@@ -1,0 +1,193 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Digit Sample Collector</title>
+<style>
+  :root { --ink: #b3170f; --paper: #f4e3b0; --bg: #1d1a17; --fg: #f2ead8; --muted: #a99f8c; }
+  * { box-sizing: border-box; }
+  body { margin: 0; background: var(--bg); color: var(--fg); font: 15px/1.4 system-ui, sans-serif;
+         display: flex; flex-direction: column; align-items: center; padding: 16px; gap: 12px; }
+  h1 { font-size: 18px; margin: 0; }
+  .prompt { font-size: 22px; } .prompt b { font-size: 40px; color: #ffcf5a; }
+  canvas#pad { width: min(92vw, 360px); height: min(92vw, 360px); background: var(--paper);
+               border-radius: 10px; touch-action: none; cursor: crosshair; }
+  .wide canvas#pad { width: min(96vw, 640px); height: min(48vw, 320px); }
+  .row { display: flex; gap: 8px; flex-wrap: wrap; justify-content: center; align-items: center; }
+  button, select, input { font: inherit; padding: 6px 12px; border-radius: 6px; border: 1px solid #555;
+                          background: #2c2824; color: var(--fg); }
+  button.primary { background: var(--ink); border-color: var(--ink); }
+  .muted { color: var(--muted); font-size: 13px; text-align: center; max-width: 640px; }
+  #preview { width: 84px; height: 84px; image-rendering: pixelated; background: #000; }
+  #counts { font-family: ui-monospace, monospace; font-size: 13px; }
+</style>
+</head>
+<body>
+  <h1>Digit Sample Collector</h1>
+  <p class="muted">Research tool for Math Run (not part of the game). Write the number shown, then
+    press <b>Save</b> (or Enter). <b>Skip</b> if you made a mistake. When done, <b>Download</b> the JSON and
+    put it in <code>mlp_training/research/collect/samples/</code>.</p>
+  <div class="row">
+    <label>Writer <input id="writer" size="10" placeholder="e.g. alex"></label>
+    <label>Device <select id="device"><option>mouse</option><option>finger</option><option>pen</option><option>trackpad</option></select></label>
+    <label>Mode <select id="mode"><option value="1">single digit</option><option value="2">2 digits</option><option value="3">3 digits</option></select></label>
+  </div>
+  <div class="prompt">Write: <b id="target">?</b></div>
+  <canvas id="pad"></canvas>
+  <div class="row">
+    <button id="undo">Undo stroke</button>
+    <button id="skip">Skip</button>
+    <button id="save" class="primary">Save (Enter)</button>
+    <canvas id="preview" width="28" height="28" title="what the game's model would see"></canvas>
+  </div>
+  <div id="counts"></div>
+  <div class="row"><button id="download">Download JSON</button><button id="reset">Clear all</button></div>
+  <p class="muted">Each sample stores the raw strokes (pad pixels), the pad size, the pointer type and,
+    for single digits, the 28×28 image made by the game's own preprocessing (<code>js/ai/processing.js</code>).
+    Samples are kept in this browser (localStorage) until you clear them.</p>
+
+<script type="module">
+// Same drawing and model rendering as js/ui/pad.js (MODEL_SIZE/BOX/LINE), plus the game's preprocessing.
+import { preprocessToMNIST } from '../../../js/ai/processing.js';
+
+const MODEL_SIZE = 280, MODEL_BOX = 190, MODEL_LINE = 18, INK = '#b3170f';
+const KEY = 'mathrun-digit-samples';
+const $ = (id) => document.getElementById(id);
+const canvas = $('pad'), ctx = canvas.getContext('2d');
+const mcanvas = document.createElement('canvas');
+mcanvas.width = mcanvas.height = MODEL_SIZE;
+const mctx = mcanvas.getContext('2d', { willReadFrequently: true });
+
+let samples = [];
+try { samples = JSON.parse(localStorage.getItem(KEY) || '[]'); } catch { samples = []; }
+let strokes = [], current = null, pointerType = 'mouse', w = 1, h = 1, dpr = 1, target = '';
+
+function nextTarget() {
+  const n = +$('mode').value;
+  // pick the least-collected digit (or a random number with n digits)
+  if (n === 1) {
+    const c = Array(10).fill(0);
+    for (const s of samples) if (s.label.length === 1) c[+s.label]++;
+    const min = Math.min(...c), pool = c.flatMap((v, d) => v === min ? [d] : []);
+    target = String(pool[Math.floor(Math.random() * pool.length)]);
+  } else {
+    const lo = 10 ** (n - 1);
+    target = String(lo + Math.floor(Math.random() * 9 * lo));
+  }
+  $('target').textContent = target;
+  document.body.classList.toggle('wide', n > 1);
+  resize();
+}
+
+function resize() {
+  const r = canvas.getBoundingClientRect();
+  dpr = Math.min(window.devicePixelRatio || 1, 2);
+  w = Math.max(1, r.width); h = Math.max(1, r.height);
+  canvas.width = Math.round(w * dpr); canvas.height = Math.round(h * dpr);
+  redraw();
+}
+
+function trace(c, pts, smooth) {
+  if (pts.length === 1) { c.beginPath(); c.arc(pts[0][0], pts[0][1], c.lineWidth / 2, 0, Math.PI * 2); c.fill(); return; }
+  c.beginPath(); c.moveTo(pts[0][0], pts[0][1]);
+  for (let i = 1; i < pts.length - 1; i++) {
+    if (!smooth) { c.lineTo(pts[i][0], pts[i][1]); continue; }
+    const mx = (pts[i][0] + pts[i + 1][0]) / 2, my = (pts[i][1] + pts[i + 1][1]) / 2;
+    c.quadraticCurveTo(pts[i][0], pts[i][1], mx, my);
+  }
+  const last = pts[pts.length - 1]; c.lineTo(last[0], last[1]); c.stroke();
+}
+function ink(c, width, color) { c.lineCap = c.lineJoin = 'round'; c.lineWidth = width; c.strokeStyle = c.fillStyle = color; }
+
+function redraw() {
+  ctx.setTransform(dpr, 0, 0, dpr, 0, 0); ctx.clearRect(0, 0, w, h);
+  ink(ctx, Math.max(7, Math.min(w, h) * 0.07), INK);
+  for (const s of strokes) trace(ctx, s, true);
+  drawPreview();
+}
+
+// pad.js renderForModel(): white on black, longest side MODEL_BOX, raw polylines
+function renderForModel() {
+  if (!strokes.length) return null;
+  let x0 = Infinity, y0 = Infinity, x1 = -Infinity, y1 = -Infinity;
+  for (const s of strokes) for (const [x, y] of s) { x0 = Math.min(x0, x); x1 = Math.max(x1, x); y0 = Math.min(y0, y); y1 = Math.max(y1, y); }
+  const ext = Math.max(x1 - x0, y1 - y0);
+  if (ext < Math.min(w, h) * 0.06) return null;
+  const scale = MODEL_BOX / ext;
+  mctx.setTransform(1, 0, 0, 1, 0, 0); mctx.fillStyle = '#000'; mctx.fillRect(0, 0, MODEL_SIZE, MODEL_SIZE);
+  mctx.setTransform(scale, 0, 0, scale, MODEL_SIZE / 2 - ((x0 + x1) / 2) * scale, MODEL_SIZE / 2 - ((y0 + y1) / 2) * scale);
+  ink(mctx, MODEL_LINE / scale, '#fff');
+  for (const s of strokes) trace(mctx, s, false);
+  mctx.setTransform(1, 0, 0, 1, 0, 0);
+  return mctx.getImageData(0, 0, MODEL_SIZE, MODEL_SIZE).data;
+}
+
+function model28() {
+  const rgba = renderForModel();
+  if (!rgba) return null;
+  return preprocessToMNIST(rgba, { srcW: MODEL_SIZE, srcH: MODEL_SIZE, roi: 'all', center: true, blur: false }).img28;
+}
+
+function drawPreview() {
+  const p = $('preview').getContext('2d'), img = p.createImageData(28, 28);
+  const x = target.length === 1 ? model28() : null;
+  for (let i = 0; i < 784; i++) { const v = x ? Math.round(x[i] * 255) : 0; img.data.set([v, v, v, 255], i * 4); }
+  p.putImageData(img, 0, 0);
+}
+
+const pos = (e) => { const r = canvas.getBoundingClientRect(); return [e.clientX - r.left, e.clientY - r.top]; };
+canvas.addEventListener('pointerdown', (e) => {
+  e.preventDefault(); try { canvas.setPointerCapture(e.pointerId); } catch {}
+  pointerType = e.pointerType; current = [pos(e)]; strokes.push(current); redraw();
+});
+canvas.addEventListener('pointermove', (e) => {
+  if (!current) return; e.preventDefault();
+  const p = pos(e), last = current[current.length - 1];
+  if (Math.hypot(p[0] - last[0], p[1] - last[1]) < 1.5) return;   // same filter as pad.js
+  current.push(p); redraw();
+});
+for (const ev of ['pointerup', 'pointercancel', 'lostpointercapture']) canvas.addEventListener(ev, () => { current = null; });
+
+function save() {
+  if (!strokes.length) return;
+  const round = (v) => Math.round(v * 10) / 10;
+  const x = target.length === 1 ? model28() : null;
+  samples.push({
+    label: target, writer: $('writer').value.trim() || 'anon', device: $('device').value,
+    pointerType, pad: [round(w), round(h)], time: new Date().toISOString(),
+    strokes: strokes.map((s) => s.map(([a, b]) => [round(a), round(b)])),
+    img28: x ? Array.from(x, (v) => Math.round(v * 1000) / 1000) : null,
+  });
+  localStorage.setItem(KEY, JSON.stringify(samples));
+  strokes = []; nextTarget(); showCounts();
+}
+
+function showCounts() {
+  const c = Array(10).fill(0); let multi = 0;
+  for (const s of samples) s.label.length === 1 ? c[+s.label]++ : multi++;
+  $('counts').textContent = c.map((v, d) => `${d}:${v}`).join('  ') + `   multi:${multi}   total:${samples.length}`;
+}
+
+$('save').onclick = save;
+$('skip').onclick = () => { strokes = []; nextTarget(); };
+$('undo').onclick = () => { strokes.pop(); redraw(); };
+$('mode').onchange = () => { strokes = []; nextTarget(); };
+$('reset').onclick = () => { if (confirm('Delete all samples stored in this browser?')) { samples = []; localStorage.removeItem(KEY); showCounts(); } };
+$('download').onclick = () => {
+  const blob = new Blob([JSON.stringify(samples)], { type: 'application/json' });
+  const a = document.createElement('a');
+  a.href = URL.createObjectURL(blob);
+  a.download = `digits_${($('writer').value.trim() || 'anon')}_${Date.now()}.json`;
+  a.click();
+};
+document.addEventListener('keydown', (e) => {
+  if (e.key === 'Enter') save();
+  if (e.key === 'Backspace' || (e.key === 'z' && (e.ctrlKey || e.metaKey))) { strokes.pop(); redraw(); }
+});
+window.addEventListener('resize', resize);
+window.collector = { get samples() { return samples; } };   // handy for console export
+nextTarget(); showCounts();
+</script>
+</body>
+</html>
