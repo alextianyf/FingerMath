@@ -1,0 +1,201 @@
+{
+  "overall": [
+    {
+      "model": "CNN (shipped)",
+      "device": "finger",
+      "accuracy": 0.9835913533566384,
+      "ci_low": 0.9801938344743175,
+      "ci_high": 0.9870851799300713,
+      "n": 14017
+    },
+    {
+      "model": "CNN (shipped)",
+      "device": "pen",
+      "accuracy": 0.9625500285877644,
+      "ci_low": 0.9325507107947809,
+      "ci_high": 0.9845569426948472,
+      "n": 3498
+    },
+    {
+      "model": "MLP (old)",
+      "device": "finger",
+      "accuracy": 0.955411286295213,
+      "ci_low": 0.9490696441486579,
+      "ci_high": 0.9617642645994199,
+      "n": 14017
+    },
+    {
+      "model": "MLP (old)",
+      "device": "pen",
+      "accuracy": 0.8879359634076616,
+      "ci_low": 0.8527997442216195,
+      "ci_high": 0.917410940893035,
+      "n": 3498
+    }
+  ],
+  "per_digit_accuracy_percent": {
+    "CNN (shipped) | finger": [
+      99.79,
+      94.29,
+      98.79,
+      98.64,
+      97.57,
+      99.29,
+      99.29,
+      99.22,
+      97.64,
+      99.07
+    ],
+    "CNN (shipped) | pen": [
+      100.0,
+      92.03,
+      99.45,
+      96.43,
+      92.31,
+      99.1,
+      97.02,
+      92.03,
+      100.0,
+      94.64
+    ],
+    "MLP (old) | finger": [
+      99.43,
+      95.51,
+      96.66,
+      96.5,
+      85.66,
+      97.14,
+      96.3,
+      97.29,
+      93.34,
+      97.57
+    ],
+    "MLP (old) | pen": [
+      99.72,
+      85.16,
+      96.98,
+      92.86,
+      85.99,
+      98.51,
+      95.24,
+      77.2,
+      96.43,
+      59.82
+    ]
+  },
+  "calibration": [
+    {
+      "model": "CNN (shipped)",
+      "device": "finger",
+      "ECE": 0.08802417802378637,
+      "confident errors (wrong and >90%) %": 0.10701291289148891
+    },
+    {
+      "model": "MLP (old)",
+      "device": "finger",
+      "ECE": 0.03443111742819365,
+      "confident errors (wrong and >90%) %": 2.9678247841906256
+    },
+    {
+      "model": "CNN (shipped)",
+      "device": "pen",
+      "ECE": 0.09348292429832951,
+      "confident errors (wrong and >90%) %": 0.2572898799313894
+    },
+    {
+      "model": "MLP (old)",
+      "device": "pen",
+      "ECE": 0.08923083314594372,
+      "confident errors (wrong and >90%) %": 7.575757575757576
+    }
+  ],
+  "game": [
+    {
+      "model": "CNN (shipped)",
+      "device": "finger",
+      "answers on screen": 2,
+      "accepted %": 98.95840764785618,
+      "wrong yokai %": 0.22116001997574375,
+      "rewrite / miss %": 0.8204323321680862
+    },
+    {
+      "model": "CNN (shipped)",
+      "device": "finger",
+      "answers on screen": 3,
+      "accepted %": 98.8299921523864,
+      "wrong yokai %": 0.42091745737318964,
+      "rewrite / miss %": 0.7490903902404256
+    },
+    {
+      "model": "CNN (shipped)",
+      "device": "pen",
+      "answers on screen": 2,
+      "accepted %": 97.25557461406518,
+      "wrong yokai %": 0.3144654088050315,
+      "rewrite / miss %": 2.429959977129792
+    },
+    {
+      "model": "CNN (shipped)",
+      "device": "pen",
+      "answers on screen": 3,
+      "accepted %": 97.05546026300743,
+      "wrong yokai %": 0.9433962264150944,
+      "rewrite / miss %": 2.0011435105774744
+    },
+    {
+      "model": "MLP (old)",
+      "device": "finger",
+      "answers on screen": 2,
+      "accepted %": 96.1047299707498,
+      "wrong yokai %": 0.5992723121923379,
+      "rewrite / miss %": 3.2959977170578636
+    },
+    {
+      "model": "MLP (old)",
+      "device": "finger",
+      "answers on screen": 3,
+      "accepted %": 96.01198544624384,
+      "wrong yokai %": 1.0487265463365913,
+      "rewrite / miss %": 2.9392880074195604
+    },
+    {
+      "model": "MLP (old)",
+      "device": "pen",
+      "answers on screen": 2,
+      "accepted %": 90.02287021154946,
+      "wrong yokai %": 1.315037164093768,
+      "rewrite / miss %": 8.662092624356777
+    },
+    {
+      "model": "MLP (old)",
+      "device": "pen",
+      "answers on screen": 3,
+      "accepted %": 89.937106918239,
+      "wrong yokai %": 2.3727844482561466,
+      "rewrite / miss %": 7.690108633504855
+    }
+  ],
+  "per_writer_cnn": {
+    "finger": {
+      "count": 177.0,
+      "mean": 0.9837,
+      "std": 0.0242,
+      "min": 0.8718,
+      "25%": 0.975,
+      "50%": 1.0,
+      "75%": 1.0,
+      "max": 1.0
+    },
+    "pen": {
+      "count": 14.0,
+      "mean": 0.9626,
+      "std": 0.0537,
+      "min": 0.8,
+      "25%": 0.964,
+      "50%": 0.974,
+      "75%": 0.997,
+      "max": 1.0
+    }
+  },
+  "seed": 8
+}
