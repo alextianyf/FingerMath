@@ -1,0 +1,160 @@
+<!doctype html>
+<html lang="zh">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Error audit review</title>
+<!-- Notebook 10 fills /*CARDS*/[] below with the test-set errors and writes cache/audit/review.html. -->
+<style>
+  :root { --bg:#f6f4ef; --card:#fff; --ink:#222; --mute:#777; --line:#ddd; --hi:#c8102e;
+          --model:#2f6db5; --ambiguous:#b7791f; --label:#2e8b57; }
+  @media (prefers-color-scheme: dark) {
+    :root { --bg:#16181c; --card:#20232a; --ink:#e8e6e1; --mute:#999; --line:#3a3d44; --hi:#ff5a6e; }
+  }
+  * { box-sizing: border-box; }
+  body { margin:0; font:14px/1.45 system-ui, "Microsoft YaHei", sans-serif; background:var(--bg); color:var(--ink); }
+  header { position:sticky; top:0; z-index:5; background:var(--bg); border-bottom:1px solid var(--line);
+           padding:10px 16px; display:flex; flex-wrap:wrap; gap:10px 18px; align-items:center; }
+  header h1 { font-size:16px; margin:0; }
+  header select, header button { font:inherit; padding:4px 8px; }
+  .prog { color:var(--mute); }
+  .help { color:var(--mute); font-size:12px; }
+  main { padding:12px 16px 80px; display:grid; gap:12px; }
+  .card { background:var(--card); border:2px solid var(--line); border-radius:8px; padding:10px 12px;
+          display:grid; grid-template-columns:170px 92px 1fr; gap:12px; align-items:start; }
+  .card.cur { border-color:var(--hi); }
+  .card.done { opacity:.9; }
+  .big { width:170px; height:170px; background:var(--bg); border-radius:6px; }
+  canvas { width:84px; height:84px; image-rendering:pixelated; background:#000; border-radius:4px; }
+  .meta b { font-size:18px; }
+  .tag { display:inline-block; padding:1px 7px; border-radius:10px; color:#fff; font-size:12px; }
+  .tag.model { background:var(--model); } .tag.ambiguous { background:var(--ambiguous); } .tag.label { background:var(--label); }
+  .reason { color:var(--mute); font-size:12px; }
+  .btns { display:flex; flex-wrap:wrap; gap:6px; margin:8px 0; }
+  .btns button { font:inherit; padding:4px 10px; border-radius:6px; border:2px solid var(--line); background:var(--card); color:var(--ink); cursor:pointer; }
+  .btns button.on.model { border-color:var(--model); background:var(--model); color:#fff; }
+  .btns button.on.ambiguous { border-color:var(--ambiguous); background:var(--ambiguous); color:#fff; }
+  .btns button.on.label { border-color:var(--label); background:var(--label); color:#fff; }
+  .changed { color:var(--hi); font-size:12px; font-weight:600; }
+  .refs { display:flex; flex-wrap:wrap; gap:4px; align-items:center; margin-top:4px; }
+  .refs span { font-size:12px; color:var(--mute); width:86px; }
+  .refs svg { width:58px; height:58px; background:var(--bg); border-radius:4px; }
+  .refs svg.bad { outline:2px solid var(--hi); }
+  svg polyline { fill:none; stroke-linecap:round; stroke-linejoin:round; }
+  @media (max-width: 700px) { .card { grid-template-columns:1fr; } }
+</style>
+</head>
+<body>
+<header>
+  <h1>错误审查</h1>
+  <label>数据集 <select id="fSet"><option value="">全部</option><option value="pen">pen 触控笔</option><option value="finger">finger 手指</option></select></label>
+  <label>初筛类别 <select id="fCat"><option value="">全部</option><option value="label">疑似标签错误</option><option value="ambiguous">人眼也难分</option><option value="model">模型读错</option></select></label>
+  <label><input type="checkbox" id="fTodo"> 只看未确认</label>
+  <span class="prog" id="prog"></span>
+  <button id="confirmVisible">确认当前显示的全部</button>
+  <button id="export">导出</button>
+  <span class="help">1 模型读错 · 2 人眼也难分 · 3 疑似标签错误 · J/K 下一张/上一张 · 红框参考样本 = 模型也认错的</span>
+</header>
+<main id="list"></main>
+<script>
+const CARDS = /*CARDS*/[];
+const NAMES = { model: '模型读错', ambiguous: '人眼也难分', label: '疑似标签错误' };
+const KEY = 'mathrun-audit10';
+const COLORS = ['#1f77b4', '#ff7f0e', '#2ca02c', '#d62728', '#9467bd', '#8c564b'];
+let state = {};
+try { state = JSON.parse(localStorage.getItem(KEY) || '{}'); } catch (e) { state = {}; }
+const save = () => { try { localStorage.setItem(KEY, JSON.stringify(state)); } catch (e) {} };
+const cat = c => (state[c.id] && state[c.id].cat) || c.screen;
+
+function svg(strokes, cls) {
+  const lines = strokes.map((s, j) => {
+    const pts = s.map(p => p.join(',')).join(' ');
+    const c = COLORS[j % COLORS.length];
+    return `<polyline points="${pts}" stroke="${c}" stroke-width="5"/><circle cx="${s[0][0]}" cy="${s[0][1]}" r="4" fill="${c}"/>`;
+  }).join('');
+  return `<svg class="${cls || ''}" viewBox="-8 -8 116 116">${lines}</svg>`;
+}
+
+function canvas(hex) {
+  const c = document.createElement('canvas'); c.width = c.height = 28;
+  const ctx = c.getContext('2d'); const im = ctx.createImageData(28, 28);
+  for (let i = 0; i < 784; i++) {
+    const v = parseInt(hex.substr(i * 2, 2), 16);
+    im.data.set([v, v, v, 255], i * 4);
+  }
+  ctx.putImageData(im, 0, 0); return c;
+}
+
+let visible = [], cur = 0;
+function render() {
+  const fs = fSet.value, fc = fCat.value, todo = fTodo.checked;
+  visible = CARDS.filter(c => (!fs || c.set === fs) && (!fc || c.screen === fc) && (!todo || !state[c.id]));
+  list.innerHTML = '';
+  visible.forEach((c, k) => {
+    const el = document.createElement('div');
+    el.className = 'card' + (state[c.id] ? ' done' : ''); el.id = 'c' + c.id;
+    const top = c.top.map(([d, p]) => `${d} <small>${(p * 100).toFixed(0)}%</small>`).join(' · ');
+    const now = cat(c);
+    el.innerHTML = `
+      <div class="big">${svg(c.s)}</div>
+      <div class="img"></div>
+      <div>
+        <div class="meta">#${c.id} · ${c.set} · ${c.writer} · 标签 <b>${c.label}</b> → 模型 <b>${c.pred}</b>
+          &nbsp; <span class="tag ${c.screen}">初筛：${NAMES[c.screen]}</span>
+          ${state[c.id] && now !== c.screen ? '<span class="changed">已改</span>' : ''}</div>
+        <div class="reason">前三：${top} · 8 个模型中 ${c.votes} 个同意 · ${c.reason}</div>
+        <div class="btns">${Object.keys(NAMES).map((k2, n) =>
+          `<button class="${k2}${state[c.id] && now === k2 ? ' on' : ''}" data-cat="${k2}">${n + 1} ${NAMES[k2]}</button>`).join('')}</div>
+        <div class="refs"><span>本人写的 ${c.label}</span>${c.refLabel.map(r => svg(r.s, r.ok ? '' : 'bad')).join('') || '—'}</div>
+        <div class="refs"><span>本人写的 ${c.pred}</span>${c.refPred.map(r => svg(r.s, r.ok ? '' : 'bad')).join('') || '—'}</div>
+      </div>`;
+    el.querySelector('.img').appendChild(canvas(c.img));
+    el.addEventListener('click', e => {
+      cur = k; mark();
+      if (e.target.dataset.cat) setCat(c, e.target.dataset.cat);
+    });
+    list.appendChild(el);
+  });
+  cur = Math.min(cur, Math.max(visible.length - 1, 0)); mark(false); progress();
+}
+
+function setCat(c, k) { state[c.id] = { cat: k }; save(); const y = scrollY; render(); scrollTo(0, y); }
+function mark(scroll = true) {
+  document.querySelectorAll('.card.cur').forEach(e => e.classList.remove('cur'));
+  const c = visible[cur]; if (!c) return;
+  const el = document.getElementById('c' + c.id); el.classList.add('cur');
+  if (scroll) el.scrollIntoView({ block: 'center', behavior: 'smooth' });
+}
+function progress() {
+  const n = CARDS.filter(c => state[c.id]).length;
+  const ch = CARDS.filter(c => state[c.id] && state[c.id].cat !== c.screen).length;
+  prog.textContent = `已确认 ${n} / ${CARDS.length} · 改动 ${ch}`;
+}
+
+[fSet, fCat, fTodo].forEach(e => e.addEventListener('change', () => { cur = 0; render(); }));
+confirmVisible.onclick = () => {
+  if (!confirm(`把当前显示的 ${visible.length} 张卡片按现在的类别标为已确认？`)) return;
+  visible.forEach(c => { if (!state[c.id]) state[c.id] = { cat: c.screen }; }); save(); render();
+};
+document.getElementById('export').onclick = () => {
+  const labels = {}; CARDS.forEach(c => labels[c.id] = cat(c));
+  const out = { version: 1, exported: new Date().toISOString(), confirmed: CARDS.filter(c => state[c.id]).map(c => c.id), labels };
+  const a = document.createElement('a');
+  a.href = URL.createObjectURL(new Blob([JSON.stringify(out, null, 1)], { type: 'application/json' }));
+  a.download = '10_audit_review.json'; a.click();
+};
+addEventListener('keydown', e => {
+  if (e.target.tagName === 'SELECT' || e.ctrlKey || e.metaKey) return;
+  const c = visible[cur];
+  if (e.key === 'j' || e.key === 'J') { cur = Math.min(cur + 1, visible.length - 1); mark(); }
+  else if (e.key === 'k' || e.key === 'K') { cur = Math.max(cur - 1, 0); mark(); }
+  else if (c && '123'.includes(e.key)) {
+    const k = Object.keys(NAMES)[+e.key - 1];
+    state[c.id] = { cat: k }; save();
+    const keep = cur; render(); cur = Math.min(fTodo.checked ? keep : keep + 1, visible.length - 1); mark();
+  }
+});
+render();
+</script>
+</body>
+</html>
