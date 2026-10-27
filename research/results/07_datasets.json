@@ -1,0 +1,53 @@
+{
+  "counts": {
+    "corr/finger/dev": {
+      "digits": 6057,
+      "writers": 76
+    },
+    "corr/finger/test": {
+      "digits": 14017,
+      "writers": 177
+    },
+    "pendigits/pen/test": {
+      "digits": 3498,
+      "writers": 14
+    },
+    "pendigits/pen/train": {
+      "digits": 5998,
+      "writers": 24
+    },
+    "pendigits/pen/val": {
+      "digits": 1496,
+      "writers": 6
+    }
+  },
+  "median_strokes_points_aspect": {
+    "n_strokes": {
+      "finger": 1.0,
+      "pen": 1.0
+    },
+    "n_points": {
+      "finger": 32.0,
+      "pen": 38.0
+    },
+    "aspect": {
+      "finger": 0.59,
+      "pen": 0.632
+    }
+  },
+  "ones_style_percent": {
+    "finger": {
+      "base or bar (2+ strokes)": 10.0,
+      "hooked": 9.4,
+      "more complex": 1.1,
+      "straight": 79.5
+    },
+    "pen": {
+      "base or bar (2+ strokes)": 4.7,
+      "hooked": 76.5,
+      "more complex": 10.1,
+      "straight": 8.7
+    }
+  },
+  "seed": 7
+}

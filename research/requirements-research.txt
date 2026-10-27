@@ -1,0 +1,20 @@
+# Python environment for the recognition research notebooks (mlp_training/research).
+# The game itself needs no Python. Python 3.13.
+#   python -m venv .venv
+#   .venv/Scripts/python -m pip install -r mlp_training/research/requirements-research.txt
+#   .venv/Scripts/python -m pip install --no-deps tensorflowjs==4.22.0
+# tensorflowjs declares dependencies that clash with tensorflow 2.21, so it goes in on its own
+# (only the TF.js export scripts need it).
+tensorflow==2.21.0
+numpy==2.5.4
+pandas==3.1.0
+pillow==13.0.0
+matplotlib==3.11.2
+seaborn==0.13.2
+scipy==1.18.1
+scikit-image==0.26.0
+scikit-learn==1.9.1
+jupyter==1.1.1
+nbconvert==7.17.2
+nbformat==5.11.1
+ipykernel==7.4.0
