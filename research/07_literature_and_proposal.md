@@ -195,12 +195,15 @@
 |---|---|---|
 | **07_real_benchmarks** | 下载并解析 Pendigits 原始轨迹和 Corr 数据集；把轨迹按游戏的笔和预处理画成图；**按书写者**划分训练、验证、测试集；可视化样本 | 真实测试集，以及数据说明（多少人、多少样本、每个数字多少） |
 | **08_baseline_on_real** | 用真实测试集评估已上线的 CNN 和旧 MLP：总体和每个数字的准确率、混淆矩阵、每个书写者的准确率分布、置信度校准（ECE、可靠性图）、"游戏实际接受率"和"打错妖怪率" | 第一次知道真实玩家大概是什么水平；剩下的错误到底是什么 |
-| **09_train_with_real** | 把 Pendigits 训练部分（以及按 3.4 的决定，可能加上 Corr 的训练部分）加入训练；做消融实验：只用 MNIST、加合成、加真实 | 新的图像 CNN，每个改动的贡献 |
-| **10_trajectory_and_fusion** | 轨迹模型（1D 卷积或小 GRU，输入为重采样后的点和方向）；与图像 CNN 做晚期融合（加权平均对数概率）；比较单独和融合的效果 | 融合是否值得做，以及在浏览器里的体积和延迟 |
-| **11_calibration_and_decision** | 温度缩放；把 `decide()` 写成"概率 × 候选先验 + 错误代价"的决策规则；画出错误–拒识曲线 [20]；用模拟的游戏场景比较新旧规则 | 新的 `decide()` 规则及其参数 |
-| **12_personalisation**（第二阶段） | 模拟"游戏确认的标签"：每个书写者按时间顺序逐个出现样本，用原型 [16] 或最后一层微调在线更新；测量随样本数增加的准确率，以及错误标签的影响 | 是否、以及如何在游戏里做无感个性化 |
+| **09_train_with_real** | 把 Pendigits 训练部分加入训练（Corr 只评估，不训练），并加入针对所有数字的倾斜、笔宽增强；4 个方案 × 2 个随机种子的消融实验 | 新的图像 CNN，每个改动的贡献 |
+| **10_error_audit** | 逐个查看剩下的错误样本，分为"模型确实读错""人眼也认不出""疑似标签错误"三类；先由我初筛，再由你确认 | 真实数据上的准确率上限，以及还有多少可以改进的空间 |
+| **11_trajectory_and_fusion** | 轨迹模型（1D 卷积或小 GRU，输入为重采样后的点和方向）；与图像 CNN 做晚期融合（加权平均对数概率）；比较单独和融合的效果 | 融合是否值得做，以及在浏览器里的体积和延迟 |
+| **12_architecture** | 固定使用 09 选出的数据，公平比较不同架构：现有 CNN、加宽或加残差的 CNN [25]、深度可分离卷积的轻量 CNN [26]、多个模型集成 [27] 后蒸馏 [23] 到小模型、11 的融合模型；空间变换网络 [28] 作为可选项。每个都报告准确率、模型大小和浏览器推理时间 | 架构能带来多少收益；如果收益很小，这本身就是结论 |
+| **13_calibration_and_decision** | 温度缩放 [19]；把 `decide()` 写成"概率 × 候选先验 + 错误代价"的决策规则；画出错误–拒识曲线 [20]；用模拟的游戏场景比较新旧规则 | 新的 `decide()` 规则及其参数 |
+| **14_personalisation**（第二阶段） | 模拟"游戏确认的标签"：每个书写者按时间顺序逐个出现样本，用原型 [16] 或最后一层微调在线更新，按"人 + 工具"分别适应；测量随样本数增加的准确率，以及错误标签的影响 | 是否、以及如何在游戏里做无感个性化 |
+| **收尾** | 选定上线方案，导出到浏览器，用游戏自己的 JS 做端到端验证，更新 README 和研究报告 | 上线 |
 
-每个 notebook 都按同一个结构写，方便审核：目的 → 数据 → 方法 → 结果（表格和图）→ 结论和下一步。所有随机过程都固定随机种子，结果写入 `results/`。
+**关于架构的判断（2026-10-27 补充）。**单纯把 CNN 换大、换新，预期收益很小：notebook 08 显示剩下的错误主要来自训练数据里没见过的写法（数据问题），以及本身模糊或疑似标错的样本（任何模型都救不回来，见 [29]）；在 MNIST 类问题上小 CNN 已接近上限。所以架构研究的重点是**利用新信息**（11 的轨迹分支）和**改变成本结构**（12 的集成后蒸馏：只增加训练成本，上线体积不变），并且排在 10 的错误审查之后，先弄清还剩多少可改进的空间。Transformer、胶囊网络等需要大量数据的结构不在考虑范围内。
 
 ### 3.4 需要你决定的事
 
@@ -281,4 +284,14 @@
 
 [24] B. Jacob, S. Kligys, B. Chen, M. Zhu, M. Tang, A. Howard, H. Adam, D. Kalenichenko. Quantization and training of neural networks for efficient integer-arithmetic-only inference. *CVPR*, 2018. arXiv:1712.05877
 
-说明：[1]–[7]、[12]–[14]、[16]–[18]、[20]、[21] 的出处已在检索时逐条核对过（作者、年份、会议或期刊）；其余为本领域的标准文献，正式引用前建议再对照一次原文。
+[25] K. He, X. Zhang, S. Ren, J. Sun. Deep residual learning for image recognition. *CVPR*, 2016. arXiv:1512.03385
+
+[26] A. G. Howard, M. Zhu, B. Chen, D. Kalenichenko, W. Wang, T. Weyand, M. Andreetto, H. Adam. MobileNets: efficient convolutional neural networks for mobile vision applications. arXiv:1704.04861, 2017.
+
+[27] B. Lakshminarayanan, A. Pritzel, C. Blundell. Simple and scalable predictive uncertainty estimation using deep ensembles. *NeurIPS*, 2017. arXiv:1612.01474
+
+[28] M. Jaderberg, K. Simonyan, A. Zisserman, K. Kavukcuoglu. Spatial transformer networks. *NeurIPS*, 2015. arXiv:1506.02025
+
+[29] C. G. Northcutt, A. Athalye, J. Mueller. Pervasive label errors in test sets destabilize machine learning benchmarks. *NeurIPS Datasets and Benchmarks Track*, 2021. arXiv:2103.14749
+
+说明：[1]–[7]、[12]–[14]、[16]–[18]、[20]、[21] 的出处已在检索时逐条核对过（作者、年份、会议或期刊）；[25]–[29] 为 2026-10-27 补充的标准文献；其余为本领域的标准文献，正式引用前建议再对照一次原文。
