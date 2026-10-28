@@ -88,15 +88,15 @@ def _cnn_trunk(h, w=32):
     return layers.Conv2D(2 * w, 3, padding='same', activation='relu')(h)
 
 
-def _traj_trunk(t):
-    """notebook 11's 1D CNN: returns 16 x 96 path features."""
-    for f in [48, 48]:
+def _traj_trunk(t, w=(48, 96)):
+    """notebook 11's 1D CNN: returns 16 x w[1] path features."""
+    for f in [w[0], w[0]]:
         t = layers.Conv1D(f, 5, padding='same', activation='relu')(t)
     t = layers.MaxPooling1D()(t)
-    for f in [96, 96]:
+    for f in [w[1], w[1]]:
         t = layers.Conv1D(f, 5, padding='same', activation='relu')(t)
     t = layers.MaxPooling1D()(t)
-    return layers.Conv1D(96, 3, padding='same', activation='relu')(t)
+    return layers.Conv1D(w[1], 3, padding='same', activation='relu')(t)
 
 
 def ordermap_cnn(name='ordermap_cnn'):
@@ -115,19 +115,75 @@ def dual_stream(name='dual_stream'):
     return keras.Model({'img': img, 'traj': tr, 'avail': av}, _head(h, name), name=name)
 
 
-def ink_glance(name='ink_glance'):
+@keras.saving.register_keras_serializable('mathrun')
+class CrossAttention(layers.Layer):
+    """Multi-head attention written with plain matrix products (MatMul, BatchMatMul, Softmax), the
+    same maths as keras' MultiHeadAttention but without Einsum, which TF.js' WASM backend (the
+    game's) does not implement. `from_mha` copies the weights of a trained MultiHeadAttention."""
+
+    def __init__(self, num_heads=4, key_dim=16, **kw):
+        super().__init__(**kw)
+        self.num_heads, self.key_dim = num_heads, key_dim
+        inner = num_heads * key_dim
+        self.wq, self.wk, self.wv = (layers.Dense(inner, name=n) for n in ('query', 'key', 'value'))
+        self.wo = None
+
+    def build(self, q_shape, kv_shape=None):
+        self.wo = layers.Dense(q_shape[-1], name='out')
+        self.wq.build(q_shape); self.wk.build(kv_shape or q_shape); self.wv.build(kv_shape or q_shape)
+        self.wo.build(tuple(q_shape[:-1]) + (self.num_heads * self.key_dim,))
+
+    def _heads(self, x):
+        b, n = keras.ops.shape(x)[0], keras.ops.shape(x)[1]
+        return keras.ops.transpose(keras.ops.reshape(x, (b, n, self.num_heads, self.key_dim)), (0, 2, 1, 3))
+
+    def call(self, q, kv):
+        qh = self._heads(self.wq(q)) * (1.0 / self.key_dim ** 0.5)
+        kh, vh = self._heads(self.wk(kv)), self._heads(self.wv(kv))
+        att = keras.ops.softmax(keras.ops.matmul(qh, keras.ops.transpose(kh, (0, 1, 3, 2))), axis=-1)
+        o = keras.ops.transpose(keras.ops.matmul(att, vh), (0, 2, 1, 3))
+        b, n = keras.ops.shape(o)[0], keras.ops.shape(o)[1]
+        return self.wo(keras.ops.reshape(o, (b, n, self.num_heads * self.key_dim)))
+
+    def from_mha(self, mha):
+        get = lambda l: [w.numpy() for w in l.weights]
+        for mine, theirs in [(self.wq, mha._query_dense), (self.wk, mha._key_dense), (self.wv, mha._value_dense)]:
+            k, b = get(theirs)                                   # (d, heads, key_dim), (heads, key_dim)
+            mine.set_weights([k.reshape(k.shape[0], -1), b.reshape(-1)])
+        k, b = get(mha._output_dense)                            # (heads, key_dim, d), (d,)
+        self.wo.set_weights([k.reshape(-1, k.shape[-1]), b])
+
+    def get_config(self):
+        return {**super().get_config(), 'num_heads': self.num_heads, 'key_dim': self.key_dim}
+
+
+def ink_glance(name='ink_glance', w=32, tw=(48, 96), attention='mha'):
     """The pen path looks at the image (ours): each of the 16 path tokens attends over the 49
     image cells (cross-attention), so a stretch of the path can ask what the ink looks like
     around it. Pooled image features, attended path features and the availability flag meet
-    in one head."""
+    in one head. `w`, `tw`: image / path widths; attention='matmul' builds the WASM-friendly layer."""
     img, tr, av = layers.Input((28, 28, 1), name='img'), layers.Input((64, 5), name='traj'), layers.Input((1,), name='avail')
-    fm = _cnn_trunk(img)                                         # 7 x 7 x 64
-    cells = layers.Reshape((49, 64))(fm)
-    q = layers.Dense(64)(_traj_trunk(tr))                         # 16 x 64
-    a = layers.MultiHeadAttention(num_heads=4, key_dim=16)(q, cells)
+    d = 2 * w
+    fm = _cnn_trunk(img, w)                                      # 7 x 7 x d
+    cells = layers.Reshape((49, d))(fm)
+    q = layers.Dense(d)(_traj_trunk(tr, tw))                     # 16 x d
+    heads, kd = 4, d // 4
+    att = layers.MultiHeadAttention(num_heads=heads, key_dim=kd) if attention == 'mha' else CrossAttention(heads, kd)
+    a = att(q, cells)
     a = layers.LayerNormalization()(layers.Add()([q, a]))
     h = layers.Concatenate()([layers.GlobalAveragePooling2D()(fm), layers.GlobalAveragePooling1D()(a), av])
     return keras.Model({'img': img, 'traj': tr, 'avail': av}, _head(h, name), name=name)
+
+
+def wasm_ink_glance(model, w=32, tw=(48, 96)):
+    """Rebuild a trained ink_glance with CrossAttention in place of MultiHeadAttention, same weights."""
+    new = ink_glance(model.name, w, tw, attention='matmul')
+    for a, b in zip(model.layers, new.layers):
+        if isinstance(a, layers.MultiHeadAttention):
+            b.from_mha(a)
+        else:
+            b.set_weights(a.get_weights())
+    return new
 
 
 JOINT_BUILDERS = {'ordermap_cnn': ordermap_cnn, 'dual_stream': dual_stream, 'ink_glance': ink_glance}
