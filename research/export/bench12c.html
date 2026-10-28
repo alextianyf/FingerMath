@@ -1,0 +1,80 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>12c Browser Benchmark</title>
+<style>
+  body { margin: 0; padding: 16px; background: #1d1a17; color: #f2ead8; font: 14px/1.5 ui-monospace, monospace; }
+  pre { white-space: pre-wrap; }
+</style>
+<!-- same TF.js build as the game (index.html) -->
+<script src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs@4.22.0/dist/tf.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs-backend-wasm@4.22.0/dist/tf-backend-wasm.min.js"></script>
+</head>
+<body>
+<p>Research benchmark for notebook 12c (not part of the game). Serve the repository root and open
+  <code>/mlp_training/research/export/bench12c.html</code> after running the notebook's export cell;
+  add <code>?backend=webgl</code> or <code>cpu</code> to switch. The results end up in <code>window.results</code>.</p>
+<pre id="out">running…</pre>
+<script>
+const out = document.getElementById('out');
+const log = (s) => { out.textContent = (out.textContent === 'running…' ? '' : out.textContent) + s + '\n'; };
+const median = (a) => { const b = [...a].sort((x, y) => x - y); return b[Math.floor(b.length / 2)]; };
+
+// One reading: every part of the candidate on one digit; late fusion mixes the two in log space with weight w.
+function predict(parts, w, img, traj, avail) {
+  return tf.tidy(() => {
+    const ps = parts.map((p) => p.kind === 'img' ? p.model.execute(img)
+      : p.kind === 'traj' ? p.model.execute(traj)
+      : p.model.execute({ img, traj, avail }));
+    if (ps.length === 1) return ps[0];
+    const z = tf.add(tf.mul(w, tf.log(tf.add(ps[0], 1e-7))), tf.mul(1 - w, tf.log(tf.add(ps[1], 1e-7))));
+    return tf.softmax(z);
+  });
+}
+
+async function main() {
+  const backend = new URLSearchParams(location.search).get('backend') || 'wasm';
+  await tf.setBackend(backend); await tf.ready();
+  log(`backend: ${tf.getBackend()}   tfjs ${tf.version.tfjs}   ${navigator.userAgent.split(') ')[0]})`);
+  const check = await (await fetch('../cache/tfjs12c/check.json', { cache: 'no-store' })).json();
+  const n = check.y.length;
+  const imgB = tf.tensor(check.img, [n, 28, 28, 1]), trajB = tf.tensor(check.traj, [n, 64, 5]), availB = tf.ones([n, 1]);
+  const img1 = imgB.slice([0, 0, 0, 0], [1, 28, 28, 1]), traj1 = trajB.slice([0, 0, 0], [1, 64, 5]), avail1 = tf.ones([1, 1]);
+  const results = { backend: tf.getBackend(), userAgent: navigator.userAgent, models: [] };
+  const cache = {};
+
+  for (const m of check.models) {
+    const t0 = performance.now();
+    const parts = [];
+    for (const p of m.parts) {
+      cache[p.url] = cache[p.url] || await tf.loadGraphModel(p.url);   // shared parts load once
+      parts.push({ model: cache[p.url], kind: p.kind });
+    }
+    const loadMs = performance.now() - t0;
+    for (let i = 0; i < 20; i++) { const y = predict(parts, m.w, img1, traj1, avail1); await y.data(); y.dispose(); }
+    const ts = [];
+    for (let i = 0; i < 200; i++) {
+      const t = performance.now();
+      const y = predict(parts, m.w, img1, traj1, avail1); await y.data(); y.dispose();
+      ts.push(performance.now() - t);
+    }
+    const yb = predict(parts, m.w, imgB, trajB, availB);
+    const p = await yb.array(); yb.dispose();
+    let maxDiff = 0, agree = 0;
+    p.forEach((row, i) => {
+      row.forEach((v, j) => { maxDiff = Math.max(maxDiff, Math.abs(v - m.probs[i][j])); });
+      agree += row.indexOf(Math.max(...row)) === m.probs[i].indexOf(Math.max(...m.probs[i]));
+    });
+    const r = { name: m.name, predictMs: median(ts), p95Ms: [...ts].sort((a, b) => a - b)[189], loadMs, argmaxAgree: agree, maxAbsDiff: maxDiff, kb: m.kb };
+    results.models.push(r);
+    log(`${m.name.padEnd(30)} ${r.predictMs.toFixed(2).padStart(6)} ms median  ${r.p95Ms.toFixed(2).padStart(6)} ms p95   load ${loadMs.toFixed(0).padStart(4)} ms   ${String(m.kb).padStart(4)} KB   matches Python ${agree}/${n}, max |Δp| ${maxDiff.toExponential(1)}`);
+  }
+  window.results = results;
+  log('done');
+}
+main().catch((e) => { log('error: ' + e.message); console.error(e); });
+</script>
+</body>
+</html>

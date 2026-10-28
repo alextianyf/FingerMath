@@ -1,0 +1,177 @@
+{
+ "backend": "wasm",
+ "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Claude/3.6556.2 Chrome/152.0.7977.167 Safari/537.36 MSIX",
+ "models": [
+  {
+   "name": "image C (09, shipped recipe)",
+   "predictMs": 3.4,
+   "p95Ms": 4.7,
+   "loadMs": 332,
+   "argmaxAgree": 32,
+   "maxAbsDiff": 0.00015056,
+   "kb": 222,
+   "predictMsRuns": [
+    3.4,
+    3.4
+   ],
+   "loadMsRuns": [
+    343,
+    321.4
+   ]
+  },
+  {
+   "name": "best image arch (resnet)",
+   "predictMs": 5.1,
+   "p95Ms": 6.1,
+   "loadMs": 343,
+   "argmaxAgree": 32,
+   "maxAbsDiff": 0.00012012,
+   "kb": 376,
+   "predictMsRuns": [
+    5.1,
+    5.1
+   ],
+   "loadMsRuns": [
+    366,
+    320.0
+   ]
+  },
+  {
+   "name": "cnn KD (image teacher)",
+   "predictMs": 2.45,
+   "p95Ms": 2.5,
+   "loadMs": 335,
+   "argmaxAgree": 32,
+   "maxAbsDiff": 0.00017655,
+   "kb": 222,
+   "predictMsRuns": [
+    3.1,
+    1.8
+   ],
+   "loadMsRuns": [
+    352,
+    318.3
+   ]
+  },
+  {
+   "name": "late fusion (11)",
+   "predictMs": 3.75,
+   "p95Ms": 5.2,
+   "loadMs": 331,
+   "argmaxAgree": 32,
+   "maxAbsDiff": 7.033e-05,
+   "kb": 471,
+   "predictMsRuns": [
+    3.3,
+    4.2
+   ],
+   "loadMsRuns": [
+    343,
+    318.2
+   ]
+  },
+  {
+   "name": "resnet + trajectory",
+   "predictMs": 5.55,
+   "p95Ms": 7.5,
+   "loadMs": 343,
+   "argmaxAgree": 32,
+   "maxAbsDiff": 5.531e-05,
+   "kb": 625,
+   "predictMsRuns": [
+    4.6,
+    6.5
+   ],
+   "loadMsRuns": [
+    358,
+    327.9
+   ]
+  },
+  {
+   "name": "separable + trajectory",
+   "predictMs": 3.1,
+   "p95Ms": 6.0,
+   "loadMs": 338,
+   "argmaxAgree": 32,
+   "maxAbsDiff": 0.00017089,
+   "kb": 373,
+   "predictMsRuns": [
+    2.3,
+    3.9
+   ],
+   "loadMsRuns": [
+    341,
+    335.0
+   ]
+  },
+  {
+   "name": "ink_glance (12b)",
+   "predictMs": 5.8,
+   "p95Ms": 8.3,
+   "loadMs": 335,
+   "argmaxAgree": 32,
+   "maxAbsDiff": 5.448e-05,
+   "kb": 578,
+   "predictMsRuns": [
+    4.9,
+    6.7
+   ],
+   "loadMsRuns": [
+    345,
+    324.7
+   ]
+  },
+  {
+   "name": "ink_glance KD",
+   "predictMs": 5.45,
+   "p95Ms": 7.7,
+   "loadMs": 342,
+   "argmaxAgree": 32,
+   "maxAbsDiff": 6.557e-05,
+   "kb": 581,
+   "predictMsRuns": [
+    4.5,
+    6.4
+   ],
+   "loadMsRuns": [
+    352,
+    332.9
+   ]
+  },
+  {
+   "name": "ink_glance small KD",
+   "predictMs": 3.4,
+   "p95Ms": 5.4,
+   "loadMs": 342,
+   "argmaxAgree": 32,
+   "maxAbsDiff": 0.0001362,
+   "kb": 234,
+   "predictMsRuns": [
+    2.6,
+    4.2
+   ],
+   "loadMsRuns": [
+    348,
+    335.2
+   ]
+  },
+  {
+   "name": "ink_glance small (no KD)",
+   "predictMs": 3.2,
+   "p95Ms": 4.8,
+   "loadMs": 347,
+   "argmaxAgree": 32,
+   "maxAbsDiff": 6.425e-05,
+   "kb": 232,
+   "predictMsRuns": [
+    2.8,
+    3.6
+   ],
+   "loadMsRuns": [
+    362,
+    331.4
+   ]
+  }
+ ],
+ "note": "Two full runs of export/bench12c.html in the Claude desktop app browser pane (Chromium 152, WASM backend, pane in the background); predictMs/loadMs are the mean of the two runs, each run the median of 200 single-digit readings. Shared parts (the image C and trajectory files) are cached by the page, so a later candidate that reuses them shows a shorter load. The run-to-run difference is up to ~2 ms, so differences under ~2 ms are not meaningful."
+}
