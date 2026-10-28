@@ -1,0 +1,470 @@
+{
+ "temperature": {
+  "shipped (06)": 0.5822191251577782,
+  "image C (09)": 0.5614409749795046,
+  "resnet (12)": 0.5341470375727002,
+  "resnet + trajectory (12)": 0.4927021371497314,
+  "ink_glance (12b)": 0.526847200427275
+ },
+ "thresholds": {
+  "shipped (06)": {
+   "hit": 0.8,
+   "miss": 0.9
+  },
+  "image C (09)": {
+   "hit": 0.6,
+   "miss": 0.9
+  },
+  "resnet (12)": {
+   "hit": 0.4,
+   "miss": 0.9
+  },
+  "resnet + trajectory (12)": {
+   "hit": 0.7,
+   "miss": 0.9
+  },
+  "ink_glance (12b)": {
+   "hit": 0.7,
+   "miss": 0.9
+  }
+ },
+ "pi": 0.85,
+ "cost": {
+  "right/hit": 0,
+  "right/wrong": 5,
+  "right/miss": 3,
+  "right/unclear": 1,
+  "wrong/miss": 0,
+  "wrong/unclear": 0,
+  "wrong/hit": 2
+ },
+ "calibration": [
+  {
+   "model": "shipped (06)",
+   "test set": "test: pen",
+   "T": 0.5822191251577782,
+   "ECE before %": 9.34829242983295,
+   "ECE after %": 1.290536220012285,
+   "NLL before": 0.2118648886680603,
+   "NLL after": 0.1355936771936002
+  },
+  {
+   "model": "shipped (06)",
+   "test set": "test: finger",
+   "T": 0.5822191251577782,
+   "ECE before %": 8.802417802378637,
+   "ECE after %": 0.3637015816300334,
+   "NLL before": 0.14140409231185913,
+   "NLL after": 0.060348971984549214
+  },
+  {
+   "model": "image C (09)",
+   "test set": "test: pen",
+   "T": 0.5614409749795046,
+   "ECE before %": 8.125246955606851,
+   "ECE after %": 0.5457035603400806,
+   "NLL before": 0.13237424194812775,
+   "NLL after": 0.058438826866366624
+  },
+  {
+   "model": "image C (09)",
+   "test set": "test: finger",
+   "T": 0.5614409749795046,
+   "ECE before %": 8.459858147812408,
+   "ECE after %": 0.25850872351032017,
+   "NLL before": 0.12301098555326462,
+   "NLL after": 0.04286283661995383
+  },
+  {
+   "model": "resnet (12)",
+   "test set": "test: pen",
+   "T": 0.5341470375727002,
+   "ECE before %": 9.159010463847373,
+   "ECE after %": 1.1299597193814004,
+   "NLL before": 0.15538741648197174,
+   "NLL after": 0.0855448879588431
+  },
+  {
+   "model": "resnet (12)",
+   "test set": "test: finger",
+   "T": 0.5341470375727002,
+   "ECE before %": 9.485532896081738,
+   "ECE after %": 0.2149006476926538,
+   "NLL before": 0.12059949338436127,
+   "NLL after": 0.027086208527080043
+  },
+  {
+   "model": "resnet + trajectory (12)",
+   "test set": "test: pen",
+   "T": 0.4927021371497314,
+   "ECE before %": 9.783649582601127,
+   "ECE after %": 0.7339184169726618,
+   "NLL before": 0.1377456933259964,
+   "NLL after": 0.04673123013362299
+  },
+  {
+   "model": "resnet + trajectory (12)",
+   "test set": "test: finger",
+   "T": 0.4927021371497314,
+   "ECE before %": 10.503674867112004,
+   "ECE after %": 0.16943010093034,
+   "NLL before": 0.12524813413619995,
+   "NLL after": 0.018020272928338153
+  },
+  {
+   "model": "ink_glance (12b)",
+   "test set": "test: pen",
+   "T": 0.526847200427275,
+   "ECE before %": 8.496051382650439,
+   "ECE after %": 0.4940122020791533,
+   "NLL before": 0.12357793748378754,
+   "NLL after": 0.04633786616662992
+  },
+  {
+   "model": "ink_glance (12b)",
+   "test set": "test: finger",
+   "T": 0.526847200427275,
+   "ECE before %": 9.284324742778697,
+   "ECE after %": 0.22550884716731104,
+   "NLL before": 0.12617942690849304,
+   "NLL after": 0.03598255827594024
+  }
+ ],
+ "comparison": [
+  {
+   "test set": "test: pen",
+   "model": "shipped (06)",
+   "rule": "old decide()",
+   "right: hit %": 97.0912,
+   "right: wrong yokai %": 0.6647,
+   "right: miss %": 1.9082,
+   "right: rewrite %": 0.3359,
+   "wrong maths: hit a yokai %": 1.7724,
+   "expected cost": 0.0851
+  },
+  {
+   "test set": "test: pen",
+   "model": "shipped (06)",
+   "rule": "new",
+   "right: hit %": 96.6838,
+   "right: wrong yokai %": 0.4717,
+   "right: miss %": 0.3359,
+   "right: rewrite %": 2.5086,
+   "wrong maths: hit a yokai %": 1.4437,
+   "expected cost": 0.0543
+  },
+  {
+   "test set": "test: pen",
+   "model": "image C (09)",
+   "rule": "old decide()",
+   "right: hit %": 98.7707,
+   "right: wrong yokai %": 0.2644,
+   "right: miss %": 0.6432,
+   "right: rewrite %": 0.3216,
+   "wrong maths: hit a yokai %": 0.6861,
+   "expected cost": 0.0324
+  },
+  {
+   "test set": "test: pen",
+   "model": "image C (09)",
+   "rule": "new",
+   "right: hit %": 98.978,
+   "right: wrong yokai %": 0.2358,
+   "right: miss %": 0.1644,
+   "right: rewrite %": 0.6218,
+   "wrong maths: hit a yokai %": 0.7576,
+   "expected cost": 0.0218
+  },
+  {
+   "test set": "test: pen",
+   "model": "resnet (12)",
+   "rule": "old decide()",
+   "right: hit %": 98.4062,
+   "right: wrong yokai %": 0.3073,
+   "right: miss %": 1.1578,
+   "right: rewrite %": 0.1286,
+   "wrong maths: hit a yokai %": 0.7433,
+   "expected cost": 0.0459
+  },
+  {
+   "test set": "test: pen",
+   "model": "resnet (12)",
+   "rule": "new",
+   "right: hit %": 98.7207,
+   "right: wrong yokai %": 0.3216,
+   "right: miss %": 0.4646,
+   "right: rewrite %": 0.4931,
+   "wrong maths: hit a yokai %": 0.8862,
+   "expected cost": 0.0324
+  },
+  {
+   "test set": "test: pen",
+   "model": "resnet + trajectory (12)",
+   "rule": "old decide()",
+   "right: hit %": 99.0352,
+   "right: wrong yokai %": 0.2287,
+   "right: miss %": 0.5503,
+   "right: rewrite %": 0.1858,
+   "wrong maths: hit a yokai %": 0.536,
+   "expected cost": 0.0269
+  },
+  {
+   "test set": "test: pen",
+   "model": "resnet + trajectory (12)",
+   "rule": "new",
+   "right: hit %": 99.0423,
+   "right: wrong yokai %": 0.1715,
+   "right: miss %": 0.1715,
+   "right: rewrite %": 0.6146,
+   "wrong maths: hit a yokai %": 0.536,
+   "expected cost": 0.0185
+  },
+  {
+   "test set": "test: pen",
+   "model": "ink_glance (12b)",
+   "rule": "old decide()",
+   "right: hit %": 99.1424,
+   "right: wrong yokai %": 0.1787,
+   "right: miss %": 0.5718,
+   "right: rewrite %": 0.1072,
+   "wrong maths: hit a yokai %": 0.4217,
+   "expected cost": 0.0243
+  },
+  {
+   "test set": "test: pen",
+   "model": "ink_glance (12b)",
+   "rule": "new",
+   "right: hit %": 99.1352,
+   "right: wrong yokai %": 0.1429,
+   "right: miss %": 0.2501,
+   "right: rewrite %": 0.4717,
+   "wrong maths: hit a yokai %": 0.4431,
+   "expected cost": 0.0178
+  },
+  {
+   "test set": "test: finger",
+   "model": "shipped (06)",
+   "rule": "old decide()",
+   "right: hit %": 98.9299,
+   "right: wrong yokai %": 0.2622,
+   "right: miss %": 0.7509,
+   "right: rewrite %": 0.0571,
+   "wrong maths: hit a yokai %": 0.7455,
+   "expected cost": 0.033
+  },
+  {
+   "test set": "test: finger",
+   "model": "shipped (06)",
+   "rule": "new",
+   "right: hit %": 98.6623,
+   "right: wrong yokai %": 0.173,
+   "right: miss %": 0.1819,
+   "right: rewrite %": 0.9827,
+   "wrong maths: hit a yokai %": 0.6135,
+   "expected cost": 0.0222
+  },
+  {
+   "test set": "test: finger",
+   "model": "image C (09)",
+   "rule": "old decide()",
+   "right: hit %": 99.217,
+   "right: wrong yokai %": 0.198,
+   "right: miss %": 0.5119,
+   "right: rewrite %": 0.0731,
+   "wrong maths: hit a yokai %": 0.5547,
+   "expected cost": 0.0238
+  },
+  {
+   "test set": "test: finger",
+   "model": "image C (09)",
+   "rule": "new",
+   "right: hit %": 99.2723,
+   "right: wrong yokai %": 0.1605,
+   "right: miss %": 0.1141,
+   "right: rewrite %": 0.453,
+   "wrong maths: hit a yokai %": 0.6528,
+   "expected cost": 0.0155
+  },
+  {
+   "test set": "test: finger",
+   "model": "resnet (12)",
+   "rule": "old decide()",
+   "right: hit %": 99.5862,
+   "right: wrong yokai %": 0.1159,
+   "right: miss %": 0.2872,
+   "right: rewrite %": 0.0107,
+   "wrong maths: hit a yokai %": 0.3549,
+   "expected cost": 0.0134
+  },
+  {
+   "test set": "test: finger",
+   "model": "resnet (12)",
+   "rule": "new",
+   "right: hit %": 99.6879,
+   "right: wrong yokai %": 0.1195,
+   "right: miss %": 0.1141,
+   "right: rewrite %": 0.0785,
+   "wrong maths: hit a yokai %": 0.494,
+   "expected cost": 0.0101
+  },
+  {
+   "test set": "test: finger",
+   "model": "resnet + trajectory (12)",
+   "rule": "old decide()",
+   "right: hit %": 99.7325,
+   "right: wrong yokai %": 0.0731,
+   "right: miss %": 0.1677,
+   "right: rewrite %": 0.0268,
+   "wrong maths: hit a yokai %": 0.2907,
+   "expected cost": 0.0085
+  },
+  {
+   "test set": "test: finger",
+   "model": "resnet + trajectory (12)",
+   "rule": "new",
+   "right: hit %": 99.7057,
+   "right: wrong yokai %": 0.0464,
+   "right: miss %": 0.0606,
+   "right: rewrite %": 0.1873,
+   "wrong maths: hit a yokai %": 0.2693,
+   "expected cost": 0.0059
+  },
+  {
+   "test set": "test: finger",
+   "model": "ink_glance (12b)",
+   "rule": "old decide()",
+   "right: hit %": 99.3793,
+   "right: wrong yokai %": 0.1427,
+   "right: miss %": 0.3959,
+   "right: rewrite %": 0.082,
+   "wrong maths: hit a yokai %": 0.5279,
+   "expected cost": 0.0184
+  },
+  {
+   "test set": "test: finger",
+   "model": "ink_glance (12b)",
+   "rule": "new",
+   "right: hit %": 99.3294,
+   "right: wrong yokai %": 0.0963,
+   "right: miss %": 0.1124,
+   "right: rewrite %": 0.4619,
+   "wrong maths: hit a yokai %": 0.503,
+   "expected cost": 0.0124
+  }
+ ],
+ "per_k": [
+  {
+   "rule": "old decide()",
+   "answers on screen": 1,
+   "right: hit %": 99.77170578583149,
+   "right: wrong yokai %": 0,
+   "right: miss %": 0.19975743739744597,
+   "right: rewrite %": 0.02853677677106371,
+   "wrong maths: hit a yokai %": 0.12128130127702075,
+   "expected cost": 0.005700221160019976
+  },
+  {
+   "rule": "old decide()",
+   "answers on screen": 2,
+   "right: hit %": 99.75030320325318,
+   "right: wrong yokai %": 0.049939359349361494,
+   "right: miss %": 0.17835485481914817,
+   "right: rewrite %": 0.02140258257829778,
+   "wrong maths: hit a yokai %": 0.2425626025540415,
+   "expected cost": 0.007580081329813797
+  },
+  {
+   "rule": "old decide()",
+   "answers on screen": 3,
+   "right: hit %": 99.71463223228936,
+   "right: wrong yokai %": 0.09987871869872299,
+   "right: miss %": 0.1569522722408504,
+   "right: rewrite %": 0.02853677677106371,
+   "wrong maths: hit a yokai %": 0.3638439038310623,
+   "expected cost": 0.00958122280088464
+  },
+  {
+   "rule": "old decide()",
+   "answers on screen": 4,
+   "right: hit %": 99.69322964971107,
+   "right: wrong yokai %": 0.14268388385531855,
+   "right: miss %": 0.1355496896625526,
+   "right: rewrite %": 0.02853677677106371,
+   "wrong maths: hit a yokai %": 0.43518584575872155,
+   "expected cost": 0.011068702290076338
+  },
+  {
+   "rule": "new",
+   "answers on screen": 1,
+   "right: hit %": 99.86445031033745,
+   "right: wrong yokai %": 0,
+   "right: miss %": 0.06420774773489334,
+   "right: rewrite %": 0.07134194192765927,
+   "wrong maths: hit a yokai %": 0.20689163159021187,
+   "expected cost": 0.002864378968395519
+  },
+  {
+   "rule": "new",
+   "answers on screen": 2,
+   "right: hit %": 99.76457159163873,
+   "right: wrong yokai %": 0.02853677677106371,
+   "right: miss %": 0.05707355354212742,
+   "right: rewrite %": 0.14981807804808447,
+   "wrong maths: hit a yokai %": 0.25683099093957334,
+   "expected cost": 0.004712135264321894
+  },
+  {
+   "rule": "new",
+   "answers on screen": 3,
+   "right: hit %": 99.63615609616893,
+   "right: wrong yokai %": 0.05707355354212742,
+   "right: miss %": 0.06420774773489334,
+   "right: rewrite %": 0.2425626025540415,
+   "wrong maths: hit a yokai %": 0.3210387386744667,
+   "expected cost": 0.007087821930512948
+  },
+  {
+   "rule": "new",
+   "answers on screen": 4,
+   "right: hit %": 99.55767996004852,
+   "right: wrong yokai %": 0.09987871869872299,
+   "right: miss %": 0.05707355354212742,
+   "right: rewrite %": 0.2853677677106371,
+   "wrong maths: hit a yokai %": 0.29250196190340305,
+   "expected cost": 0.0090033530712706
+  }
+ ],
+ "sensitivity": [
+  {
+   "pi": 0.7,
+   "rule": "old decide()",
+   "expected cost": 0.008011700078476135
+  },
+  {
+   "pi": 0.7,
+   "rule": "new",
+   "expected cost": 0.005823286009845188
+  },
+  {
+   "pi": 0.85,
+   "rule": "old decide()",
+   "expected cost": 0.008482556895198686
+  },
+  {
+   "pi": 0.85,
+   "rule": "new",
+   "expected cost": 0.005916922308625241
+  },
+  {
+   "pi": 0.95,
+   "rule": "old decide()",
+   "expected cost": 0.008796461439680388
+  },
+  {
+   "pi": 0.95,
+   "rule": "new",
+   "expected cost": 0.005979346507811943
+  }
+ ],
+ "js": "// Bayesian reading (research notebook 13): calibrated probabilities x the answers on screen.\nconst TEMP = 0.493, PI = 0.85, T_HIT = 0.70, T_MISS = 0.90;\nexport function decide(probs) {\n  const answers = new Set(targets().map((e) => e.answer));\n  const z = probs.map((p) => Math.log(p + 1e-7) / TEMP), m = Math.max(...z);\n  const p = z.map((v) => Math.exp(v - m)); const s0 = p.reduce((a, b) => a + b, 0);\n  const top = p.indexOf(Math.max(...p));\n  if (!answers.size) return { kind: 'idle', d: top, p: p[top] / s0 };\n  const k = answers.size;\n  const q = p.map((v, d) => v / s0 * (answers.has(d) ? PI / k : (1 - PI) / (10 - k)));\n  const s = q.reduce((a, b) => a + b, 0);\n  let best = -1; for (const d of answers) if (best < 0 || q[d] > q[best]) best = d;\n  if (q[best] / s >= T_HIT) return { kind: 'hit', d: best, p: q[best] / s, ...(best !== top && { corrected: top }) };\n  const off = 1 - [...answers].reduce((a, d) => a + q[d], 0) / s;\n  if (off >= T_MISS) return { kind: 'miss', d: top, p: p[top] / s0 };\n  return { kind: 'unclear', d: top, p: p[top] / s0 };\n}"
+}

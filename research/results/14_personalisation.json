@@ -1,0 +1,1044 @@
+{
+ "hyperparameters": {
+  "head": {
+   "steps": 100,
+   "lr": 0.003,
+   "l2": 0.001
+  },
+  "proto": {
+   "tau": 10.0
+  }
+ },
+ "calibration": [
+  {
+   "base": "image C (09)",
+   "device": "finger",
+   "method": "head",
+   "k": 1,
+   "before": 0.9879727079946593,
+   "after": 0.990998618524053
+  },
+  {
+   "base": "image C (09)",
+   "device": "finger",
+   "method": "head",
+   "k": 2,
+   "before": 0.9882446624587743,
+   "after": 0.9923525546089201
+  },
+  {
+   "base": "image C (09)",
+   "device": "finger",
+   "method": "head",
+   "k": 4,
+   "before": 0.9890399767866872,
+   "after": 0.9945122886734729
+  },
+  {
+   "base": "image C (09)",
+   "device": "finger",
+   "method": "none",
+   "k": 0,
+   "before": 0.9884025888186674,
+   "after": 0.9884025888186674
+  },
+  {
+   "base": "image C (09)",
+   "device": "finger",
+   "method": "proto",
+   "k": 1,
+   "before": 0.9879727079946593,
+   "after": 0.9901809792153652
+  },
+  {
+   "base": "image C (09)",
+   "device": "finger",
+   "method": "proto",
+   "k": 2,
+   "before": 0.9882446624587743,
+   "after": 0.9907247740269461
+  },
+  {
+   "base": "image C (09)",
+   "device": "finger",
+   "method": "proto",
+   "k": 4,
+   "before": 0.9890399767866872,
+   "after": 0.9915034554014817
+  },
+  {
+   "base": "image C (09)",
+   "device": "pen",
+   "method": "head",
+   "k": 1,
+   "before": 0.9836259713090257,
+   "after": 0.9886854951185494
+  },
+  {
+   "base": "image C (09)",
+   "device": "pen",
+   "method": "head",
+   "k": 2,
+   "before": 0.9832243890531341,
+   "after": 0.9909883642084135
+  },
+  {
+   "base": "image C (09)",
+   "device": "pen",
+   "method": "head",
+   "k": 5,
+   "before": 0.9846374730796841,
+   "after": 0.9957089016511127
+  },
+  {
+   "base": "image C (09)",
+   "device": "pen",
+   "method": "head",
+   "k": 10,
+   "before": 0.9847555129434324,
+   "after": 0.9976190476190476
+  },
+  {
+   "base": "image C (09)",
+   "device": "pen",
+   "method": "none",
+   "k": 0,
+   "before": 0.9839954102122777,
+   "after": 0.9839954102122777
+  },
+  {
+   "base": "image C (09)",
+   "device": "pen",
+   "method": "proto",
+   "k": 1,
+   "before": 0.9836259713090257,
+   "after": 0.9877926379756924
+  },
+  {
+   "base": "image C (09)",
+   "device": "pen",
+   "method": "proto",
+   "k": 2,
+   "before": 0.9832243890531341,
+   "after": 0.989126366324012
+  },
+  {
+   "base": "image C (09)",
+   "device": "pen",
+   "method": "proto",
+   "k": 5,
+   "before": 0.9846374730796841,
+   "after": 0.9910678391959798
+  },
+  {
+   "base": "image C (09)",
+   "device": "pen",
+   "method": "proto",
+   "k": 10,
+   "before": 0.9847555129434324,
+   "after": 0.9914253755193352
+  },
+  {
+   "base": "resnet (12)",
+   "device": "finger",
+   "method": "head",
+   "k": 1,
+   "before": 0.992322481004619,
+   "after": 0.9939470685866872
+  },
+  {
+   "base": "resnet (12)",
+   "device": "finger",
+   "method": "head",
+   "k": 2,
+   "before": 0.9924635262093254,
+   "after": 0.9946480319918733
+  },
+  {
+   "base": "resnet (12)",
+   "device": "finger",
+   "method": "head",
+   "k": 4,
+   "before": 0.9932490389727232,
+   "after": 0.9959624713736556
+  },
+  {
+   "base": "resnet (12)",
+   "device": "finger",
+   "method": "none",
+   "k": 0,
+   "before": 0.9926090986423363,
+   "after": 0.9926090986423363
+  },
+  {
+   "base": "resnet (12)",
+   "device": "finger",
+   "method": "proto",
+   "k": 1,
+   "before": 0.992322481004619,
+   "after": 0.9937906127237096
+  },
+  {
+   "base": "resnet (12)",
+   "device": "finger",
+   "method": "proto",
+   "k": 2,
+   "before": 0.9924635262093254,
+   "after": 0.993988363270764
+  },
+  {
+   "base": "resnet (12)",
+   "device": "finger",
+   "method": "proto",
+   "k": 4,
+   "before": 0.9932490389727232,
+   "after": 0.9956783804645647
+  },
+  {
+   "base": "resnet (12)",
+   "device": "pen",
+   "method": "head",
+   "k": 1,
+   "before": 0.9818415022912931,
+   "after": 0.987793883243674
+  },
+  {
+   "base": "resnet (12)",
+   "device": "pen",
+   "method": "head",
+   "k": 2,
+   "before": 0.9813623911687326,
+   "after": 0.9888158073178008
+  },
+  {
+   "base": "resnet (12)",
+   "device": "pen",
+   "method": "head",
+   "k": 5,
+   "before": 0.9821392677674085,
+   "after": 0.993210696338837
+  },
+  {
+   "base": "resnet (12)",
+   "device": "pen",
+   "method": "head",
+   "k": 10,
+   "before": 0.9819015659955257,
+   "after": 0.9957110898050495
+  },
+  {
+   "base": "resnet (12)",
+   "device": "pen",
+   "method": "none",
+   "k": 0,
+   "before": 0.9822822719449225,
+   "after": 0.9822822719449225
+  },
+  {
+   "base": "resnet (12)",
+   "device": "pen",
+   "method": "proto",
+   "k": 1,
+   "before": 0.9818415022912931,
+   "after": 0.9830319784817693
+  },
+  {
+   "base": "resnet (12)",
+   "device": "pen",
+   "method": "proto",
+   "k": 2,
+   "before": 0.9813623911687326,
+   "after": 0.9829151861997885
+  },
+  {
+   "base": "resnet (12)",
+   "device": "pen",
+   "method": "proto",
+   "k": 5,
+   "before": 0.9821392677674085,
+   "after": 0.9835678391959799
+  },
+  {
+   "base": "resnet (12)",
+   "device": "pen",
+   "method": "proto",
+   "k": 10,
+   "before": 0.9819015659955257,
+   "after": 0.9833301374240973
+  }
+ ],
+ "in_game": [
+  {
+   "base": "image C (09)",
+   "device": "finger",
+   "mode": "game",
+   "method": "head",
+   "played": 10,
+   "before": 98.80478123543776,
+   "after": 98.22457695645703,
+   "kept": 9.915254237288135,
+   "label_errors": 0.340909090909091
+  },
+  {
+   "base": "image C (09)",
+   "device": "finger",
+   "mode": "game",
+   "method": "head",
+   "played": 20,
+   "before": 98.79567106285792,
+   "after": 98.72857513277981,
+   "kept": 19.80225988700565,
+   "label_errors": 0.23192450824029773
+  },
+  {
+   "base": "image C (09)",
+   "device": "finger",
+   "mode": "game",
+   "method": "head",
+   "played": 40,
+   "before": 98.55513756829546,
+   "after": 99.03211280678387,
+   "kept": 39.59322033898305,
+   "label_errors": 0.1596652665731613
+  },
+  {
+   "base": "image C (09)",
+   "device": "finger",
+   "mode": "game",
+   "method": "proto",
+   "played": 10,
+   "before": 98.80478123543776,
+   "after": 75.15287312575973,
+   "kept": 9.915254237288135,
+   "label_errors": 0.340909090909091
+  },
+  {
+   "base": "image C (09)",
+   "device": "finger",
+   "mode": "game",
+   "method": "proto",
+   "played": 20,
+   "before": 98.79567106285792,
+   "after": 91.07345126456005,
+   "kept": 19.80225988700565,
+   "label_errors": 0.23192450824029773
+  },
+  {
+   "base": "image C (09)",
+   "device": "finger",
+   "mode": "game",
+   "method": "proto",
+   "played": 40,
+   "before": 98.55513756829546,
+   "after": 98.72789399927558,
+   "kept": 39.59322033898305,
+   "label_errors": 0.1596652665731613
+  },
+  {
+   "base": "image C (09)",
+   "device": "finger",
+   "mode": "game + noise",
+   "method": "head",
+   "played": 10,
+   "before": 98.82911395630909,
+   "after": 91.46875053456458,
+   "kept": 9.898305084745763,
+   "label_errors": 10.677083333333334
+  },
+  {
+   "base": "image C (09)",
+   "device": "finger",
+   "mode": "game + noise",
+   "method": "head",
+   "played": 20,
+   "before": 98.79600985931376,
+   "after": 90.1368978869733,
+   "kept": 19.796610169491526,
+   "label_errors": 11.149517622040843
+  },
+  {
+   "base": "image C (09)",
+   "device": "finger",
+   "mode": "game + noise",
+   "method": "head",
+   "played": 40,
+   "before": 98.74639459343406,
+   "after": 92.88954703428388,
+   "kept": 39.58757062146893,
+   "label_errors": 10.072865928129087
+  },
+  {
+   "base": "image C (09)",
+   "device": "finger",
+   "mode": "game + noise",
+   "method": "proto",
+   "played": 10,
+   "before": 98.82911395630909,
+   "after": 73.89361541147224,
+   "kept": 9.898305084745763,
+   "label_errors": 10.677083333333334
+  },
+  {
+   "base": "image C (09)",
+   "device": "finger",
+   "mode": "game + noise",
+   "method": "proto",
+   "played": 20,
+   "before": 98.79600985931376,
+   "after": 89.05993624223444,
+   "kept": 19.796610169491526,
+   "label_errors": 11.149517622040843
+  },
+  {
+   "base": "image C (09)",
+   "device": "finger",
+   "mode": "game + noise",
+   "method": "proto",
+   "played": 40,
+   "before": 98.74639459343406,
+   "after": 98.00589879537249,
+   "kept": 39.58757062146893,
+   "label_errors": 10.072865928129087
+  },
+  {
+   "base": "image C (09)",
+   "device": "pen",
+   "mode": "game",
+   "method": "head",
+   "played": 10,
+   "before": 98.4518828451883,
+   "after": 98.24342498505679,
+   "kept": 9.857142857142858,
+   "label_errors": 0.7142857142857143
+  },
+  {
+   "base": "image C (09)",
+   "device": "pen",
+   "mode": "game",
+   "method": "head",
+   "played": 20,
+   "before": 98.44666250779788,
+   "after": 98.19794407225582,
+   "kept": 19.785714285714285,
+   "label_errors": 0.3968253968253968
+  },
+  {
+   "base": "image C (09)",
+   "device": "pen",
+   "mode": "game",
+   "method": "head",
+   "played": 40,
+   "before": 98.43488591608892,
+   "after": 98.43472317156528,
+   "kept": 39.5,
+   "label_errors": 0.3968253968253968
+  },
+  {
+   "base": "image C (09)",
+   "device": "pen",
+   "mode": "game",
+   "method": "proto",
+   "played": 10,
+   "before": 98.4518828451883,
+   "after": 80.67443713887228,
+   "kept": 9.857142857142858,
+   "label_errors": 0.7142857142857143
+  },
+  {
+   "base": "image C (09)",
+   "device": "pen",
+   "mode": "game",
+   "method": "proto",
+   "played": 20,
+   "before": 98.44666250779788,
+   "after": 88.4115381485801,
+   "kept": 19.785714285714285,
+   "label_errors": 0.3968253968253968
+  },
+  {
+   "base": "image C (09)",
+   "device": "pen",
+   "mode": "game",
+   "method": "proto",
+   "played": 40,
+   "before": 98.43488591608892,
+   "after": 97.38062689190508,
+   "kept": 39.5,
+   "label_errors": 0.3968253968253968
+  },
+  {
+   "base": "image C (09)",
+   "device": "pen",
+   "mode": "game + noise",
+   "method": "head",
+   "played": 10,
+   "before": 98.39235903566447,
+   "after": 91.03519127316198,
+   "kept": 9.928571428571429,
+   "label_errors": 9.365079365079366
+  },
+  {
+   "base": "image C (09)",
+   "device": "pen",
+   "mode": "game + noise",
+   "method": "head",
+   "played": 20,
+   "before": 98.47785402370556,
+   "after": 93.7220971547913,
+   "kept": 19.642857142857142,
+   "label_errors": 6.235072976559045
+  },
+  {
+   "base": "image C (09)",
+   "device": "pen",
+   "mode": "game + noise",
+   "method": "head",
+   "played": 40,
+   "before": 98.26481788887804,
+   "after": 90.67262311623213,
+   "kept": 39.714285714285715,
+   "label_errors": 10.797908232118758
+  },
+  {
+   "base": "image C (09)",
+   "device": "pen",
+   "mode": "game + noise",
+   "method": "proto",
+   "played": 10,
+   "before": 98.39235903566447,
+   "after": 75.87841203426979,
+   "kept": 9.928571428571429,
+   "label_errors": 9.365079365079366
+  },
+  {
+   "base": "image C (09)",
+   "device": "pen",
+   "mode": "game + noise",
+   "method": "proto",
+   "played": 20,
+   "before": 98.47785402370556,
+   "after": 87.63039409802272,
+   "kept": 19.642857142857142,
+   "label_errors": 6.235072976559045
+  },
+  {
+   "base": "image C (09)",
+   "device": "pen",
+   "mode": "game + noise",
+   "method": "proto",
+   "played": 40,
+   "before": 98.26481788887804,
+   "after": 96.01601406112684,
+   "kept": 39.714285714285715,
+   "label_errors": 10.797908232118758
+  },
+  {
+   "base": "resnet (12)",
+   "device": "finger",
+   "mode": "game",
+   "method": "head",
+   "played": 10,
+   "before": 99.26444416526664,
+   "after": 98.96762828441553,
+   "kept": 9.92090395480226,
+   "label_errors": 0.05681818181818182
+  },
+  {
+   "base": "resnet (12)",
+   "device": "finger",
+   "mode": "game",
+   "method": "head",
+   "played": 20,
+   "before": 99.2753619641388,
+   "after": 99.31194536481945,
+   "kept": 19.819209039548024,
+   "label_errors": 0.0867224880382775
+  },
+  {
+   "base": "resnet (12)",
+   "device": "finger",
+   "mode": "game",
+   "method": "head",
+   "played": 40,
+   "before": 99.09149969182863,
+   "after": 99.34679812146918,
+   "kept": 39.69491525423729,
+   "label_errors": 0.10016025641025643
+  },
+  {
+   "base": "resnet (12)",
+   "device": "finger",
+   "mode": "game",
+   "method": "proto",
+   "played": 10,
+   "before": 99.26444416526664,
+   "after": 90.82838713827755,
+   "kept": 9.92090395480226,
+   "label_errors": 0.05681818181818182
+  },
+  {
+   "base": "resnet (12)",
+   "device": "finger",
+   "mode": "game",
+   "method": "proto",
+   "played": 20,
+   "before": 99.2753619641388,
+   "after": 95.90199464478816,
+   "kept": 19.819209039548024,
+   "label_errors": 0.0867224880382775
+  },
+  {
+   "base": "resnet (12)",
+   "device": "finger",
+   "mode": "game",
+   "method": "proto",
+   "played": 40,
+   "before": 99.09149969182863,
+   "after": 99.23390936548832,
+   "kept": 39.69491525423729,
+   "label_errors": 0.10016025641025643
+  },
+  {
+   "base": "resnet (12)",
+   "device": "finger",
+   "mode": "game + noise",
+   "method": "head",
+   "played": 10,
+   "before": 99.23126389711196,
+   "after": 91.70843153071341,
+   "kept": 9.932203389830509,
+   "label_errors": 10.473484848484848
+  },
+  {
+   "base": "resnet (12)",
+   "device": "finger",
+   "mode": "game + noise",
+   "method": "head",
+   "played": 20,
+   "before": 99.29368266910109,
+   "after": 91.06835246424781,
+   "kept": 19.847457627118644,
+   "label_errors": 10.989832535885167
+  },
+  {
+   "base": "resnet (12)",
+   "device": "finger",
+   "mode": "game + noise",
+   "method": "head",
+   "played": 40,
+   "before": 99.19492240215925,
+   "after": 93.08521083192136,
+   "kept": 39.67231638418079,
+   "label_errors": 9.998255582137162
+  },
+  {
+   "base": "resnet (12)",
+   "device": "finger",
+   "mode": "game + noise",
+   "method": "proto",
+   "played": 10,
+   "before": 99.23126389711196,
+   "after": 87.46700517624691,
+   "kept": 9.932203389830509,
+   "label_errors": 10.473484848484848
+  },
+  {
+   "base": "resnet (12)",
+   "device": "finger",
+   "mode": "game + noise",
+   "method": "proto",
+   "played": 20,
+   "before": 99.29368266910109,
+   "after": 93.58207360059733,
+   "kept": 19.847457627118644,
+   "label_errors": 10.989832535885167
+  },
+  {
+   "base": "resnet (12)",
+   "device": "finger",
+   "mode": "game + noise",
+   "method": "proto",
+   "played": 40,
+   "before": 99.19492240215925,
+   "after": 98.64693238048503,
+   "kept": 39.67231638418079,
+   "label_errors": 9.998255582137162
+  },
+  {
+   "base": "resnet (12)",
+   "device": "pen",
+   "mode": "game",
+   "method": "head",
+   "played": 10,
+   "before": 98.33308427973701,
+   "after": 97.97594142259413,
+   "kept": 9.642857142857142,
+   "label_errors": 0.7142857142857143
+  },
+  {
+   "base": "resnet (12)",
+   "device": "pen",
+   "mode": "game",
+   "method": "head",
+   "played": 20,
+   "before": 98.29151861997885,
+   "after": 98.2916542352654,
+   "kept": 19.642857142857142,
+   "label_errors": 0.3968253968253968
+  },
+  {
+   "base": "resnet (12)",
+   "device": "pen",
+   "mode": "game",
+   "method": "head",
+   "played": 40,
+   "before": 98.19695342251734,
+   "after": 98.1627770725515,
+   "kept": 39.642857142857146,
+   "label_errors": 0.7379219879219879
+  },
+  {
+   "base": "resnet (12)",
+   "device": "pen",
+   "mode": "game",
+   "method": "proto",
+   "played": 10,
+   "before": 98.33308427973701,
+   "after": 91.12659394301653,
+   "kept": 9.642857142857142,
+   "label_errors": 0.7142857142857143
+  },
+  {
+   "base": "resnet (12)",
+   "device": "pen",
+   "mode": "game",
+   "method": "proto",
+   "played": 20,
+   "before": 98.29151861997885,
+   "after": 92.38981257967399,
+   "kept": 19.642857142857142,
+   "label_errors": 0.3968253968253968
+  },
+  {
+   "base": "resnet (12)",
+   "device": "pen",
+   "mode": "game",
+   "method": "proto",
+   "played": 40,
+   "before": 98.19695342251734,
+   "after": 97.9588581844221,
+   "kept": 39.642857142857146,
+   "label_errors": 0.7379219879219879
+  },
+  {
+   "base": "resnet (12)",
+   "device": "pen",
+   "mode": "game + noise",
+   "method": "head",
+   "played": 10,
+   "before": 98.24367403865311,
+   "after": 91.63155010958359,
+   "kept": 9.857142857142858,
+   "label_errors": 9.603174603174605
+  },
+  {
+   "base": "resnet (12)",
+   "device": "pen",
+   "mode": "game + noise",
+   "method": "head",
+   "played": 20,
+   "before": 98.38482193712875,
+   "after": 92.5697740649326,
+   "kept": 19.571428571428573,
+   "label_errors": 7.318295739348371
+  },
+  {
+   "base": "resnet (12)",
+   "device": "pen",
+   "mode": "game + noise",
+   "method": "head",
+   "played": 40,
+   "before": 98.12892621163299,
+   "after": 90.80932851609543,
+   "kept": 39.714285714285715,
+   "label_errors": 11.16902834008097
+  },
+  {
+   "base": "resnet (12)",
+   "device": "pen",
+   "mode": "game + noise",
+   "method": "proto",
+   "played": 10,
+   "before": 98.24367403865311,
+   "after": 89.1024108388125,
+   "kept": 9.857142857142858,
+   "label_errors": 9.603174603174605
+  },
+  {
+   "base": "resnet (12)",
+   "device": "pen",
+   "mode": "game + noise",
+   "method": "proto",
+   "played": 20,
+   "before": 98.38482193712875,
+   "after": 90.27190864954298,
+   "kept": 19.571428571428573,
+   "label_errors": 7.318295739348371
+  },
+  {
+   "base": "resnet (12)",
+   "device": "pen",
+   "mode": "game + noise",
+   "method": "proto",
+   "played": 40,
+   "before": 98.12892621163299,
+   "after": 96.62858444813331,
+   "kept": 39.714285714285715,
+   "label_errors": 11.16902834008097
+  }
+ ],
+ "in_game_l2": [
+  {
+   "base": "image C (09)",
+   "device": "pen",
+   "mode": "game",
+   "L2": 0.001,
+   "before": 98.435,
+   "after": 98.435,
+   "writers worse by > 2 points %": 0.0
+  },
+  {
+   "base": "image C (09)",
+   "device": "pen",
+   "mode": "game",
+   "L2": 0.1,
+   "before": 98.435,
+   "after": 98.401,
+   "writers worse by > 2 points %": 0.0
+  },
+  {
+   "base": "image C (09)",
+   "device": "pen",
+   "mode": "game",
+   "L2": 1.0,
+   "before": 98.435,
+   "after": 98.435,
+   "writers worse by > 2 points %": 0.0
+  },
+  {
+   "base": "image C (09)",
+   "device": "pen",
+   "mode": "game + noise",
+   "L2": 0.001,
+   "before": 98.265,
+   "after": 90.673,
+   "writers worse by > 2 points %": 78.571
+  },
+  {
+   "base": "image C (09)",
+   "device": "pen",
+   "mode": "game + noise",
+   "L2": 0.1,
+   "before": 98.265,
+   "after": 95.983,
+   "writers worse by > 2 points %": 28.571
+  },
+  {
+   "base": "image C (09)",
+   "device": "pen",
+   "mode": "game + noise",
+   "L2": 1.0,
+   "before": 98.265,
+   "after": 98.401,
+   "writers worse by > 2 points %": 0.0
+  },
+  {
+   "base": "image C (09)",
+   "device": "finger",
+   "mode": "game",
+   "L2": 0.001,
+   "before": 98.555,
+   "after": 99.032,
+   "writers worse by > 2 points %": 3.409
+  },
+  {
+   "base": "image C (09)",
+   "device": "finger",
+   "mode": "game",
+   "L2": 0.1,
+   "before": 98.555,
+   "after": 98.946,
+   "writers worse by > 2 points %": 0.568
+  },
+  {
+   "base": "image C (09)",
+   "device": "finger",
+   "mode": "game",
+   "L2": 1.0,
+   "before": 98.555,
+   "after": 98.642,
+   "writers worse by > 2 points %": 1.136
+  },
+  {
+   "base": "image C (09)",
+   "device": "finger",
+   "mode": "game + noise",
+   "L2": 0.001,
+   "before": 98.746,
+   "after": 92.89,
+   "writers worse by > 2 points %": 71.023
+  },
+  {
+   "base": "image C (09)",
+   "device": "finger",
+   "mode": "game + noise",
+   "L2": 0.1,
+   "before": 98.746,
+   "after": 98.526,
+   "writers worse by > 2 points %": 10.795
+  },
+  {
+   "base": "image C (09)",
+   "device": "finger",
+   "mode": "game + noise",
+   "L2": 1.0,
+   "before": 98.746,
+   "after": 98.803,
+   "writers worse by > 2 points %": 3.409
+  },
+  {
+   "base": "resnet (12)",
+   "device": "pen",
+   "mode": "game",
+   "L2": 0.001,
+   "before": 98.197,
+   "after": 98.163,
+   "writers worse by > 2 points %": 0.0
+  },
+  {
+   "base": "resnet (12)",
+   "device": "pen",
+   "mode": "game",
+   "L2": 0.1,
+   "before": 98.197,
+   "after": 98.027,
+   "writers worse by > 2 points %": 0.0
+  },
+  {
+   "base": "resnet (12)",
+   "device": "pen",
+   "mode": "game",
+   "L2": 1.0,
+   "before": 98.197,
+   "after": 98.163,
+   "writers worse by > 2 points %": 0.0
+  },
+  {
+   "base": "resnet (12)",
+   "device": "pen",
+   "mode": "game + noise",
+   "L2": 0.001,
+   "before": 98.129,
+   "after": 90.809,
+   "writers worse by > 2 points %": 57.143
+  },
+  {
+   "base": "resnet (12)",
+   "device": "pen",
+   "mode": "game + noise",
+   "L2": 0.1,
+   "before": 98.129,
+   "after": 95.1,
+   "writers worse by > 2 points %": 28.571
+  },
+  {
+   "base": "resnet (12)",
+   "device": "pen",
+   "mode": "game + noise",
+   "L2": 1.0,
+   "before": 98.129,
+   "after": 98.027,
+   "writers worse by > 2 points %": 0.0
+  },
+  {
+   "base": "resnet (12)",
+   "device": "finger",
+   "mode": "game",
+   "L2": 0.001,
+   "before": 99.091,
+   "after": 99.347,
+   "writers worse by > 2 points %": 1.705
+  },
+  {
+   "base": "resnet (12)",
+   "device": "finger",
+   "mode": "game",
+   "L2": 0.1,
+   "before": 99.091,
+   "after": 99.219,
+   "writers worse by > 2 points %": 1.705
+  },
+  {
+   "base": "resnet (12)",
+   "device": "finger",
+   "mode": "game",
+   "L2": 1.0,
+   "before": 99.091,
+   "after": 99.134,
+   "writers worse by > 2 points %": 1.136
+  },
+  {
+   "base": "resnet (12)",
+   "device": "finger",
+   "mode": "game + noise",
+   "L2": 0.001,
+   "before": 99.195,
+   "after": 93.085,
+   "writers worse by > 2 points %": 70.455
+  },
+  {
+   "base": "resnet (12)",
+   "device": "finger",
+   "mode": "game + noise",
+   "L2": 0.1,
+   "before": 99.195,
+   "after": 98.706,
+   "writers worse by > 2 points %": 7.386
+  },
+  {
+   "base": "resnet (12)",
+   "device": "finger",
+   "mode": "game + noise",
+   "L2": 1.0,
+   "before": 99.195,
+   "after": 99.282,
+   "writers worse by > 2 points %": 1.136
+  }
+ ],
+ "fusion": [
+  {
+   "device": "finger",
+   "mode": "calib 2",
+   "fusion before": 0.9952277929794733,
+   "fusion after": 0.9960881462196483
+  },
+  {
+   "device": "finger",
+   "mode": "game 40",
+   "fusion before": 0.9962615144358565,
+   "fusion after": 0.9966912929906351
+  },
+  {
+   "device": "pen",
+   "mode": "calib 2",
+   "fusion before": 0.9860221324147658,
+   "fusion after": 0.9922333125389894
+  },
+  {
+   "device": "pen",
+   "mode": "game 40",
+   "fusion before": 0.9857110308238128,
+   "fusion after": 0.9904729355857176
+  }
+ ]
+}
