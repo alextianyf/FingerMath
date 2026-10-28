@@ -198,7 +198,9 @@
 | **09_train_with_real** | 把 Pendigits 训练部分加入训练（Corr 只评估，不训练），并加入针对所有数字的倾斜、笔宽增强；4 个方案 × 2 个随机种子的消融实验 | 新的图像 CNN，每个改动的贡献 |
 | **10_error_audit** | 逐个查看剩下的错误样本，分为"模型确实读错""人眼也认不出""疑似标签错误"三类；先由我初筛，再由你确认 | 真实数据上的准确率上限，以及还有多少可以改进的空间 |
 | **11_trajectory_and_fusion** | 轨迹模型（1D 卷积或小 GRU，输入为重采样后的点和方向）；与图像 CNN 做晚期融合（加权平均对数概率）；比较单独和融合的效果 | 融合是否值得做，以及在浏览器里的体积和延迟 |
-| **12_architecture** | 固定使用 09 选出的数据，公平比较不同架构：现有 CNN、加宽或加残差的 CNN [25]、深度可分离卷积的轻量 CNN [26]、多个模型集成 [27] 后蒸馏 [23] 到小模型、11 的融合模型；空间变换网络 [28] 作为可选项。每个都报告准确率、模型大小和浏览器推理时间 | 架构能带来多少收益；如果收益很小，这本身就是结论 |
+| **12_image_architectures** | 固定使用 09 选出的数据，公平比较图像模型的结构：现有 CNN、加宽、残差 [25]、深度可分离卷积 [26]、ConvMixer [30]；同结构和跨结构的集成 [27]；每种结构和 11 的轨迹模型融合后还剩多少差别 | 只换图像结构能带来多少收益 |
+| **12b_new_architectures** | 我们设计的、同时用图像和笔迹的结构：方向图 CNN（给图像加上笔画方向和先后的通道 [31][32]）、双流联合训练、交叉注意力 [33]、门控融合 [35]；没有笔迹的 MNIST 用 ModDrop [34] 一起训练 | 能否用一个模型达到或超过两个模型的晚期融合 |
+| **12c_distill_and_browser** | 把最好的组合（集成或融合）蒸馏 [23] 到上线大小；所有候选导出到浏览器，测体积和延迟 | 上线候选和它的代价 |
 | **13_calibration_and_decision** | 温度缩放 [19]；把 `decide()` 写成"概率 × 候选先验 + 错误代价"的决策规则；画出错误–拒识曲线 [20]；用模拟的游戏场景比较新旧规则 | 新的 `decide()` 规则及其参数 |
 | **14_personalisation**（第二阶段） | 模拟"游戏确认的标签"：每个书写者按时间顺序逐个出现样本，用原型 [16] 或最后一层微调在线更新，按"人 + 工具"分别适应；测量随样本数增加的准确率，以及错误标签的影响 | 是否、以及如何在游戏里做无感个性化 |
 | **收尾** | 选定上线方案，导出到浏览器，用游戏自己的 JS 做端到端验证，更新 README 和研究报告 | 上线 |
@@ -294,4 +296,16 @@
 
 [29] C. G. Northcutt, A. Athalye, J. Mueller. Pervasive label errors in test sets destabilize machine learning benchmarks. *NeurIPS Datasets and Benchmarks Track*, 2021. arXiv:2103.14749
 
-说明：[1]–[7]、[12]–[14]、[16]–[18]、[20]、[21] 的出处已在检索时逐条核对过（作者、年份、会议或期刊）；[25]–[29] 为 2026-10-27 补充的标准文献；其余为本领域的标准文献，正式引用前建议再对照一次原文。
+[30] A. Trockman, J. Z. Kolter. Patches are all you need? *Transactions on Machine Learning Research*, 2023. arXiv:2201.09792
+
+[31] Z.-L. Bai, Q. Huo. A study on the use of 8-directional features for online handwritten Chinese character recognition. *Proc. 8th ICDAR*, 2005.
+
+[32] X.-Y. Zhang, Y. Bengio, C.-L. Liu. Online and offline handwritten Chinese character recognition: a comprehensive study and new benchmark. *Pattern Recognition*, 61:348–360, 2017. arXiv:1606.05763
+
+[33] A. Vaswani, N. Shazeer, N. Parmar, J. Uszkoreit, L. Jones, A. N. Gomez, Ł. Kaiser, I. Polosukhin. Attention is all you need. *NeurIPS*, 2017. arXiv:1706.03762
+
+[34] N. Neverova, C. Wolf, G. Taylor, F. Nebout. ModDrop: adaptive multi-modal gesture recognition. *IEEE Transactions on Pattern Analysis and Machine Intelligence*, 38(8):1692–1706, 2016. arXiv:1501.00102
+
+[35] J. Arevalo, T. Solorio, M. Montes-y-Gómez, F. A. González. Gated multimodal units for information fusion. *ICLR Workshop*, 2017. arXiv:1702.01992
+
+说明：[1]–[7]、[12]–[14]、[16]–[18]、[20]、[21] 的出处已在检索时逐条核对过（作者、年份、会议或期刊）；[25]–[29] 为 2026-10-27 补充的标准文献，[30]–[35] 为 notebook 12 补充的标准文献；其余为本领域的标准文献，正式引用前建议再对照一次原文。

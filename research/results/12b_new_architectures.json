@@ -1,0 +1,702 @@
+{
+ "runs": [
+  {
+   "model": "ordermap_cnn",
+   "seed": 42,
+   "params": 107882.0,
+   "train min": NaN,
+   "val: pen": 99.73262032085562,
+   "val: finger": 98.39854713554564,
+   "test: pen": 98.97084048027445,
+   "test: finger": 98.35200114147106
+  },
+  {
+   "model": "ordermap_cnn",
+   "seed": 43,
+   "params": 107882.0,
+   "train min": NaN,
+   "val: pen": 99.73262032085562,
+   "val: finger": 98.31599801882119,
+   "test: pen": 98.85648942252716,
+   "test: finger": 98.23071984019404
+  },
+  {
+   "model": "dual_stream",
+   "seed": 42,
+   "params": 222810.0,
+   "train min": NaN,
+   "val: pen": 99.73262032085562,
+   "val: finger": 98.53062572230478,
+   "test: pen": 99.28530588907948,
+   "test: finger": 98.27352500535065
+  },
+  {
+   "model": "dual_stream",
+   "seed": 43,
+   "params": 222810.0,
+   "train min": NaN,
+   "val: pen": 99.66577540106952,
+   "val: finger": 98.51411589895989,
+   "test: pen": 99.02801600914809,
+   "test: finger": 98.42334308339873
+  },
+  {
+   "model": "ink_glance",
+   "seed": 42,
+   "params": 243738.0,
+   "train min": NaN,
+   "val: pen": 99.66577540106952,
+   "val: finger": 99.22403830279016,
+   "test: pen": 98.94225271583763,
+   "test: finger": 99.0796889491332
+  },
+  {
+   "model": "ink_glance",
+   "seed": 43,
+   "params": 243738.0,
+   "train min": NaN,
+   "val: pen": 99.66577540106952,
+   "val: finger": 99.05894006934126,
+   "test: pen": 99.14236706689536,
+   "test: finger": 99.2651779981451
+  },
+  {
+   "model": "image C (09)",
+   "seed": 42,
+   "params": NaN,
+   "train min": NaN,
+   "val: pen": 99.59893048128342,
+   "val: finger": 98.91035165923725,
+   "test: pen": 98.39908519153802,
+   "test: finger": 98.83712634657915
+  },
+  {
+   "model": "trajectory (11)",
+   "seed": 42,
+   "params": NaN,
+   "train min": NaN,
+   "val: pen": 98.1951871657754,
+   "val: finger": 96.6319960376424,
+   "test: pen": 98.14179531160663,
+   "test: finger": 96.88949133195406
+  },
+  {
+   "model": "late fusion (11)",
+   "seed": 42,
+   "params": NaN,
+   "train min": NaN,
+   "val: pen": 99.79946524064172,
+   "val: finger": 99.22403830279016,
+   "test: pen": 99.02801600914809,
+   "test: finger": 99.31511735749447
+  },
+  {
+   "model": "gated fusion",
+   "seed": 42,
+   "params": NaN,
+   "train min": NaN,
+   "val: pen": 99.73262032085562,
+   "val: finger": 99.1579990094106,
+   "test: pen": 98.82790165809034,
+   "test: finger": 99.25090960975957
+  },
+  {
+   "model": "image C (09)",
+   "seed": 43,
+   "params": NaN,
+   "train min": NaN,
+   "val: pen": 99.53208556149733,
+   "val: finger": 98.64619448571901,
+   "test: pen": 97.94168096054888,
+   "test: finger": 98.71584504530213
+  },
+  {
+   "model": "trajectory (11)",
+   "seed": 43,
+   "params": NaN,
+   "train min": NaN,
+   "val: pen": 98.1283422459893,
+   "val: finger": 96.94568268119531,
+   "test: pen": 98.28473413379074,
+   "test: finger": 97.02504102161662
+  },
+  {
+   "model": "late fusion (11)",
+   "seed": 43,
+   "params": NaN,
+   "train min": NaN,
+   "val: pen": 99.66577540106952,
+   "val: finger": 99.09195971603104,
+   "test: pen": 98.97084048027445,
+   "test: finger": 99.13676250267532
+  },
+  {
+   "model": "gated fusion",
+   "seed": 43,
+   "params": NaN,
+   "train min": NaN,
+   "val: pen": 99.59893048128342,
+   "val: finger": 99.09195971603104,
+   "test: pen": 99.02801600914809,
+   "test: finger": 99.00834700720553
+  },
+  {
+   "model": "ordermap_cnn + trajectory",
+   "seed": 42,
+   "params": NaN,
+   "train min": NaN,
+   "val: pen": 99.73262032085562,
+   "val: finger": 98.84431236585769,
+   "test: pen": 99.08519153802172,
+   "test: finger": 98.68730826853107
+  },
+  {
+   "model": "ordermap_cnn + trajectory",
+   "seed": 43,
+   "params": NaN,
+   "train min": NaN,
+   "val: pen": 99.73262032085562,
+   "val: finger": 98.71223377909857,
+   "test: pen": 99.1709548313322,
+   "test: finger": 98.5731611614468
+  },
+  {
+   "model": "dual_stream + trajectory",
+   "seed": 42,
+   "params": NaN,
+   "train min": NaN,
+   "val: pen": 99.73262032085562,
+   "val: finger": 98.54713554564967,
+   "test: pen": 99.1709548313322,
+   "test: finger": 98.26639081115788
+  },
+  {
+   "model": "dual_stream + trajectory",
+   "seed": 43,
+   "params": NaN,
+   "train min": NaN,
+   "val: pen": 99.66577540106952,
+   "val: finger": 98.51411589895989,
+   "test: pen": 98.97084048027445,
+   "test: finger": 98.41620888920598
+  },
+  {
+   "model": "ink_glance + trajectory",
+   "seed": 42,
+   "params": NaN,
+   "train min": NaN,
+   "val: pen": 99.66577540106952,
+   "val: finger": 99.22403830279016,
+   "test: pen": 98.94225271583763,
+   "test: finger": 99.0796889491332
+  },
+  {
+   "model": "ink_glance + trajectory",
+   "seed": 43,
+   "params": NaN,
+   "train min": NaN,
+   "val: pen": 99.66577540106952,
+   "val: finger": 99.05894006934126,
+   "test: pen": 99.14236706689536,
+   "test: finger": 99.2651779981451
+  }
+ ],
+ "mean": {
+  "ordermap_cnn": {
+   "val: pen": 99.733,
+   "val: finger": 98.357,
+   "test: pen": 98.914,
+   "test: finger": 98.291,
+   "val mean": 99.045,
+   "networks": 1,
+   "test: pen error cut %": 40.625,
+   "test: finger error cut %": -39.65
+  },
+  "dual_stream": {
+   "val: pen": 99.699,
+   "val: finger": 98.522,
+   "test: pen": 99.157,
+   "test: finger": 98.348,
+   "val mean": 99.111,
+   "networks": 1,
+   "test: pen error cut %": 53.906,
+   "test: finger error cut %": -34.985
+  },
+  "ink_glance": {
+   "val: pen": 99.666,
+   "val: finger": 99.141,
+   "test: pen": 99.042,
+   "test: finger": 99.172,
+   "val mean": 99.404,
+   "networks": 1,
+   "test: pen error cut %": 47.656,
+   "test: finger error cut %": 32.362
+  },
+  "image C (09)": {
+   "val: pen": 99.566,
+   "val: finger": 98.778,
+   "test: pen": 98.17,
+   "test: finger": 98.776,
+   "val mean": 99.172,
+   "networks": 1,
+   "test: pen error cut %": 0.0,
+   "test: finger error cut %": 0.0
+  },
+  "trajectory (11)": {
+   "val: pen": 98.162,
+   "val: finger": 96.789,
+   "test: pen": 98.213,
+   "test: finger": 96.957,
+   "val mean": 97.475,
+   "networks": 1,
+   "test: pen error cut %": 2.344,
+   "test: finger error cut %": -148.688
+  },
+  "late fusion (11)": {
+   "val: pen": 99.733,
+   "val: finger": 99.158,
+   "test: pen": 98.999,
+   "test: finger": 99.226,
+   "val mean": 99.445,
+   "networks": 2,
+   "test: pen error cut %": 45.313,
+   "test: finger error cut %": 36.735
+  },
+  "gated fusion": {
+   "val: pen": 99.666,
+   "val: finger": 99.125,
+   "test: pen": 98.928,
+   "test: finger": 99.13,
+   "val mean": 99.395,
+   "networks": 2,
+   "test: pen error cut %": 41.406,
+   "test: finger error cut %": 28.863
+  },
+  "ordermap_cnn + trajectory": {
+   "val: pen": 99.733,
+   "val: finger": 98.778,
+   "test: pen": 99.128,
+   "test: finger": 98.63,
+   "val mean": 99.255,
+   "networks": 2,
+   "test: pen error cut %": 52.344,
+   "test: finger error cut %": -11.953
+  },
+  "dual_stream + trajectory": {
+   "val: pen": 99.699,
+   "val: finger": 98.531,
+   "test: pen": 99.071,
+   "test: finger": 98.341,
+   "val mean": 99.115,
+   "networks": 2,
+   "test: pen error cut %": 49.219,
+   "test: finger error cut %": -35.569
+  },
+  "ink_glance + trajectory": {
+   "val: pen": 99.666,
+   "val: finger": 99.141,
+   "test: pen": 99.042,
+   "test: finger": 99.172,
+   "val mean": 99.404,
+   "networks": 2,
+   "test: pen error cut %": 47.656,
+   "test: finger error cut %": 32.362
+  }
+ },
+ "image_only_mode": {
+  "ordermap_cnn": {
+   "val: pen": 99.398,
+   "val: finger": 98.729,
+   "test: pen": 97.756,
+   "test: finger": 98.627
+  },
+  "dual_stream": {
+   "val: pen": 99.398,
+   "val: finger": 98.778,
+   "test: pen": 97.37,
+   "test: finger": 98.587
+  },
+  "ink_glance": {
+   "val: pen": 99.432,
+   "val: finger": 98.952,
+   "test: pen": 97.627,
+   "test: finger": 98.894
+  },
+  "image C (09)": {
+   "val: pen": 99.566,
+   "val: finger": 98.778,
+   "test: pen": 98.17,
+   "test: finger": 98.776
+  }
+ },
+ "gate_theta": {
+  "42": [
+   1.9635990784118647,
+   0.13639893422173624,
+   -0.142501041629974,
+   -0.21173919023585797,
+   0.13749138292352134,
+   0.03987806184174424
+  ],
+  "43": [
+   1.745119432039562,
+   0.1776525867941181,
+   -0.15334184804944584,
+   -0.23139074799235637,
+   0.1502587788773938,
+   0.037956816139548856
+  ]
+ },
+ "w_joint_plus_trajectory": {
+  "ordermap_cnn": 0.65,
+  "dual_stream": 0.95,
+  "ink_glance": 1.0
+ },
+ "audit_fixed": [
+  {
+   "model": "late fusion (11)",
+   "model: fixed / 152": 95,
+   "ambiguous: fixed / 70": 37,
+   "label: fixed / 7": 1,
+   "new errors": 38,
+   "test errors left": 134
+  },
+  {
+   "model": "gated fusion",
+   "model: fixed / 152": 76,
+   "ambiguous: fixed / 70": 31,
+   "label: fixed / 7": 0,
+   "new errors": 28,
+   "test errors left": 150
+  },
+  {
+   "model": "ordermap_cnn",
+   "model: fixed / 152": 84,
+   "ambiguous: fixed / 70": 27,
+   "label: fixed / 7": 0,
+   "new errors": 144,
+   "test errors left": 262
+  },
+  {
+   "model": "dual_stream",
+   "model: fixed / 152": 116,
+   "ambiguous: fixed / 70": 42,
+   "label: fixed / 7": 1,
+   "new errors": 170,
+   "test errors left": 240
+  },
+  {
+   "model": "ink_glance",
+   "model: fixed / 152": 114,
+   "ambiguous: fixed / 70": 44,
+   "label: fixed / 7": 1,
+   "new errors": 52,
+   "test errors left": 122
+  },
+  {
+   "model": "ordermap_cnn + trajectory",
+   "model: fixed / 152": 102,
+   "ambiguous: fixed / 70": 37,
+   "label: fixed / 7": 1,
+   "new errors": 120,
+   "test errors left": 209
+  },
+  {
+   "model": "dual_stream + trajectory",
+   "model: fixed / 152": 117,
+   "ambiguous: fixed / 70": 43,
+   "label: fixed / 7": 1,
+   "new errors": 177,
+   "test errors left": 245
+  },
+  {
+   "model": "ink_glance + trajectory",
+   "model: fixed / 152": 114,
+   "ambiguous: fixed / 70": 44,
+   "label: fixed / 7": 1,
+   "new errors": 52,
+   "test errors left": 122
+  }
+ ],
+ "game_3_answers": [
+  {
+   "test set": "test: pen",
+   "model": "image C (09)",
+   "accepted %": 98.71355060034305,
+   "wrong yokai %": 0.42881646655231564,
+   "rewrite / miss %": 0.8576329331046351
+  },
+  {
+   "test set": "test: pen",
+   "model": "late fusion (11)",
+   "accepted %": 99.22813036020584,
+   "wrong yokai %": 0.22870211549456831,
+   "rewrite / miss %": 0.5431675242996037
+  },
+  {
+   "test set": "test: pen",
+   "model": "gated fusion",
+   "accepted %": 99.08519153802172,
+   "wrong yokai %": 0.22870211549456831,
+   "rewrite / miss %": 0.6861063464837058
+  },
+  {
+   "test set": "test: pen",
+   "model": "ordermap_cnn",
+   "accepted %": 99.22813036020584,
+   "wrong yokai %": 0.17152658662092624,
+   "rewrite / miss %": 0.6003430531732468
+  },
+  {
+   "test set": "test: pen",
+   "model": "dual_stream",
+   "accepted %": 99.39965694682675,
+   "wrong yokai %": 0.22870211549456831,
+   "rewrite / miss %": 0.37164093767867445
+  },
+  {
+   "test set": "test: pen",
+   "model": "ink_glance",
+   "accepted %": 99.08519153802172,
+   "wrong yokai %": 0.2858776443682104,
+   "rewrite / miss %": 0.6289308176100628
+  },
+  {
+   "test set": "test: finger",
+   "model": "image C (09)",
+   "accepted %": 99.18670186202469,
+   "wrong yokai %": 0.2853677677106371,
+   "rewrite / miss %": 0.5279303702646732
+  },
+  {
+   "test set": "test: finger",
+   "model": "late fusion (11)",
+   "accepted %": 99.56481415424128,
+   "wrong yokai %": 0.16408646643361632,
+   "rewrite / miss %": 0.27109937932510153
+  },
+  {
+   "test set": "test: finger",
+   "model": "gated fusion",
+   "accepted %": 99.45780124134978,
+   "wrong yokai %": 0.17835485481914817,
+   "rewrite / miss %": 0.3638439038310626
+  },
+  {
+   "test set": "test: finger",
+   "model": "ordermap_cnn",
+   "accepted %": 98.79432118142256,
+   "wrong yokai %": 0.3852464864093601,
+   "rewrite / miss %": 0.8204323321680862
+  },
+  {
+   "test set": "test: finger",
+   "model": "dual_stream",
+   "accepted %": 98.60883213241064,
+   "wrong yokai %": 0.3852464864093601,
+   "rewrite / miss %": 1.0059213811799972
+  },
+  {
+   "test set": "test: finger",
+   "model": "ink_glance",
+   "accepted %": 99.35078832845831,
+   "wrong yokai %": 0.19975743739744597,
+   "rewrite / miss %": 0.4494542341442531
+  }
+ ],
+ "per_digit_test_percent": {
+  "pen | image C (09)": [
+   100.0,
+   98.6,
+   99.3,
+   98.8,
+   93.4,
+   99.6,
+   99.1,
+   96.4,
+   99.7,
+   97.0
+  ],
+  "pen | late fusion (11)": [
+   100.0,
+   99.3,
+   99.7,
+   99.4,
+   96.3,
+   99.4,
+   98.8,
+   98.4,
+   100.0,
+   98.8
+  ],
+  "pen | gated fusion": [
+   100.0,
+   99.2,
+   99.6,
+   99.4,
+   96.4,
+   99.4,
+   99.0,
+   97.9,
+   100.0,
+   98.5
+  ],
+  "pen | ordermap_cnn": [
+   99.6,
+   99.6,
+   99.5,
+   99.4,
+   96.3,
+   99.6,
+   99.1,
+   98.1,
+   100.0,
+   98.2
+  ],
+  "pen | dual_stream": [
+   100.0,
+   99.7,
+   99.6,
+   99.0,
+   98.8,
+   99.7,
+   98.8,
+   97.3,
+   100.0,
+   98.8
+  ],
+  "pen | ink_glance": [
+   100.0,
+   99.5,
+   100.0,
+   98.7,
+   96.8,
+   99.4,
+   99.7,
+   97.9,
+   100.0,
+   98.5
+  ],
+  "finger | image C (09)": [
+   99.8,
+   97.9,
+   98.9,
+   98.4,
+   98.7,
+   99.3,
+   99.5,
+   98.9,
+   97.0,
+   99.4
+  ],
+  "finger | late fusion (11)": [
+   99.8,
+   98.8,
+   99.0,
+   98.5,
+   99.9,
+   99.5,
+   99.6,
+   99.5,
+   99.2,
+   98.5
+  ],
+  "finger | gated fusion": [
+   99.8,
+   98.5,
+   99.1,
+   98.5,
+   99.6,
+   99.4,
+   99.5,
+   99.4,
+   98.5,
+   98.9
+  ],
+  "finger | ordermap_cnn": [
+   99.7,
+   98.9,
+   98.9,
+   97.1,
+   99.4,
+   98.8,
+   99.7,
+   98.3,
+   98.9,
+   93.3
+  ],
+  "finger | dual_stream": [
+   99.7,
+   95.9,
+   98.4,
+   98.0,
+   99.9,
+   99.4,
+   98.6,
+   97.0,
+   99.1,
+   97.4
+  ],
+  "finger | ink_glance": [
+   99.9,
+   98.9,
+   99.1,
+   99.3,
+   99.9,
+   99.6,
+   99.6,
+   99.3,
+   99.1,
+   97.1
+  ]
+ },
+ "cost": [
+  {
+   "model": "image C (09)",
+   "params": 106730,
+   "ms": 11.523,
+   "weights KB (float32)": 417.0
+  },
+  {
+   "model": "trajectory (11)",
+   "params": 116730,
+   "ms": 7.975,
+   "weights KB (float32)": 456.0
+  },
+  {
+   "model": "ordermap_cnn",
+   "params": 107882,
+   "ms": 10.919,
+   "weights KB (float32)": 421.0
+  },
+  {
+   "model": "dual_stream",
+   "params": 222810,
+   "ms": 13.565,
+   "weights KB (float32)": 870.0
+  },
+  {
+   "model": "ink_glance",
+   "params": 243738,
+   "ms": 15.74,
+   "weights KB (float32)": 952.0
+  },
+  {
+   "model": "late / gated fusion (2 networks)",
+   "params": 223460,
+   "ms": 19.498,
+   "weights KB (float32)": 873.0
+  }
+ ],
+ "data": {
+  "mnist": 0.35,
+  "skeleton": 0.35,
+  "pen (paired)": 0.2,
+  "templates (paired)": 0.1,
+  "moddrop": 0.3
+ },
+ "seeds": [
+  42,
+  43
+ ]
+}
