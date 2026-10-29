@@ -1,0 +1,386 @@
+{
+ "runs": [
+  {
+   "arch": "cnn",
+   "seed": 42,
+   "params": 106730,
+   "train min": NaN,
+   "val: pen": 99.59893048128342,
+   "val: finger": 98.91035165923725,
+   "test: pen": 98.39908519153802,
+   "test: finger": 98.83712634657915
+  },
+  {
+   "arch": "cnn",
+   "seed": 43,
+   "params": 106730,
+   "train min": NaN,
+   "val: pen": 99.53208556149733,
+   "val: finger": 98.64619448571901,
+   "test: pen": 97.94168096054888,
+   "test: finger": 98.71584504530213
+  },
+  {
+   "arch": "cnn_wide",
+   "seed": 42,
+   "params": 415498,
+   "train min": 51.6,
+   "val: pen": 99.59893048128342,
+   "val: finger": 99.12497936272082,
+   "test: pen": 98.14179531160663,
+   "test: finger": 99.17956766783192
+  },
+  {
+   "arch": "cnn_wide",
+   "seed": 43,
+   "params": 415498,
+   "train min": 61.8,
+   "val: pen": 99.39839572192514,
+   "val: finger": 99.12497936272082,
+   "test: pen": 98.084619782733,
+   "test: finger": 99.12962830848255
+  },
+  {
+   "arch": "resnet",
+   "seed": 42,
+   "params": 181930,
+   "train min": 47.3,
+   "val: pen": 99.59893048128342,
+   "val: finger": 99.37262671289417,
+   "test: pen": 98.22755860491709,
+   "test: finger": 99.25804380395235
+  },
+  {
+   "arch": "resnet",
+   "seed": 43,
+   "params": 181930,
+   "train min": 43.5,
+   "val: pen": 99.46524064171123,
+   "val: finger": 99.43866600627373,
+   "test: pen": 98.28473413379074,
+   "test: finger": 99.32225155168723
+  },
+  {
+   "arch": "separable",
+   "seed": 42,
+   "params": 53514,
+   "train min": 20.8,
+   "val: pen": 99.46524064171123,
+   "val: finger": 99.12497936272082,
+   "test: pen": 98.084619782733,
+   "test: finger": 99.02974958978383
+  },
+  {
+   "arch": "separable",
+   "seed": 43,
+   "params": 53514,
+   "train min": 20.1,
+   "val: pen": 99.53208556149733,
+   "val: finger": 99.17450883275549,
+   "test: pen": 98.28473413379074,
+   "test: finger": 99.02261539559106
+  },
+  {
+   "arch": "convmixer",
+   "seed": 42,
+   "params": 136778,
+   "train min": 30.4,
+   "val: pen": 99.53208556149733,
+   "val: finger": 98.8278025425128,
+   "test: pen": 98.11320754716981,
+   "test: finger": 98.75151601626597
+  },
+  {
+   "arch": "convmixer",
+   "seed": 43,
+   "params": 136778,
+   "train min": 33.4,
+   "val: pen": 99.53208556149733,
+   "val: finger": 98.84431236585769,
+   "test: pen": 97.97026872498571,
+   "test: finger": 98.8299921523864
+  }
+ ],
+ "mean": {
+  "cnn": {
+   "params": 106730,
+   "val: pen": 99.566,
+   "val: finger": 98.778,
+   "test: pen": 98.17,
+   "test: finger": 98.776,
+   "val mean": 99.172,
+   "seed spread (test, max)": 0.457,
+   "ms / digit (Python)": 4.038
+  },
+  "cnn_wide": {
+   "params": 415498,
+   "val: pen": 99.499,
+   "val: finger": 99.125,
+   "test: pen": 98.113,
+   "test: finger": 99.155,
+   "val mean": 99.312,
+   "seed spread (test, max)": 0.057,
+   "ms / digit (Python)": 5.595
+  },
+  "resnet": {
+   "params": 181930,
+   "val: pen": 99.532,
+   "val: finger": 99.406,
+   "test: pen": 98.256,
+   "test: finger": 99.29,
+   "val mean": 99.469,
+   "seed spread (test, max)": 0.064,
+   "ms / digit (Python)": 6.468
+  },
+  "separable": {
+   "params": 53514,
+   "val: pen": 99.499,
+   "val: finger": 99.15,
+   "test: pen": 98.185,
+   "test: finger": 99.026,
+   "val mean": 99.324,
+   "seed spread (test, max)": 0.2,
+   "ms / digit (Python)": 3.91
+  },
+  "convmixer": {
+   "params": 136778,
+   "val: pen": 99.532,
+   "val: finger": 98.836,
+   "test: pen": 98.042,
+   "test: finger": 98.791,
+   "val mean": 99.184,
+   "seed spread (test, max)": 0.143,
+   "ms / digit (Python)": 6.062
+  }
+ },
+ "ensembles": {
+  "cnn x2 seeds": {
+   "val: pen": 99.599,
+   "val: finger": 98.877,
+   "test: pen": 98.256,
+   "test: finger": 98.801,
+   "val mean": 99.238
+  },
+  "cnn_wide x2 seeds": {
+   "val: pen": 99.532,
+   "val: finger": 99.125,
+   "test: pen": 98.113,
+   "test: finger": 99.23,
+   "val mean": 99.329
+  },
+  "resnet x2 seeds": {
+   "val: pen": 99.599,
+   "val: finger": 99.373,
+   "test: pen": 98.17,
+   "test: finger": 99.301,
+   "val mean": 99.486
+  },
+  "separable x2 seeds": {
+   "val: pen": 99.465,
+   "val: finger": 99.224,
+   "test: pen": 98.228,
+   "test: finger": 99.108,
+   "val mean": 99.345
+  },
+  "convmixer x2 seeds": {
+   "val: pen": 99.532,
+   "val: finger": 98.844,
+   "test: pen": 98.027,
+   "test: finger": 98.88,
+   "val mean": 99.188
+  },
+  "5 archs (seed 42)": {
+   "val: pen": 99.532,
+   "val: finger": 99.307,
+   "test: pen": 98.313,
+   "test: finger": 99.23,
+   "val mean": 99.419
+  },
+  "all 10": {
+   "val: pen": 99.532,
+   "val: finger": 99.29,
+   "test: pen": 98.285,
+   "test: finger": 99.244,
+   "val mean": 99.411
+  }
+ },
+ "per_digit_test_percent": {
+  "pen | cnn": [
+   100.0,
+   98.6,
+   99.3,
+   98.8,
+   93.4,
+   99.6,
+   99.1,
+   96.4,
+   99.7,
+   97.0
+  ],
+  "pen | cnn_wide": [
+   100.0,
+   98.6,
+   99.5,
+   98.5,
+   93.1,
+   99.3,
+   99.3,
+   96.0,
+   100.0,
+   97.2
+  ],
+  "pen | resnet": [
+   100.0,
+   98.5,
+   99.6,
+   99.1,
+   93.4,
+   98.5,
+   99.7,
+   97.1,
+   100.0,
+   96.9
+  ],
+  "pen | separable": [
+   100.0,
+   97.9,
+   99.6,
+   99.0,
+   93.0,
+   99.1,
+   99.6,
+   97.0,
+   100.0,
+   97.0
+  ],
+  "pen | convmixer": [
+   100.0,
+   98.4,
+   99.3,
+   98.5,
+   93.4,
+   98.4,
+   99.3,
+   95.9,
+   99.4,
+   98.2
+  ],
+  "finger | cnn": [
+   99.8,
+   97.9,
+   98.9,
+   98.4,
+   98.7,
+   99.3,
+   99.5,
+   98.9,
+   97.0,
+   99.4
+  ],
+  "finger | cnn_wide": [
+   99.8,
+   98.5,
+   99.4,
+   99.3,
+   99.1,
+   99.3,
+   99.5,
+   99.1,
+   98.2,
+   99.4
+  ],
+  "finger | resnet": [
+   99.8,
+   98.8,
+   99.5,
+   99.6,
+   98.5,
+   99.5,
+   99.4,
+   99.4,
+   99.0,
+   99.4
+  ],
+  "finger | separable": [
+   99.8,
+   98.6,
+   99.3,
+   99.1,
+   98.2,
+   99.4,
+   99.2,
+   99.1,
+   98.1,
+   99.4
+  ],
+  "finger | convmixer": [
+   99.9,
+   98.6,
+   99.4,
+   99.2,
+   95.1,
+   99.3,
+   99.1,
+   99.5,
+   98.7,
+   99.1
+  ]
+ },
+ "fusion_with_trajectory": {
+  "cnn": {
+   "w": 0.55,
+   "test: pen image": 98.17,
+   "test: pen fused": 98.999,
+   "test: pen error cut %": 45.313,
+   "test: finger image": 98.776,
+   "test: finger fused": 99.226,
+   "test: finger error cut %": 36.735
+  },
+  "cnn_wide": {
+   "w": 0.6,
+   "test: pen image": 98.113,
+   "test: pen fused": 98.971,
+   "test: pen error cut %": 45.455,
+   "test: finger image": 99.155,
+   "test: finger fused": 99.347,
+   "test: finger error cut %": 22.785
+  },
+  "resnet": {
+   "w": 0.65,
+   "test: pen image": 98.256,
+   "test: pen fused": 98.814,
+   "test: pen error cut %": 31.967,
+   "test: finger image": 99.29,
+   "test: finger fused": 99.511,
+   "test: finger error cut %": 31.156
+  },
+  "separable": {
+   "w": 0.6,
+   "test: pen image": 98.185,
+   "test: pen fused": 98.985,
+   "test: pen error cut %": 44.094,
+   "test: finger image": 99.026,
+   "test: finger fused": 99.44,
+   "test: finger error cut %": 42.491
+  },
+  "convmixer": {
+   "w": 0.5,
+   "test: pen image": 98.042,
+   "test: pen fused": 98.999,
+   "test: pen error cut %": 48.905,
+   "test: finger image": 98.791,
+   "test: finger fused": 99.329,
+   "test: finger error cut %": 44.543
+  }
+ },
+ "budget": {
+  "epochs": 16,
+  "steps": 470,
+  "batch": 128,
+  "smoothing": 0.1
+ },
+ "seeds": [
+  42,
+  43
+ ]
+}

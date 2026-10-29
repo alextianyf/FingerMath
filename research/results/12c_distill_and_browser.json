@@ -1,0 +1,605 @@
+{
+ "image_teacher": [
+  "resnet",
+  "separable"
+ ],
+ "runs": [
+  {
+   "model": "cnn KD (image teacher)",
+   "seed": 42,
+   "params": 106730.0,
+   "train min": NaN,
+   "val: pen": 99.53208556149733,
+   "val: finger": 98.8278025425128,
+   "test: pen": 98.45626072041166,
+   "test: finger": 98.73724762788044
+  },
+  {
+   "model": "cnn KD (image teacher)",
+   "seed": 43,
+   "params": 106730.0,
+   "train min": NaN,
+   "val: pen": 99.39839572192514,
+   "val: finger": 98.86082218920258,
+   "test: pen": 98.31332189822756,
+   "test: finger": 98.73011343368766
+  },
+  {
+   "model": "ink_glance KD",
+   "seed": 42,
+   "params": 243738.0,
+   "train min": NaN,
+   "val: pen": 99.66577540106952,
+   "val: finger": 99.29007759616972,
+   "test: pen": 99.02801600914809,
+   "test: finger": 99.33651994007276
+  },
+  {
+   "model": "ink_glance KD",
+   "seed": 43,
+   "params": 243738.0,
+   "train min": NaN,
+   "val: pen": 99.73262032085562,
+   "val: finger": 99.20752847944527,
+   "test: pen": 99.14236706689536,
+   "test: finger": 99.36505671684384
+  },
+  {
+   "model": "ink_glance small KD",
+   "seed": 42,
+   "params": 64210.0,
+   "train min": NaN,
+   "val: pen": 99.79946524064172,
+   "val: finger": 98.94337130592703,
+   "test: pen": 98.99942824471127,
+   "test: finger": 99.10109153171149
+  },
+  {
+   "model": "ink_glance small KD",
+   "seed": 43,
+   "params": 64210.0,
+   "train min": NaN,
+   "val: pen": 99.66577540106952,
+   "val: finger": 99.1579990094106,
+   "test: pen": 99.08519153802172,
+   "test: finger": 99.22237283298851
+  },
+  {
+   "model": "ink_glance small (no KD)",
+   "seed": 42,
+   "params": 64210.0,
+   "train min": NaN,
+   "val: pen": 99.66577540106952,
+   "val: finger": 99.05894006934126,
+   "test: pen": 99.37106918238993,
+   "test: finger": 98.97981023043447
+  },
+  {
+   "model": "ink_glance small (no KD)",
+   "seed": 43,
+   "params": 64210.0,
+   "train min": NaN,
+   "val: pen": 99.59893048128342,
+   "val: finger": 98.9929007759617,
+   "test: pen": 99.31389365351629,
+   "test: finger": 98.86566312335022
+  },
+  {
+   "model": "image C (09, shipped recipe)",
+   "seed": 42,
+   "params": NaN,
+   "train min": NaN,
+   "val: pen": 99.59893048128342,
+   "val: finger": 98.91035165923725,
+   "test: pen": 98.39908519153802,
+   "test: finger": 98.83712634657915
+  },
+  {
+   "model": "image C (09, shipped recipe)",
+   "seed": 43,
+   "params": NaN,
+   "train min": NaN,
+   "val: pen": 99.53208556149733,
+   "val: finger": 98.64619448571901,
+   "test: pen": 97.94168096054888,
+   "test: finger": 98.71584504530213
+  },
+  {
+   "model": "best image arch (resnet)",
+   "seed": 42,
+   "params": NaN,
+   "train min": NaN,
+   "val: pen": 99.59893048128342,
+   "val: finger": 99.37262671289417,
+   "test: pen": 98.22755860491709,
+   "test: finger": 99.25804380395235
+  },
+  {
+   "model": "best image arch (resnet)",
+   "seed": 43,
+   "params": NaN,
+   "train min": NaN,
+   "val: pen": 99.46524064171123,
+   "val: finger": 99.43866600627373,
+   "test: pen": 98.28473413379074,
+   "test: finger": 99.32225155168723
+  },
+  {
+   "model": "late fusion (11)",
+   "seed": 42,
+   "params": NaN,
+   "train min": NaN,
+   "val: pen": 99.79946524064172,
+   "val: finger": 99.22403830279016,
+   "test: pen": 99.02801600914809,
+   "test: finger": 99.31511735749447
+  },
+  {
+   "model": "late fusion (11)",
+   "seed": 43,
+   "params": NaN,
+   "train min": NaN,
+   "val: pen": 99.66577540106952,
+   "val: finger": 99.09195971603104,
+   "test: pen": 98.97084048027445,
+   "test: finger": 99.13676250267532
+  },
+  {
+   "model": "ink_glance (12b)",
+   "seed": 42,
+   "params": NaN,
+   "train min": NaN,
+   "val: pen": 99.66577540106952,
+   "val: finger": 99.22403830279016,
+   "test: pen": 98.94225271583763,
+   "test: finger": 99.0796889491332
+  },
+  {
+   "model": "ink_glance (12b)",
+   "seed": 43,
+   "params": NaN,
+   "train min": NaN,
+   "val: pen": 99.66577540106952,
+   "val: finger": 99.05894006934126,
+   "test: pen": 99.14236706689536,
+   "test: finger": 99.2651779981451
+  },
+  {
+   "model": "resnet + trajectory",
+   "seed": 42,
+   "params": NaN,
+   "train min": NaN,
+   "val: pen": 99.73262032085562,
+   "val: finger": 99.40564635958395,
+   "test: pen": 98.65637507146941,
+   "test: finger": 99.53627737747021
+  },
+  {
+   "model": "resnet + trajectory",
+   "seed": 43,
+   "params": NaN,
+   "train min": NaN,
+   "val: pen": 99.66577540106952,
+   "val: finger": 99.52121512299819,
+   "test: pen": 98.97084048027445,
+   "test: finger": 99.48633801812086
+  },
+  {
+   "model": "separable + trajectory",
+   "seed": 42,
+   "params": NaN,
+   "train min": NaN,
+   "val: pen": 99.66577540106952,
+   "val: finger": 99.22403830279016,
+   "test: pen": 98.88507718696398,
+   "test: finger": 99.47920382392809
+  },
+  {
+   "model": "separable + trajectory",
+   "seed": 43,
+   "params": NaN,
+   "train min": NaN,
+   "val: pen": 99.66577540106952,
+   "val: finger": 99.35611688954928,
+   "test: pen": 99.08519153802172,
+   "test: finger": 99.40072768780766
+  },
+  {
+   "model": "teacher: image ensemble",
+   "seed": 0,
+   "params": NaN,
+   "train min": NaN,
+   "val: pen": 99.53208556149733,
+   "val: finger": 99.35611688954928,
+   "test: pen": 98.19897084048027,
+   "test: finger": 99.27231219233788
+  },
+  {
+   "model": "teacher: joint ensemble",
+   "seed": 0,
+   "params": NaN,
+   "train min": NaN,
+   "val: pen": 99.73262032085562,
+   "val: finger": 99.30658741951461,
+   "test: pen": 99.199542595769,
+   "test: finger": 99.37932510522937
+  }
+ ],
+ "mean": {
+  "cnn KD (image teacher)": {
+   "val: pen": 99.465,
+   "val: finger": 98.844,
+   "test: pen": 98.385,
+   "test: finger": 98.734,
+   "val mean": 99.155,
+   "networks": 1
+  },
+  "ink_glance KD": {
+   "val: pen": 99.699,
+   "val: finger": 99.249,
+   "test: pen": 99.085,
+   "test: finger": 99.351,
+   "val mean": 99.474,
+   "networks": 1
+  },
+  "ink_glance small KD": {
+   "val: pen": 99.733,
+   "val: finger": 99.051,
+   "test: pen": 99.042,
+   "test: finger": 99.162,
+   "val mean": 99.392,
+   "networks": 1
+  },
+  "ink_glance small (no KD)": {
+   "val: pen": 99.632,
+   "val: finger": 99.026,
+   "test: pen": 99.342,
+   "test: finger": 98.923,
+   "val mean": 99.329,
+   "networks": 1
+  },
+  "image C (09, shipped recipe)": {
+   "val: pen": 99.566,
+   "val: finger": 98.778,
+   "test: pen": 98.17,
+   "test: finger": 98.776,
+   "val mean": 99.172,
+   "networks": 1
+  },
+  "best image arch (resnet)": {
+   "val: pen": 99.532,
+   "val: finger": 99.406,
+   "test: pen": 98.256,
+   "test: finger": 99.29,
+   "val mean": 99.469,
+   "networks": 1
+  },
+  "late fusion (11)": {
+   "val: pen": 99.733,
+   "val: finger": 99.158,
+   "test: pen": 98.999,
+   "test: finger": 99.226,
+   "val mean": 99.445,
+   "networks": 2
+  },
+  "ink_glance (12b)": {
+   "val: pen": 99.666,
+   "val: finger": 99.141,
+   "test: pen": 99.042,
+   "test: finger": 99.172,
+   "val mean": 99.404,
+   "networks": 1
+  },
+  "resnet + trajectory": {
+   "val: pen": 99.699,
+   "val: finger": 99.463,
+   "test: pen": 98.814,
+   "test: finger": 99.511,
+   "val mean": 99.581,
+   "networks": 2
+  },
+  "separable + trajectory": {
+   "val: pen": 99.666,
+   "val: finger": 99.29,
+   "test: pen": 98.985,
+   "test: finger": 99.44,
+   "val mean": 99.478,
+   "networks": 2
+  },
+  "teacher: image ensemble": {
+   "val: pen": 99.532,
+   "val: finger": 99.356,
+   "test: pen": 98.199,
+   "test: finger": 99.272,
+   "val mean": 99.444,
+   "networks": 4
+  },
+  "teacher: joint ensemble": {
+   "val: pen": 99.733,
+   "val: finger": 99.307,
+   "test: pen": 99.2,
+   "test: finger": 99.379,
+   "val mean": 99.52,
+   "networks": 6
+  }
+ },
+ "game_3_answers": [
+  {
+   "test set": "test: pen",
+   "model": "image C (09, shipped recipe)",
+   "accepted %": 98.714,
+   "wrong yokai %": 0.429,
+   "rewrite / miss %": 0.858
+  },
+  {
+   "test set": "test: pen",
+   "model": "best image arch (resnet)",
+   "accepted %": 98.342,
+   "wrong yokai %": 0.486,
+   "rewrite / miss %": 1.172
+  },
+  {
+   "test set": "test: pen",
+   "model": "cnn KD (image teacher)",
+   "accepted %": 98.685,
+   "wrong yokai %": 0.372,
+   "rewrite / miss %": 0.943
+  },
+  {
+   "test set": "test: pen",
+   "model": "late fusion (11)",
+   "accepted %": 99.228,
+   "wrong yokai %": 0.229,
+   "rewrite / miss %": 0.543
+  },
+  {
+   "test set": "test: pen",
+   "model": "resnet + trajectory",
+   "accepted %": 98.971,
+   "wrong yokai %": 0.286,
+   "rewrite / miss %": 0.743
+  },
+  {
+   "test set": "test: pen",
+   "model": "separable + trajectory",
+   "accepted %": 99.171,
+   "wrong yokai %": 0.2,
+   "rewrite / miss %": 0.629
+  },
+  {
+   "test set": "test: pen",
+   "model": "ink_glance (12b)",
+   "accepted %": 99.085,
+   "wrong yokai %": 0.286,
+   "rewrite / miss %": 0.629
+  },
+  {
+   "test set": "test: pen",
+   "model": "ink_glance KD",
+   "accepted %": 99.4,
+   "wrong yokai %": 0.172,
+   "rewrite / miss %": 0.429
+  },
+  {
+   "test set": "test: pen",
+   "model": "ink_glance small KD",
+   "accepted %": 99.257,
+   "wrong yokai %": 0.257,
+   "rewrite / miss %": 0.486
+  },
+  {
+   "test set": "test: pen",
+   "model": "ink_glance small (no KD)",
+   "accepted %": 99.457,
+   "wrong yokai %": 0.114,
+   "rewrite / miss %": 0.429
+  },
+  {
+   "test set": "test: finger",
+   "model": "image C (09, shipped recipe)",
+   "accepted %": 99.187,
+   "wrong yokai %": 0.285,
+   "rewrite / miss %": 0.528
+  },
+  {
+   "test set": "test: finger",
+   "model": "best image arch (resnet)",
+   "accepted %": 99.558,
+   "wrong yokai %": 0.171,
+   "rewrite / miss %": 0.271
+  },
+  {
+   "test set": "test: finger",
+   "model": "cnn KD (image teacher)",
+   "accepted %": 99.122,
+   "wrong yokai %": 0.307,
+   "rewrite / miss %": 0.571
+  },
+  {
+   "test set": "test: finger",
+   "model": "late fusion (11)",
+   "accepted %": 99.565,
+   "wrong yokai %": 0.164,
+   "rewrite / miss %": 0.271
+  },
+  {
+   "test set": "test: finger",
+   "model": "resnet + trajectory",
+   "accepted %": 99.693,
+   "wrong yokai %": 0.1,
+   "rewrite / miss %": 0.207
+  },
+  {
+   "test set": "test: finger",
+   "model": "separable + trajectory",
+   "accepted %": 99.679,
+   "wrong yokai %": 0.107,
+   "rewrite / miss %": 0.214
+  },
+  {
+   "test set": "test: finger",
+   "model": "ink_glance (12b)",
+   "accepted %": 99.351,
+   "wrong yokai %": 0.2,
+   "rewrite / miss %": 0.449
+  },
+  {
+   "test set": "test: finger",
+   "model": "ink_glance KD",
+   "accepted %": 99.551,
+   "wrong yokai %": 0.193,
+   "rewrite / miss %": 0.257
+  },
+  {
+   "test set": "test: finger",
+   "model": "ink_glance small KD",
+   "accepted %": 99.429,
+   "wrong yokai %": 0.207,
+   "rewrite / miss %": 0.364
+  },
+  {
+   "test set": "test: finger",
+   "model": "ink_glance small (no KD)",
+   "accepted %": 99.358,
+   "wrong yokai %": 0.243,
+   "rewrite / miss %": 0.4
+  }
+ ],
+ "final": [
+  {
+   "model": "image C (09, shipped recipe)",
+   "test: pen": 98.17,
+   "test: finger": 98.776,
+   "networks": 1,
+   "size KB": 222,
+   "wrong yokai % (finger)": 0.285,
+   "wrong yokai % (pen)": 0.429,
+   "WASM ms / digit": 3.4,
+   "load ms": 332,
+   "same answer as Python (of 32)": 32
+  },
+  {
+   "model": "best image arch (resnet)",
+   "test: pen": 98.256,
+   "test: finger": 99.29,
+   "networks": 1,
+   "size KB": 376,
+   "wrong yokai % (finger)": 0.171,
+   "wrong yokai % (pen)": 0.486,
+   "WASM ms / digit": 5.1,
+   "load ms": 343,
+   "same answer as Python (of 32)": 32
+  },
+  {
+   "model": "cnn KD (image teacher)",
+   "test: pen": 98.385,
+   "test: finger": 98.734,
+   "networks": 1,
+   "size KB": 222,
+   "wrong yokai % (finger)": 0.307,
+   "wrong yokai % (pen)": 0.372,
+   "WASM ms / digit": 2.45,
+   "load ms": 335,
+   "same answer as Python (of 32)": 32
+  },
+  {
+   "model": "late fusion (11)",
+   "test: pen": 98.999,
+   "test: finger": 99.226,
+   "networks": 2,
+   "size KB": 471,
+   "wrong yokai % (finger)": 0.164,
+   "wrong yokai % (pen)": 0.229,
+   "WASM ms / digit": 3.75,
+   "load ms": 331,
+   "same answer as Python (of 32)": 32
+  },
+  {
+   "model": "resnet + trajectory",
+   "test: pen": 98.814,
+   "test: finger": 99.511,
+   "networks": 2,
+   "size KB": 625,
+   "wrong yokai % (finger)": 0.1,
+   "wrong yokai % (pen)": 0.286,
+   "WASM ms / digit": 5.55,
+   "load ms": 343,
+   "same answer as Python (of 32)": 32
+  },
+  {
+   "model": "separable + trajectory",
+   "test: pen": 98.985,
+   "test: finger": 99.44,
+   "networks": 2,
+   "size KB": 373,
+   "wrong yokai % (finger)": 0.107,
+   "wrong yokai % (pen)": 0.2,
+   "WASM ms / digit": 3.1,
+   "load ms": 338,
+   "same answer as Python (of 32)": 32
+  },
+  {
+   "model": "ink_glance (12b)",
+   "test: pen": 99.042,
+   "test: finger": 99.172,
+   "networks": 1,
+   "size KB": 578,
+   "wrong yokai % (finger)": 0.2,
+   "wrong yokai % (pen)": 0.286,
+   "WASM ms / digit": 5.8,
+   "load ms": 335,
+   "same answer as Python (of 32)": 32
+  },
+  {
+   "model": "ink_glance KD",
+   "test: pen": 99.085,
+   "test: finger": 99.351,
+   "networks": 1,
+   "size KB": 581,
+   "wrong yokai % (finger)": 0.193,
+   "wrong yokai % (pen)": 0.172,
+   "WASM ms / digit": 5.45,
+   "load ms": 342,
+   "same answer as Python (of 32)": 32
+  },
+  {
+   "model": "ink_glance small KD",
+   "test: pen": 99.042,
+   "test: finger": 99.162,
+   "networks": 1,
+   "size KB": 234,
+   "wrong yokai % (finger)": 0.207,
+   "wrong yokai % (pen)": 0.257,
+   "WASM ms / digit": 3.4,
+   "load ms": 342,
+   "same answer as Python (of 32)": 32
+  },
+  {
+   "model": "ink_glance small (no KD)",
+   "test: pen": 99.342,
+   "test: finger": 98.923,
+   "networks": 1,
+   "size KB": 232,
+   "wrong yokai % (finger)": 0.243,
+   "wrong yokai % (pen)": 0.114,
+   "WASM ms / digit": 3.2,
+   "load ms": 347,
+   "same answer as Python (of 32)": 32
+  }
+ ],
+ "kd": {
+  "T": 2.0,
+  "alpha": 0.5
+ },
+ "small": {
+  "w": 16,
+  "tw": [
+   24,
+   48
+  ]
+ },
+ "seeds": [
+  42,
+  43
+ ]
+}

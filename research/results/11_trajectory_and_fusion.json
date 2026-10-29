@@ -1,0 +1,575 @@
+{
+ "runs": [
+  {
+   "config": "cnn1d",
+   "seed": 42,
+   "params": 116730.0,
+   "train min": 2.9,
+   "val: pen": 0.9812834224598931,
+   "val: finger": 0.9489846458642892,
+   "test: pen": 0.9914236706689536,
+   "test: finger": 0.9517015053149747
+  },
+  {
+   "config": "cnn1d",
+   "seed": 43,
+   "params": 116730.0,
+   "train min": 2.9,
+   "val: pen": 0.9812834224598931,
+   "val: finger": 0.9521215122998183,
+   "test: pen": 0.9871355060034306,
+   "test: finger": 0.9548405507597917
+  },
+  {
+   "config": "bigru",
+   "seed": 42,
+   "params": 110666.0,
+   "train min": 22.6,
+   "val: pen": 0.9792780748663101,
+   "val: finger": 0.9514611193660227,
+   "test: pen": 0.9857061177815895,
+   "test: finger": 0.9502746664764214
+  },
+  {
+   "config": "bigru",
+   "seed": 43,
+   "params": 110666.0,
+   "train min": 22.7,
+   "val: pen": 0.9799465240641712,
+   "val: finger": 0.9488195476308403,
+   "test: pen": 0.9857061177815895,
+   "test: finger": 0.9494185631732895
+  },
+  {
+   "config": "cnn1d + templates",
+   "seed": 42,
+   "params": 116730.0,
+   "train min": 2.9,
+   "val: pen": 0.981951871657754,
+   "val: finger": 0.966319960376424,
+   "test: pen": 0.9814179531160663,
+   "test: finger": 0.9688949133195406
+  },
+  {
+   "config": "cnn1d + templates",
+   "seed": 43,
+   "params": 116730.0,
+   "train min": 3.0,
+   "val: pen": 0.9812834224598931,
+   "val: finger": 0.9694568268119531,
+   "test: pen": 0.9828473413379074,
+   "test: finger": 0.9702504102161661
+  },
+  {
+   "config": "image CNN (09 C)",
+   "seed": 42,
+   "params": NaN,
+   "train min": NaN,
+   "val: pen": 0.9959893048128342,
+   "val: finger": 0.9891035165923725,
+   "test: pen": 0.9839908519153803,
+   "test: finger": 0.9883712634657915
+  },
+  {
+   "config": "image CNN (09 C)",
+   "seed": 43,
+   "params": NaN,
+   "train min": NaN,
+   "val: pen": 0.9953208556149733,
+   "val: finger": 0.9864619448571901,
+   "test: pen": 0.9794168096054888,
+   "test: finger": 0.9871584504530213
+  }
+ ],
+ "mean_percent": {
+  "cnn1d": {
+   "val: pen": 98.128,
+   "val: finger": 95.055,
+   "test: pen": 98.928,
+   "test: finger": 95.327,
+   "val mean": 96.592
+  },
+  "bigru": {
+   "val: pen": 97.961,
+   "val: finger": 95.014,
+   "test: pen": 98.571,
+   "test: finger": 94.985,
+   "val mean": 96.488
+  },
+  "cnn1d + templates": {
+   "val: pen": 98.162,
+   "val: finger": 96.789,
+   "test: pen": 98.213,
+   "test: finger": 96.957,
+   "val mean": 97.475
+  },
+  "image CNN (09 C)": {
+   "val: pen": 99.566,
+   "val: finger": 98.778,
+   "test: pen": 98.17,
+   "test: finger": 98.776,
+   "val mean": 99.172
+  }
+ },
+ "trajectory_chosen": "cnn1d + templates",
+ "stroke_order_check": [
+  {
+   "order": "writing order (Z_FOK_GLYPH)",
+   "seed": 42,
+   "all %": 96.88949133195406,
+   "multi-stroke digits %": 95.38113695090439
+  },
+  {
+   "order": "notebook 07 order (ZINDEX)",
+   "seed": 42,
+   "all %": 96.01911964043661,
+   "multi-stroke digits %": 91.4405684754522
+  },
+  {
+   "order": "writing order (Z_FOK_GLYPH)",
+   "seed": 43,
+   "all %": 97.02504102161662,
+   "multi-stroke digits %": 95.25193798449612
+  },
+  {
+   "order": "notebook 07 order (ZINDEX)",
+   "seed": 43,
+   "all %": 96.21174288364129,
+   "multi-stroke digits %": 91.56976744186046
+  }
+ ],
+ "fusion_weight": 0.55,
+ "fusion_curve": [
+  {
+   "w": 0.0,
+   "val: pen": 98.162,
+   "val: finger": 96.789,
+   "test: pen": 98.213,
+   "test: finger": 96.957,
+   "val mean": 97.475
+  },
+  {
+   "w": 0.05,
+   "val: pen": 98.162,
+   "val: finger": 96.871,
+   "test: pen": 98.256,
+   "test: finger": 97.125,
+   "val mean": 97.517
+  },
+  {
+   "w": 0.1,
+   "val: pen": 98.229,
+   "val: finger": 97.012,
+   "test: pen": 98.385,
+   "test: finger": 97.318,
+   "val mean": 97.62
+  },
+  {
+   "w": 0.15,
+   "val: pen": 98.496,
+   "val: finger": 97.218,
+   "test: pen": 98.442,
+   "test: finger": 97.492,
+   "val mean": 97.857
+  },
+  {
+   "w": 0.2,
+   "val: pen": 98.93,
+   "val: finger": 97.474,
+   "test: pen": 98.556,
+   "test: finger": 97.706,
+   "val mean": 98.202
+  },
+  {
+   "w": 0.25,
+   "val: pen": 99.332,
+   "val: finger": 97.713,
+   "test: pen": 98.671,
+   "test: finger": 97.935,
+   "val mean": 98.522
+  },
+  {
+   "w": 0.3,
+   "val: pen": 99.599,
+   "val: finger": 97.953,
+   "test: pen": 98.756,
+   "test: finger": 98.238,
+   "val mean": 98.776
+  },
+  {
+   "w": 0.35,
+   "val: pen": 99.666,
+   "val: finger": 98.275,
+   "test: pen": 98.842,
+   "test: finger": 98.548,
+   "val mean": 98.97
+  },
+  {
+   "w": 0.4,
+   "val: pen": 99.699,
+   "val: finger": 98.63,
+   "test: pen": 98.971,
+   "test: finger": 98.784,
+   "val mean": 99.164
+  },
+  {
+   "w": 0.45,
+   "val: pen": 99.699,
+   "val: finger": 98.853,
+   "test: pen": 99.028,
+   "test: finger": 99.023,
+   "val mean": 99.276
+  },
+  {
+   "w": 0.5,
+   "val: pen": 99.733,
+   "val: finger": 99.108,
+   "test: pen": 99.028,
+   "test: finger": 99.205,
+   "val mean": 99.421
+  },
+  {
+   "w": 0.55,
+   "val: pen": 99.733,
+   "val: finger": 99.158,
+   "test: pen": 98.999,
+   "test: finger": 99.226,
+   "val mean": 99.445
+  },
+  {
+   "w": 0.6,
+   "val: pen": 99.699,
+   "val: finger": 99.158,
+   "test: pen": 98.928,
+   "test: finger": 99.226,
+   "val mean": 99.429
+  },
+  {
+   "w": 0.65,
+   "val: pen": 99.699,
+   "val: finger": 99.141,
+   "test: pen": 98.799,
+   "test: finger": 99.18,
+   "val mean": 99.42
+  },
+  {
+   "w": 0.7,
+   "val: pen": 99.666,
+   "val: finger": 99.141,
+   "test: pen": 98.814,
+   "test: finger": 99.14,
+   "val mean": 99.404
+  },
+  {
+   "w": 0.75,
+   "val: pen": 99.632,
+   "val: finger": 99.067,
+   "test: pen": 98.728,
+   "test: finger": 99.08,
+   "val mean": 99.35
+  },
+  {
+   "w": 0.8,
+   "val: pen": 99.632,
+   "val: finger": 98.993,
+   "test: pen": 98.613,
+   "test: finger": 99.026,
+   "val mean": 99.313
+  },
+  {
+   "w": 0.85,
+   "val: pen": 99.599,
+   "val: finger": 98.952,
+   "test: pen": 98.528,
+   "test: finger": 98.98,
+   "val mean": 99.275
+  },
+  {
+   "w": 0.9,
+   "val: pen": 99.599,
+   "val: finger": 98.861,
+   "test: pen": 98.413,
+   "test: finger": 98.923,
+   "val mean": 99.23
+  },
+  {
+   "w": 0.95,
+   "val: pen": 99.599,
+   "val: finger": 98.828,
+   "test: pen": 98.313,
+   "test: finger": 98.844,
+   "val mean": 99.213
+  },
+  {
+   "w": 1.0,
+   "val: pen": 99.566,
+   "val: finger": 98.778,
+   "test: pen": 98.17,
+   "test: finger": 98.776,
+   "val mean": 99.172
+  }
+ ],
+ "test_percent": {
+  "test: pen": {
+   "image": 98.17,
+   "trajectory": 98.21,
+   "fusion": 99.0,
+   "error cut by fusion %": 45.31
+  },
+  "test: finger": {
+   "image": 98.78,
+   "trajectory": 96.96,
+   "fusion": 99.23,
+   "error cut by fusion %": 36.73
+  }
+ },
+ "overlap_seed42": {
+  "test: pen": {
+   "both wrong": 19,
+   "only image wrong": 37,
+   "only trajectory wrong": 46,
+   "fusion wrong": 34
+  },
+  "test: finger": {
+   "both wrong": 50,
+   "only image wrong": 113,
+   "only trajectory wrong": 386,
+   "fusion wrong": 96
+  }
+ },
+ "per_digit_test_percent": {
+  "pen | image": [
+   100.0,
+   98.6,
+   99.3,
+   98.8,
+   93.4,
+   99.6,
+   99.1,
+   96.4,
+   99.7,
+   97.0
+  ],
+  "pen | trajectory": [
+   96.1,
+   99.7,
+   99.7,
+   99.4,
+   97.3,
+   98.2,
+   97.9,
+   95.3,
+   100.0,
+   98.7
+  ],
+  "pen | fusion": [
+   100.0,
+   99.3,
+   99.7,
+   99.4,
+   96.3,
+   99.4,
+   98.8,
+   98.4,
+   100.0,
+   98.8
+  ],
+  "finger | image": [
+   99.8,
+   97.9,
+   98.9,
+   98.4,
+   98.7,
+   99.3,
+   99.5,
+   98.9,
+   97.0,
+   99.4
+  ],
+  "finger | trajectory": [
+   99.1,
+   94.2,
+   97.4,
+   96.9,
+   99.8,
+   97.6,
+   98.5,
+   95.8,
+   99.0,
+   91.4
+  ],
+  "finger | fusion": [
+   99.8,
+   98.8,
+   99.0,
+   98.5,
+   99.9,
+   99.5,
+   99.6,
+   99.5,
+   99.2,
+   98.5
+  ]
+ },
+ "audit_fixed": {
+  "fixed": 135,
+  "new_errors": 39,
+  "groups": [
+   {
+    "pattern (notebook 10)": "writer pd-b13 writes every 4 the same one-stroke way (no upper half of",
+    "category": "model",
+    "errors": 24,
+    "fixed by fusion": 11
+   },
+   {
+    "pattern (notebook 10)": "flat-top 3 (written like a Z with a curl): people read it as 3",
+    "category": "model",
+    "errors": 12,
+    "fixed by fusion": 8
+   },
+   {
+    "pattern (notebook 10)": "1 with a foot and/or a short flag: people read it as 1",
+    "category": "model",
+    "errors": 6,
+    "fixed by fusion": 5
+   },
+   {
+    "pattern (notebook 10)": "4 written as an L plus a short vertical: people read it as 4",
+    "category": "model",
+    "errors": 6,
+    "fixed by fusion": 6
+   },
+   {
+    "pattern (notebook 10)": "8 in one stroke whose two loops still cross clearly",
+    "category": "model",
+    "errors": 8,
+    "fixed by fusion": 7
+   },
+   {
+    "pattern (notebook 10)": "crossed 7 (European style)",
+    "category": "model",
+    "errors": 3,
+    "fixed by fusion": 3
+   },
+   {
+    "pattern (notebook 10)": "2 with a small loop at the turn",
+    "category": "model",
+    "errors": 2,
+    "fixed by fusion": 1
+   },
+   {
+    "pattern (notebook 10)": "slashed 0",
+    "category": "model",
+    "errors": 1,
+    "fixed by fusion": 1
+   },
+   {
+    "pattern (notebook 10)": "5 with its top bar written apart",
+    "category": "model",
+    "errors": 1,
+    "fixed by fusion": 1
+   },
+   {
+    "pattern (notebook 10)": "6 with a small loop",
+    "category": "model",
+    "errors": 1,
+    "fixed by fusion": 1
+   },
+   {
+    "pattern (notebook 10)": "1 with a long flag: could as well be a 7",
+    "category": "ambiguous",
+    "errors": 5,
+    "fixed by fusion": 1
+   },
+   {
+    "pattern (notebook 10)": "9 with an open loop: reads as 7 or ?",
+    "category": "ambiguous",
+    "errors": 6,
+    "fixed by fusion": 2
+   },
+   {
+    "pattern (notebook 10)": "open-top 8 that looks like a 6 or an L",
+    "category": "ambiguous",
+    "errors": 4,
+    "fixed by fusion": 3
+   },
+   {
+    "pattern (notebook 10)": "5 without its top bar: reads as 3",
+    "category": "ambiguous",
+    "errors": 2,
+    "fixed by fusion": 0
+   },
+   {
+    "pattern (notebook 10)": "shape between two digits",
+    "category": "ambiguous",
+    "errors": 12,
+    "fixed by fusion": 8
+   }
+  ]
+ },
+ "game_3_answers": [
+  {
+   "test set": "test: pen",
+   "model": "image (09 C)",
+   "accepted %": 98.71355060034305,
+   "wrong yokai %": 0.42881646655231564,
+   "rewrite / miss %": 0.8576329331046351
+  },
+  {
+   "test set": "test: pen",
+   "model": "fusion",
+   "accepted %": 99.22813036020584,
+   "wrong yokai %": 0.22870211549456831,
+   "rewrite / miss %": 0.5431675242996037
+  },
+  {
+   "test set": "test: finger",
+   "model": "image (09 C)",
+   "accepted %": 99.18670186202469,
+   "wrong yokai %": 0.2853677677106371,
+   "rewrite / miss %": 0.5279303702646732
+  },
+  {
+   "test set": "test: finger",
+   "model": "fusion",
+   "accepted %": 99.56481415424128,
+   "wrong yokai %": 0.16408646643361632,
+   "rewrite / miss %": 0.27109937932510153
+  }
+ ],
+ "cost": [
+  {
+   "model": "image CNN",
+   "params": 106730,
+   "weights KB (float32)": 417,
+   "ms per digit (median)": 2.89
+  },
+  {
+   "model": "trajectory cnn1d + templates",
+   "params": 116730,
+   "weights KB (float32)": 456,
+   "ms per digit (median)": 2.01
+  },
+  {
+   "model": "trajectory bigru",
+   "params": 110666,
+   "weights KB (float32)": 432,
+   "ms per digit (median)": 10.71
+  }
+ ],
+ "encoding": {
+  "points": 64,
+  "features": 5
+ },
+ "budget": {
+  "epochs": 16,
+  "steps": 470,
+  "batch": 128,
+  "smoothing": 0.1,
+  "n_aug": 19
+ },
+ "seeds": [
+  42,
+  43
+ ]
+}

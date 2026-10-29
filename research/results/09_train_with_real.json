@@ -1,0 +1,209 @@
+{
+  "runs": [
+    {
+      "config": "A ship recipe",
+      "seed": 42,
+      "train min": 11.0,
+      "val: pen (Pendigits val)": 0.9739304812834224,
+      "val: finger (Corr dev)": 0.9838203731220075,
+      "test: pen (Pendigits test)": 0.9528301886792453,
+      "test: finger (Corr test)": 0.9825212242277235,
+      "synthetic pad_tmpl": 0.971
+    },
+    {
+      "config": "A ship recipe",
+      "seed": 43,
+      "train min": 11.1,
+      "val: pen (Pendigits val)": 0.9739304812834224,
+      "val: finger (Corr dev)": 0.9844807660558033,
+      "test: pen (Pendigits test)": 0.9582618639222413,
+      "test: finger (Corr test)": 0.9828065919954341,
+      "synthetic pad_tmpl": 0.9715
+    },
+    {
+      "config": "B + slant/width aug",
+      "seed": 42,
+      "train min": 11.1,
+      "val: pen (Pendigits val)": 0.9719251336898396,
+      "val: finger (Corr dev)": 0.9833250784216608,
+      "test: pen (Pendigits test)": 0.9488279016580904,
+      "test: finger (Corr test)": 0.9801669401441108,
+      "synthetic pad_tmpl": 0.9621
+    },
+    {
+      "config": "B + slant/width aug",
+      "seed": 43,
+      "train min": 12.4,
+      "val: pen (Pendigits val)": 0.9672459893048129,
+      "val: finger (Corr dev)": 0.9834901766551097,
+      "test: pen (Pendigits test)": 0.9502572898799314,
+      "test: finger (Corr test)": 0.9790254690732682,
+      "synthetic pad_tmpl": 0.9703
+    },
+    {
+      "config": "C + real pen data",
+      "seed": 42,
+      "train min": 10.7,
+      "val: pen (Pendigits val)": 0.9959893048128342,
+      "val: finger (Corr dev)": 0.9891035165923725,
+      "test: pen (Pendigits test)": 0.9839908519153803,
+      "test: finger (Corr test)": 0.9883712634657915,
+      "synthetic pad_tmpl": 0.9692
+    },
+    {
+      "config": "C + real pen data",
+      "seed": 43,
+      "train min": 11.3,
+      "val: pen (Pendigits val)": 0.9953208556149733,
+      "val: finger (Corr dev)": 0.9864619448571901,
+      "test: pen (Pendigits test)": 0.9794168096054888,
+      "test: finger (Corr test)": 0.9871584504530213,
+      "synthetic pad_tmpl": 0.9701
+    },
+    {
+      "config": "D + both",
+      "seed": 42,
+      "train min": 10.7,
+      "val: pen (Pendigits val)": 0.9946524064171123,
+      "val: finger (Corr dev)": 0.9884431236585769,
+      "test: pen (Pendigits test)": 0.9794168096054888,
+      "test: finger (Corr test)": 0.9878718698722979,
+      "synthetic pad_tmpl": 0.9664
+    },
+    {
+      "config": "D + both",
+      "seed": 43,
+      "train min": 10.8,
+      "val: pen (Pendigits val)": 0.9933155080213903,
+      "val: finger (Corr dev)": 0.9862968466237412,
+      "test: pen (Pendigits test)": 0.9791309319611207,
+      "test: finger (Corr test)": 0.9858029535563958,
+      "synthetic pad_tmpl": 0.967
+    }
+  ],
+  "mean_percent": {
+    "A ship recipe": {
+      "val: pen (Pendigits val)": 97.393,
+      "val: finger (Corr dev)": 98.415,
+      "test: pen (Pendigits test)": 95.555,
+      "test: finger (Corr test)": 98.266,
+      "synthetic pad_tmpl": 97.125,
+      "val mean": 97.904
+    },
+    "B + slant/width aug": {
+      "val: pen (Pendigits val)": 96.959,
+      "val: finger (Corr dev)": 98.341,
+      "test: pen (Pendigits test)": 94.954,
+      "test: finger (Corr test)": 97.96,
+      "synthetic pad_tmpl": 96.62,
+      "val mean": 97.65
+    },
+    "C + real pen data": {
+      "val: pen (Pendigits val)": 99.566,
+      "val: finger (Corr dev)": 98.778,
+      "test: pen (Pendigits test)": 98.17,
+      "test: finger (Corr test)": 98.776,
+      "synthetic pad_tmpl": 96.965,
+      "val mean": 99.172
+    },
+    "D + both": {
+      "val: pen (Pendigits val)": 99.398,
+      "val: finger (Corr dev)": 98.737,
+      "test: pen (Pendigits test)": 97.927,
+      "test: finger (Corr test)": 98.684,
+      "synthetic pad_tmpl": 96.67,
+      "val mean": 99.068
+    }
+  },
+  "chosen": "C + real pen data",
+  "per_digit_test_percent": {
+    "pen | A ship recipe": [
+      100.0,
+      90.7,
+      99.2,
+      96.7,
+      92.0,
+      98.5,
+      97.9,
+      91.2,
+      99.7,
+      92.6
+    ],
+    "pen | C + real pen data": [
+      100.0,
+      98.6,
+      99.5,
+      98.8,
+      92.9,
+      99.7,
+      99.1,
+      96.7,
+      99.7,
+      97.9
+    ],
+    "finger | A ship recipe": [
+      99.8,
+      94.3,
+      98.7,
+      98.4,
+      97.6,
+      99.2,
+      99.4,
+      99.0,
+      97.5,
+      99.1
+    ],
+    "finger | C + real pen data": [
+      99.8,
+      98.3,
+      99.1,
+      98.3,
+      98.7,
+      99.1,
+      99.6,
+      98.8,
+      97.0,
+      99.4
+    ]
+  },
+  "game_3_answers": [
+    {
+      "test set": "test: pen (Pendigits test)",
+      "config": "A ship recipe",
+      "accepted %": 96.4551172098342,
+      "wrong yokai %": 1.2006861063464835,
+      "rewrite / miss %": 2.344196683819322
+    },
+    {
+      "test set": "test: pen (Pendigits test)",
+      "config": "C + real pen data",
+      "accepted %": 98.71355060034305,
+      "wrong yokai %": 0.42881646655231564,
+      "rewrite / miss %": 0.8576329331046351
+    },
+    {
+      "test set": "test: finger (Corr test)",
+      "config": "A ship recipe",
+      "accepted %": 98.70871085110937,
+      "wrong yokai %": 0.42805165156595565,
+      "rewrite / miss %": 0.8632374973246759
+    },
+    {
+      "test set": "test: finger (Corr test)",
+      "config": "C + real pen data",
+      "accepted %": 99.18670186202469,
+      "wrong yokai %": 0.2853677677106371,
+      "rewrite / miss %": 0.5279303702646732
+    }
+  ],
+  "budget": {
+    "epochs": 16,
+    "steps": 470,
+    "batch": 128,
+    "smoothing": 0.1
+  },
+  "seeds": [
+    42,
+    43
+  ]
+}

@@ -1,0 +1,78 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Recognition End-to-End Test</title>
+<style>
+  body { margin: 0; padding: 16px; background: #1d1a17; color: #f2ead8; font: 14px/1.5 ui-monospace, monospace; }
+  pre { white-space: pre-wrap; }
+  a { color: #f6c95b; }
+</style>
+<!-- same TF.js build as the game (index.html) -->
+<script src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs@4.22.0/dist/tf.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs-backend-wasm@4.22.0/dist/tf-backend-wasm.min.js"></script>
+</head>
+<body>
+<p>Research page (not part of the game). Runs the game's own code — <code>pad.js</code> rendering,
+  <code>processing.js</code>, <code>recognizer.js</code> — on 1000 synthetic pad digits from template writers
+  no model was trained on (<code>export_e2e.py</code>). Serve the repository root and open
+  <code>/mlp_training/research/e2e/</code>; <a href="?model=mlp">?model=mlp</a> for the old MLP. The results are also in
+  <code>window.results</code>.</p>
+<pre id="out">running…</pre>
+<script type="module">
+import { modelRenderer, MODEL_SIZE } from '../../../js/ui/pad.js';
+import { initRecognizer, classify, aiInfo } from '../../../js/ai/recognizer.js';
+
+const out = document.getElementById('out');
+const log = (s) => { out.textContent = (out.textContent === 'running…' ? '' : out.textContent) + s + '\n'; };
+const pct = (x) => `${(100 * x).toFixed(1)}%`;
+const median = (a) => { const b = [...a].sort((x, y) => x - y); return b[Math.floor(b.length / 2)] ?? 0; };
+const render = modelRenderer();
+// let the page breathe between samples (a MessageChannel is not throttled in a hidden tab)
+const yieldNow = () => new Promise((r) => { const c = new MessageChannel(); c.port1.onmessage = () => r(); c.port2.postMessage(0); });
+const PAIRS = [[1, 7], [4, 9], [5, 6], [3, 5], [2, 7], [0, 6]];
+
+async function main() {
+  const t0 = performance.now();
+  await initRecognizer();
+  const loadMs = performance.now() - t0;
+  log(`model ${aiInfo.model}   backend ${aiInfo.backend}   load + warm-up ${loadMs.toFixed(0)} ms   ${navigator.userAgent.split(') ')[0]})`);
+  const { samples } = await (await fetch('fixtures.json')).json();
+  const ms = [], pred = [], conf = [];
+  for (const [k, s] of samples.entries()) {
+    if (k % 20 === 0) { await yieldNow(); document.title = `${k}/${samples.length}`; }
+    const t = performance.now();
+    const { probs } = await classify(render(s.strokes), MODEL_SIZE);   // render + preprocessing + model, as in the game
+    ms.push(performance.now() - t);
+    const d = probs.indexOf(Math.max(...probs));
+    pred.push(d); conf.push(probs[d]);
+  }
+  const y = samples.map((s) => s.label);
+  const ok = pred.map((d, i) => d === y[i]);
+  const confusions = {};
+  pred.forEach((d, i) => { if (!ok[i]) confusions[`${y[i]}→${d}`] = (confusions[`${y[i]}→${d}`] ?? 0) + 1; });
+  const pairs = Object.fromEntries(PAIRS.map(([a, b]) => {
+    const idx = y.map((v, i) => i).filter((i) => y[i] === a || y[i] === b);
+    return [`${a}-${b}`, idx.filter((i) => (y[i] === a && pred[i] === b) || (y[i] === b && pred[i] === a)).length / idx.length];
+  }));
+  const r = {
+    model: aiInfo.model, backend: aiInfo.backend, loadMs, n: samples.length,
+    acc: ok.filter(Boolean).length / ok.length,
+    per_digit: [...Array(10).keys()].map((d) => ok.filter((v, i) => y[i] === d && v).length / y.filter((v) => v === d).length),
+    pairs, wrong_confident: ok.filter((v, i) => !v && conf[i] > 0.9).length / ok.length,
+    top_confusions: Object.entries(confusions).sort((a, b) => b[1] - a[1]).slice(0, 8),
+    ms_median: median(ms), ms_p95: [...ms].sort((a, b) => a - b)[Math.floor(ms.length * 0.95)],
+  };
+  log(`n=${r.n}  accuracy ${pct(r.acc)}   wrong and >90% sure ${pct(r.wrong_confident)}`);
+  log(`per digit: ${r.per_digit.map((v, d) => `${d}:${pct(v)}`).join('  ')}`);
+  log(`confused pairs: ${Object.entries(pairs).map(([k, v]) => `${k} ${pct(v)}`).join('  ')}`);
+  log(`most common mistakes: ${r.top_confusions.map(([k, v]) => `${k} ×${v}`).join(', ')}`);
+  log(`one reading (render + preprocessing + model): ${r.ms_median.toFixed(1)} ms median, ${r.ms_p95.toFixed(1)} ms p95`);
+  window.results = r;
+  log('done');
+}
+main().catch((e) => { log('error: ' + e.message); console.error(e); });
+</script>
+</body>
+</html>

@@ -1,0 +1,106 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>TF.js Model Benchmark</title>
+<style>
+  body { margin: 0; padding: 16px; background: #1d1a17; color: #f2ead8; font: 14px/1.5 ui-monospace, monospace; }
+  pre { white-space: pre-wrap; }
+</style>
+<!-- same TF.js build as the game (index.html) -->
+<script src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs@4.22.0/dist/tf.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs-backend-wasm@4.22.0/dist/tf-backend-wasm.min.js"></script>
+</head>
+<body>
+<p>Research benchmark (not part of the game). Serve the repository root and open
+  <code>/mlp_training/research/export/bench.html</code>; add <code>?backend=webgl</code> or <code>cpu</code> to switch.</p>
+<pre id="out">running…</pre>
+<script>
+const out = document.getElementById('out');
+const log = (s) => { out.textContent = (out.textContent === 'running…' ? '' : out.textContent) + s + '\n'; };
+const median = (a) => { const b = [...a].sort((x, y) => x - y); return b[Math.floor(b.length / 2)]; };
+
+const MODELS = [
+  { name: 'deployed MLP', url: '../../../mnist_tfjs_model/model.json', flat: true, ref: 'mlp_probs' },
+  { name: 'CNN (float32)', url: 'cnn_tfjs/model.json', ref: 'cnn_probs' },
+  { name: 'CNN (float16 weights)', url: 'cnn_tfjs_f16/model.json', ref: 'cnn_probs' },
+  { name: 'CNN half width', url: 'cnn16_tfjs/model.json' },
+  { name: 'shipped (digit_model)', url: '../../../digit_model/model.json', ref: 'probs', check: 'ship_check.json' },
+];
+
+async function timeIt(fn, n) {
+  for (let i = 0; i < 20; i++) await fn();
+  const t = [];
+  for (let i = 0; i < n; i++) { const t0 = performance.now(); await fn(); t.push(performance.now() - t0); }
+  return median(t);
+}
+
+async function main() {
+  const backend = new URLSearchParams(location.search).get('backend') || 'wasm';
+  await tf.setBackend(backend); await tf.ready();
+  log(`backend: ${tf.getBackend()}   tfjs ${tf.version.tfjs}   ${navigator.userAgent.split(') ')[0]})`);
+  const checks = { 'check_inputs.json': await (await fetch('check_inputs.json')).json() };
+  checks['ship_check.json'] = await fetch('ship_check.json').then((r) => r.json()).catch(() => null);
+  const results = { backend: tf.getBackend(), models: {} };
+
+  for (const m of MODELS) {
+    const check = checks[m.check ?? 'check_inputs.json'];
+    if (!check) continue;
+    const t0 = performance.now();
+    const model = await tf.loadGraphModel(m.url);
+    const loadMs = performance.now() - t0;
+    const shape = m.flat ? [1, 784] : [1, 28, 28, 1];
+    const x1 = tf.tensor(check.x[0], shape);
+    const ms = await timeIt(async () => { const y = model.predict(x1); await y.data(); y.dispose(); }, 200);
+    let agree = '';
+    if (m.ref) {
+      const xb = tf.tensor(check.x, m.flat ? [32, 784] : [32, 28, 28, 1]);
+      const p = await model.predict(xb).array();
+      const ref = check[m.ref];
+      let maxDiff = 0, same = 0;
+      p.forEach((row, i) => {
+        row.forEach((v, j) => { maxDiff = Math.max(maxDiff, Math.abs(v - ref[i][j])); });
+        same += row.indexOf(Math.max(...row)) === ref[i].indexOf(Math.max(...ref[i]));
+      });
+      agree = `   matches Python: ${same}/32 argmax, max |Δp| ${maxDiff.toExponential(1)}`;
+      xb.dispose();
+    }
+    log(`${m.name.padEnd(24)} predict ${ms.toFixed(2).padStart(6)} ms (median of 200, batch 1)   load ${loadMs.toFixed(0)} ms${agree}`);
+    results.models[m.name] = { predictMs: ms, loadMs };
+    x1.dispose(); model.dispose();
+  }
+
+  // on-device personalisation: frozen features + train the 2-layer head with Adam
+  const check = checks['check_inputs.json'];
+  const feat = await tf.loadGraphModel('cnn_features_tfjs/model.json');
+  const head = await (await fetch('cnn_head.json')).json();
+  const steps = head.hyperparameters.steps, lr = head.hyperparameters.lr, l2 = head.hyperparameters.l2;
+  const x50 = tf.tensor(Array.from({ length: 50 }, (_, i) => check.x[i % 32]), [50, 28, 28, 1]);
+  const y50 = tf.oneHot(tf.tensor1d(Array.from({ length: 50 }, (_, i) => check.y[i % 32]), 'int32'), 10);
+  await feat.predict(x50).data();                       // warm-up
+  const t0 = performance.now();
+  const f = feat.predict(x50);
+  const base = head.values.map((v, i) => tf.tensor(v, head.shapes[i]));
+  const W = base.map((t) => tf.variable(t.clone()));
+  const opt = tf.train.adam(lr);
+  for (let s = 0; s < steps; s++) {
+    opt.minimize(() => {
+      const e = tf.relu(tf.add(tf.matMul(f, W[0]), W[1]));
+      const logits = tf.add(tf.matMul(e, W[2]), W[3]);
+      const ce = tf.losses.softmaxCrossEntropy(y50, logits);
+      const reg = tf.addN(W.map((w, i) => tf.sum(tf.square(tf.sub(w, base[i])))));
+      return tf.add(ce, tf.mul(l2, reg));
+    });
+  }
+  await W[3].data();
+  const ftMs = performance.now() - t0;
+  log(`personalisation: features for 50 samples + ${steps} Adam steps on the head: ${ftMs.toFixed(0)} ms`);
+  results.finetuneMs = ftMs;
+  window.results = results;
+  log('done');
+}
+main().catch((e) => { log('error: ' + e.message); console.error(e); });
+</script>
+</body>
+</html>

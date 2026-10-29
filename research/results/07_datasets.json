@@ -1,0 +1,171 @@
+{
+  "counts": {
+    "corr/finger/dev": {
+      "digits": 6057,
+      "writers": 76
+    },
+    "corr/finger/test": {
+      "digits": 14017,
+      "writers": 177
+    },
+    "pendigits/pen/test": {
+      "digits": 3498,
+      "writers": 14
+    },
+    "pendigits/pen/train": {
+      "digits": 5998,
+      "writers": 24
+    },
+    "pendigits/pen/val": {
+      "digits": 1496,
+      "writers": 6
+    }
+  },
+  "median_strokes_points_aspect": {
+    "n_strokes": {
+      "finger": 1.0,
+      "pen": 1.0
+    },
+    "n_points": {
+      "finger": 32.0,
+      "pen": 38.0
+    },
+    "aspect": {
+      "finger": 0.59,
+      "pen": 0.632
+    }
+  },
+  "per_digit_strokes": {
+    "multi-stroke %": {
+      "finger": {
+        "0": 1.0,
+        "1": 10.0,
+        "2": 0.0,
+        "3": 0.0,
+        "4": 92.0,
+        "5": 51.0,
+        "6": 1.0,
+        "7": 62.0,
+        "8": 2.0,
+        "9": 4.0
+      },
+      "pen": {
+        "0": 2.0,
+        "1": 5.0,
+        "2": 0.0,
+        "3": 0.0,
+        "4": 60.0,
+        "5": 80.0,
+        "6": 0.0,
+        "7": 86.0,
+        "8": 4.0,
+        "9": 4.0
+      }
+    },
+    "median aspect (w/h)": {
+      "finger": {
+        "0": 0.74,
+        "1": 0.07,
+        "2": 0.72,
+        "3": 0.59,
+        "4": 0.65,
+        "5": 0.64,
+        "6": 0.51,
+        "7": 0.64,
+        "8": 0.55,
+        "9": 0.49
+      },
+      "pen": {
+        "0": 0.84,
+        "1": 0.46,
+        "2": 0.84,
+        "3": 0.63,
+        "4": 0.55,
+        "5": 0.79,
+        "6": 0.53,
+        "7": 0.65,
+        "8": 0.52,
+        "9": 0.6
+      }
+    },
+    "median bend (path/h)": {
+      "finger": {
+        "0": 2.87,
+        "1": 1.01,
+        "2": 2.4,
+        "3": 2.24,
+        "4": 1.95,
+        "5": 2.29,
+        "6": 2.3,
+        "7": 1.89,
+        "8": 2.93,
+        "9": 2.34
+      },
+      "pen": {
+        "0": 3.09,
+        "1": 1.85,
+        "2": 2.56,
+        "3": 2.2,
+        "4": 2.0,
+        "5": 2.45,
+        "6": 2.21,
+        "7": 2.15,
+        "8": 2.81,
+        "9": 2.6
+      }
+    }
+  },
+  "style_gap_tvd": {
+    "0": {
+      "pen vs MNIST": 0.55,
+      "finger vs MNIST": 0.56,
+      "pen vs finger": 0.2
+    },
+    "1": {
+      "pen vs MNIST": 0.61,
+      "finger vs MNIST": 0.52,
+      "pen vs finger": 0.61
+    },
+    "2": {
+      "pen vs MNIST": 0.55,
+      "finger vs MNIST": 0.5,
+      "pen vs finger": 0.24
+    },
+    "3": {
+      "pen vs MNIST": 0.59,
+      "finger vs MNIST": 0.56,
+      "pen vs finger": 0.15
+    },
+    "4": {
+      "pen vs MNIST": 0.64,
+      "finger vs MNIST": 0.64,
+      "pen vs finger": 0.33
+    },
+    "5": {
+      "pen vs MNIST": 0.42,
+      "finger vs MNIST": 0.47,
+      "pen vs finger": 0.46
+    },
+    "6": {
+      "pen vs MNIST": 0.53,
+      "finger vs MNIST": 0.59,
+      "pen vs finger": 0.28
+    },
+    "7": {
+      "pen vs MNIST": 0.61,
+      "finger vs MNIST": 0.52,
+      "pen vs finger": 0.36
+    },
+    "8": {
+      "pen vs MNIST": 0.46,
+      "finger vs MNIST": 0.43,
+      "pen vs finger": 0.33
+    },
+    "9": {
+      "pen vs MNIST": 0.56,
+      "finger vs MNIST": 0.47,
+      "pen vs finger": 0.64
+    }
+  },
+  "seed": 7
+}
