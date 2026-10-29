@@ -4,6 +4,7 @@ plus a few test inputs with the expected outputs (export/ship_check.json) for ex
     python export_ship.py MODEL_NAME VARIANT        e.g. ship_cnn_final area18
 """
 import json
+import os
 import shutil
 import sys
 from pathlib import Path
@@ -15,7 +16,8 @@ from tensorflowjs.converters import tf_saved_model_conversion_v2 as tfjs_conv
 import datasets, ship
 
 HERE = Path(__file__).parent
-TARGET = HERE.parents[1] / 'digit_model'
+# the game repo, checked out next to this one (override with MATH_RUN=...)
+TARGET = Path(os.environ.get('MATH_RUN', HERE.resolve().parents[1] / 'Math-Run')) / 'digit_model'
 
 
 def main(name, variant):

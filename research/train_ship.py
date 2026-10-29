@@ -86,7 +86,7 @@ def main():
                 'pad_tmpl': report(predict(tmpl[variant]), y_tmpl)}
 
     results = {}
-    mlp = tf.saved_model.load(str(Path(__file__).parents[1] / 'saved_model')).signatures['serving_default']
+    mlp = tf.saved_model.load(str(Path(__file__).parents[1] / 'mlp_baseline' / 'saved_model')).signatures['serving_default']
     mlp_predict = lambda x: np.concatenate([mlp(keras_tensor=tf.constant(x[i:i + 2048].reshape(-1, 784)))['output_0'].numpy()
                                             for i in range(0, len(x), 2048)])
     results['mlp_deployed'] = {'variant': 'nn18', 'params': 435_404, **evaluate(mlp_predict, 'nn18')}

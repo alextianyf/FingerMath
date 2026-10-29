@@ -1,0 +1,10 @@
+tensorflow==2.19.0
+numpy==2.0.2
+pandas==2.2.2
+matplotlib==3.9.1
+seaborn==0.13.2
+Pillow==10.4.0
+scikit-learn==1.5.2
+tensorflowjs==4.22.0
+ipykernel==6.29.5
+ipython==8.12.3

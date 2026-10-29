@@ -11,7 +11,7 @@ import synth
 from browser import strokes_to_28
 
 HERE = Path(__file__).resolve().parent
-ROOT = HERE.parents[1]
+ROOT = HERE.parent
 CACHE = HERE / 'cache'
 SAMPLES = HERE / 'collect' / 'samples'
 

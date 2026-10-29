@@ -21,8 +21,8 @@
   <code>window.results</code>.</p>
 <pre id="out">running…</pre>
 <script type="module">
-import { modelRenderer, MODEL_SIZE } from '../../../js/ui/pad.js';
-import { initRecognizer, classify, aiInfo } from '../../../js/ai/recognizer.js';
+import { modelRenderer, MODEL_SIZE } from '../../../Math-Run/js/ui/pad.js';
+import { initRecognizer, classify, aiInfo } from '../../../Math-Run/js/ai/recognizer.js';
 
 const out = document.getElementById('out');
 const log = (s) => { out.textContent = (out.textContent === 'running…' ? '' : out.textContent) + s + '\n'; };

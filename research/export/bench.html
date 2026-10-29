@@ -22,11 +22,11 @@ const log = (s) => { out.textContent = (out.textContent === 'running…' ? '' : 
 const median = (a) => { const b = [...a].sort((x, y) => x - y); return b[Math.floor(b.length / 2)]; };
 
 const MODELS = [
-  { name: 'deployed MLP', url: '../../../mnist_tfjs_model/model.json', flat: true, ref: 'mlp_probs' },
+  { name: 'deployed MLP', url: '../../../Math-Run/mnist_tfjs_model/model.json', flat: true, ref: 'mlp_probs' },
   { name: 'CNN (float32)', url: 'cnn_tfjs/model.json', ref: 'cnn_probs' },
   { name: 'CNN (float16 weights)', url: 'cnn_tfjs_f16/model.json', ref: 'cnn_probs' },
   { name: 'CNN half width', url: 'cnn16_tfjs/model.json' },
-  { name: 'shipped (digit_model)', url: '../../../digit_model/model.json', ref: 'probs', check: 'ship_check.json' },
+  { name: 'shipped (digit_model)', url: '../../../Math-Run/digit_model/model.json', ref: 'probs', check: 'ship_check.json' },
 ];
 
 async function timeIt(fn, n) {
