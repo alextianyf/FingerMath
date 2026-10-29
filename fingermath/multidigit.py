@@ -8,8 +8,8 @@ import numpy as np
 from PIL import Image, ImageDraw
 from scipy import ndimage
 
-import synth
-from browser import MODEL_LINE, MODEL_BOX, SUPERSAMPLE, preprocess_to_mnist, strokes_to_28
+from . import synth
+from .browser import MODEL_LINE, MODEL_BOX, SUPERSAMPLE, preprocess_to_mnist, strokes_to_28
 
 LINE_H = 28                 # sequence-model input: 28 x LINE_W
 LINE_W = 112

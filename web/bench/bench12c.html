@@ -38,7 +38,7 @@ async function main() {
   const backend = new URLSearchParams(location.search).get('backend') || 'wasm';
   await tf.setBackend(backend); await tf.ready();
   log(`backend: ${tf.getBackend()}   tfjs ${tf.version.tfjs}   ${navigator.userAgent.split(') ')[0]})`);
-  const check = await (await fetch('../cache/tfjs12c/check.json', { cache: 'no-store' })).json();
+  const check = await (await fetch('../../cache/tfjs12c/check.json', { cache: 'no-store' })).json();
   const n = check.y.length;
   const imgB = tf.tensor(check.img, [n, 28, 28, 1]), trajB = tf.tensor(check.traj, [n, 64, 5]), availB = tf.ones([n, 1]);
   const img1 = imgB.slice([0, 0, 0, 0], [1, 28, 28, 1]), traj1 = trajB.slice([0, 0, 0], [1, 64, 5]), avail1 = tf.ones([1, 1]);

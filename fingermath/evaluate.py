@@ -3,7 +3,7 @@ import numpy as np
 import matplotlib.pyplot as plt
 from sklearn.metrics import confusion_matrix
 
-import datasets
+from . import datasets
 
 
 def load_test_sets(with_real=True):

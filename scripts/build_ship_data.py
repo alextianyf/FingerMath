@@ -1,6 +1,6 @@
 """Build the notebook-06 datasets (cache/ship_*.npz). Takes ~10 minutes on 12 cores."""
 import time
-import datasets, ship
+from fingermath import datasets, ship
 
 if __name__ == '__main__':
     x_tr, y_tr, x_te, y_te = datasets.load_mnist()

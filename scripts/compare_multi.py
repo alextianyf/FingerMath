@@ -19,10 +19,10 @@ import numpy as np
 import keras
 from scipy import ndimage
 
-import datasets, models, ship, synth
-import multidigit as md
+from fingermath import datasets, models, ship, synth
+from fingermath import multidigit as md
 
-HERE = Path(__file__).parent
+ROOT = Path(__file__).resolve().parents[1]
 
 
 def numbers_with_owner(n, length, seed):
@@ -71,8 +71,8 @@ def main(model_name, variant):
         results[name] = {k: {'all': float(np.mean(v)), **{b: float(np.mean(np.array(v)[m])) for b, m in bins.items()}}
                          for k, v in hits.items()}
         print(name, json.dumps(results[name], indent=1), flush=True)
-    (HERE / 'results').mkdir(exist_ok=True)
-    (HERE / 'results' / '06_multi_python.json').write_text(json.dumps({'model': model_name, 'variant': variant, **results}, indent=1))
+    (ROOT / 'results').mkdir(exist_ok=True)
+    (ROOT / 'results' / '06_multi_python.json').write_text(json.dumps({'model': model_name, 'variant': variant, **results}, indent=1))
 
 
 if __name__ == '__main__':

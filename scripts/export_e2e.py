@@ -6,7 +6,7 @@ from pathlib import Path
 
 import numpy as np
 
-import ship
+from fingermath import ship
 
 PX = 150          # digit height in pad pixels
 
@@ -16,6 +16,6 @@ if __name__ == '__main__':
     idx = np.concatenate([rng.choice(np.nonzero(y == d)[0], 100, replace=False) for d in range(10)])
     samples = [{'label': int(y[i]), 'strokes': [np.round(np.asarray(s) * PX).astype(int).tolist() for s in strokes[i]]}
                for i in idx]
-    path = Path(__file__).parent / 'e2e' / 'fixtures.json'
+    path = Path(__file__).resolve().parents[1] / 'web' / 'e2e' / 'fixtures.json'
     path.write_text(json.dumps({'samples': samples}, separators=(',', ':')))
     print(path, path.stat().st_size // 1024, 'KB')

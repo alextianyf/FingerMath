@@ -1,8 +1,9 @@
-# Python environment for the recognition research notebooks (research/).
+# Python environment for FingerMath (notebooks, scripts and the fingermath package).
 # The game itself needs no Python. Python 3.13.
 #   python -m venv .venv
-#   .venv/Scripts/python -m pip install -r research/requirements-research.txt
+#   .venv/Scripts/python -m pip install -r requirements.txt
 #   .venv/Scripts/python -m pip install --no-deps tensorflowjs==4.22.0 tf_keras==2.21.0
+#   .venv/Scripts/python -m pip install -e .
 # tensorflowjs declares dependencies that clash with tensorflow 2.21, so it goes in on its own
 # (only the TF.js export scripts need it); tfjs_export.py stands in for the parts it imports
 # but never uses (decision forests, TF Hub, JAX).

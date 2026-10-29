@@ -12,8 +12,8 @@ from multiprocessing import Pool
 import numpy as np
 from PIL import Image
 
-import datasets, synth
-from browser import render_strokes, js_round, otsu, shift_image
+from . import datasets, synth
+from .browser import render_strokes, js_round, otsu, shift_image
 
 CACHE = datasets.CACHE
 

@@ -12,9 +12,9 @@ import numpy as np
 import pandas as pd
 import keras
 
-import augstrokes, datasets, models, ship
+from . import augstrokes, datasets, models, ship
 
-REAL = Path('cache/real')
+REAL = datasets.CACHE / 'real'
 EPOCHS, STEPS, BATCH, SMOOTHING, LR = 16, 470, 128, 0.1, 2e-3
 SEEDS = [42, 43]
 

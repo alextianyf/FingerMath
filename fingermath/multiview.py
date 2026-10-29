@@ -18,8 +18,8 @@ combination for this game.
 import numpy as np
 from PIL import Image, ImageDraw
 
-import augstrokes, ship, trajectory
-from browser import MODEL_BOX, MODEL_LINE, MODEL_SIZE, js_round, otsu, render_strokes, shift_image
+from . import augstrokes, ship, trajectory
+from .browser import MODEL_BOX, MODEL_LINE, MODEL_SIZE, js_round, otsu, render_strokes, shift_image
 
 
 def _params(gray):
@@ -124,7 +124,7 @@ def joint_ds(image_sources, paired_sources, keys, batch=128, seed=0, moddrop=0.3
                     (zeros, avail 0) so the model keeps working on the image alone [34].
     """
     import tensorflow as tf
-    import models
+    from . import models
 
     def finish(img, om, tr, av, y):
         plane = tf.ones_like(img) * av[:, None, None, :]

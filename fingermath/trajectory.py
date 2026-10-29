@@ -13,7 +13,7 @@ Timing is left out on purpose: pen, finger and mouse move at very different spee
 import numpy as np
 import pandas as pd
 
-import augstrokes
+from . import augstrokes
 
 N = 64
 FEATURES = 5

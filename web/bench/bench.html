@@ -23,9 +23,9 @@ const median = (a) => { const b = [...a].sort((x, y) => x - y); return b[Math.fl
 
 const MODELS = [
   { name: 'deployed MLP', url: '../../../Math-Run/mnist_tfjs_model/model.json', flat: true, ref: 'mlp_probs' },
-  { name: 'CNN (float32)', url: 'cnn_tfjs/model.json', ref: 'cnn_probs' },
-  { name: 'CNN (float16 weights)', url: 'cnn_tfjs_f16/model.json', ref: 'cnn_probs' },
-  { name: 'CNN half width', url: 'cnn16_tfjs/model.json' },
+  { name: 'CNN (float32)', url: '../../exports/cnn_tfjs/model.json', ref: 'cnn_probs' },
+  { name: 'CNN (float16 weights)', url: '../../exports/cnn_tfjs_f16/model.json', ref: 'cnn_probs' },
+  { name: 'CNN half width', url: '../../exports/cnn16_tfjs/model.json' },
   { name: 'shipped (digit_model)', url: '../../../Math-Run/digit_model/model.json', ref: 'probs', check: 'ship_check.json' },
 ];
 
@@ -40,8 +40,8 @@ async function main() {
   const backend = new URLSearchParams(location.search).get('backend') || 'wasm';
   await tf.setBackend(backend); await tf.ready();
   log(`backend: ${tf.getBackend()}   tfjs ${tf.version.tfjs}   ${navigator.userAgent.split(') ')[0]})`);
-  const checks = { 'check_inputs.json': await (await fetch('check_inputs.json')).json() };
-  checks['ship_check.json'] = await fetch('ship_check.json').then((r) => r.json()).catch(() => null);
+  const checks = { 'check_inputs.json': await (await fetch('../../exports/check_inputs.json')).json() };
+  checks['ship_check.json'] = await fetch('../../exports/ship_check.json').then((r) => r.json()).catch(() => null);
   const results = { backend: tf.getBackend(), models: {} };
 
   for (const m of MODELS) {
@@ -74,7 +74,7 @@ async function main() {
   // on-device personalisation: frozen features + train the 2-layer head with Adam
   const check = checks['check_inputs.json'];
   const feat = await tf.loadGraphModel('cnn_features_tfjs/model.json');
-  const head = await (await fetch('cnn_head.json')).json();
+  const head = await (await fetch('../../exports/cnn_head.json')).json();
   const steps = head.hyperparameters.steps, lr = head.hyperparameters.lr, l2 = head.hyperparameters.l2;
   const x50 = tf.tensor(Array.from({ length: 50 }, (_, i) => check.x[i % 32]), [50, 28, 28, 1]);
   const y50 = tf.oneHot(tf.tensor1d(Array.from({ length: 50 }, (_, i) => check.y[i % 32]), 'int32'), 10);

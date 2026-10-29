@@ -16,7 +16,7 @@ import numpy as np
 from scipy.ndimage import zoom
 from skimage.morphology import skeletonize
 
-from browser import strokes_to_28
+from .browser import strokes_to_28
 
 
 # ------------------------------------------------------------------ distortions

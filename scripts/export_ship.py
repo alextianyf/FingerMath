@@ -13,11 +13,11 @@ import numpy as np
 import keras
 from tensorflowjs.converters import tf_saved_model_conversion_v2 as tfjs_conv
 
-import datasets, ship
+from fingermath import datasets, ship
 
-HERE = Path(__file__).parent
+ROOT = Path(__file__).resolve().parents[1]
 # the game repo, checked out next to this one (override with MATH_RUN=...)
-TARGET = Path(os.environ.get('MATH_RUN', HERE.resolve().parents[1] / 'Math-Run')) / 'digit_model'
+TARGET = Path(os.environ.get('MATH_RUN', ROOT.parent / 'Math-Run')) / 'digit_model'
 
 
 def main(name, variant):
@@ -32,7 +32,7 @@ def main(name, variant):
     sets, y, _, _ = ship.template_sets(200, 5, 'tmpl_test', seed=10)
     x = sets[variant][:32]
     p = model.predict(x[..., None], verbose=0)
-    (HERE / 'export' / 'ship_check.json').write_text(json.dumps({
+    (ROOT / 'exports' / 'ship_check.json').write_text(json.dumps({
         'model': name, 'variant': variant, 'x': np.round(x, 4).reshape(32, -1).tolist(), 'y': y[:32].tolist(),
         'probs': np.round(p, 5).tolist()}))
 

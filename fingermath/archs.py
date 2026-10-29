@@ -6,7 +6,7 @@ Every model takes a (28, 28, 1) image, ends in a 64-d 'embedding' layer and a 10
 import keras
 from keras import layers
 
-import models
+from . import models
 
 
 def _head(h, name):

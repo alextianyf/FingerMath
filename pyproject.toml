@@ -1,0 +1,14 @@
+[build-system]
+requires = ["setuptools>=68"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "fingermath"
+version = "0.1.0"
+description = "On-device recognition of handwritten math answers"
+readme = "README.md"
+license = "MIT"
+requires-python = ">=3.12"
+
+[tool.setuptools]
+packages = ["fingermath"]

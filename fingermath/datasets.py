@@ -7,13 +7,13 @@ from pathlib import Path
 import numpy as np
 import pandas as pd
 
-import synth
-from browser import strokes_to_28
+from . import synth
+from .browser import strokes_to_28
 
 HERE = Path(__file__).resolve().parent
 ROOT = HERE.parent
-CACHE = HERE / 'cache'
-SAMPLES = HERE / 'collect' / 'samples'
+CACHE = ROOT / 'cache'
+SAMPLES = ROOT / 'web' / 'collect' / 'samples'
 
 
 def load_mnist():
@@ -56,7 +56,7 @@ def pad_skeleton_set(images, labels, name, seed=0, jitter=True, chunk=500):
 def _pipeline_job(imgs):
     """Upscale MNIST to the pad's 280x280 and run the browser preprocessing on it."""
     from PIL import Image
-    from browser import preprocess_to_mnist
+    from .browser import preprocess_to_mnist
     return np.stack([preprocess_to_mnist(np.asarray(Image.fromarray(im).resize((280, 280), Image.BILINEAR),
                                                     np.float32) / 255) for im in imgs])
 

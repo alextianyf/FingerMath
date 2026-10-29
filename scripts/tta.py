@@ -8,8 +8,8 @@ import sys
 import numpy as np
 import keras
 
-import datasets, models, ship
-from browser import shift_image
+from fingermath import datasets, models, ship
+from fingermath.browser import shift_image
 
 SHIFTS = {'none': [(0, 0)], 'shift4': [(0, 0), (1, 0), (-1, 0), (0, 1)],
           'shift5': [(0, 0), (1, 0), (-1, 0), (0, 1), (0, -1)]}

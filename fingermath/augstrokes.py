@@ -6,7 +6,7 @@ random pen width, then `ship.to28(..., 'area')` turns it into the 28x28 model in
 """
 import numpy as np
 
-import ship
+from . import ship
 
 ROT_DEG = 10        # rotation, +- degrees
 SHEAR = 0.35        # horizontal shear (slant), +-
